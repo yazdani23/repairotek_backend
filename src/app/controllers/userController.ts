@@ -5,6 +5,7 @@ import { UserDoc } from "../../domain/docs/User";
 
 // const UserController = crudControllerGenerator("User", UserService);
 class UserController extends BaseController<UserDoc> {
+  private userService = this.service as typeof UserService;
   constructor() {
     super(UserService);
   }

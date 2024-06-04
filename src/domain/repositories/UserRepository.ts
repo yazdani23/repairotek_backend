@@ -34,6 +34,10 @@ class UserRepository extends BaseRepository<UserDoc> {
       throw new Error(`Failed to fetch data: ${error}`);
     }
   }
+  async findByEmail(email: string): Promise<UserDoc | null> {
+    return await this.model.findOne({ email });
+  }
 }
+
 
 export default new UserRepository();

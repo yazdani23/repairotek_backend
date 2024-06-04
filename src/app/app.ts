@@ -20,6 +20,10 @@ app.use(express.json());
 // });
 // پیکربندی middleware session
 const sessionMiddleware = session({
+  
+  //To do 
+  // const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
+
   secret: 'mysecretkey', // کلید مخفی برای رمزنگاری اطلاعات جلسات
   resave: false,
   saveUninitialized: false,

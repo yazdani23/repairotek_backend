@@ -1,5 +1,4 @@
 import Joi from "joi";
-import { Repository } from "../../interfaces/Repository";
 import { Service } from "../../interfaces/Service";
 import BaseRepository from "../repositories/BaseRepository";
 

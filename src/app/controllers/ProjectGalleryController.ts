@@ -3,6 +3,7 @@ import ProjectGalleryService from "../../domain/services/ProjectGalleryService";
 import { ProjectGalleryDoc } from "../../domain/docs/ProjectGallery";
 
 class ProjectGalleryController extends BaseController<ProjectGalleryDoc> {
+  private projectGalleryService = this.service as typeof ProjectGalleryService;
   constructor() {
     super(ProjectGalleryService);
   }
