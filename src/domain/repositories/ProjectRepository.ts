@@ -1,3 +1,4 @@
+import { StatusProject } from "../../utils/constant/StatusProject";
 import logger from "../../utils/helpers/logger";
 import { ProjectDoc } from "../docs/Project";
 import { ProjectGalleryDoc } from "../docs/ProjectGallery";
@@ -49,6 +50,13 @@ class ProjectRepository extends BaseRepository<ProjectDoc>{
     logger.info(gallery)
     return gallery;
   }
+
+  // async getProjectStatuses(
+  // ): Promise<String[] | null> {
+  //   const statuses = await StatusProject;
+  //   logger.info(statuses);
+  //   return statuses;
+  // }
 }
 
 export default new ProjectRepository();

@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { ProjectDoc } from "../../domain/docs/Project";
 import ProjectService from "../../domain/services/ProjectService";
 import BaseController from "./BaseController";
+import { StatusProject } from "../../utils/constant/StatusProject";
+import logger from "../../utils/helpers/logger";
 
 class ProjectController extends BaseController<ProjectDoc> {
   private projectService = this.service as typeof ProjectService;
@@ -22,6 +24,16 @@ class ProjectController extends BaseController<ProjectDoc> {
     }
     return res.json(projectGallery);
   };
+
+  
+  async getProjectStatuses(
+    req: Request,
+    res: Response
+  ): Promise<Response<String[] | null>> {
+    const statuses = StatusProject;
+    logger.info(statuses);
+    return res.json(statuses);
+  }
 }
 export default new ProjectController();
 
