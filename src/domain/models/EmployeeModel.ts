@@ -7,7 +7,7 @@ import { ContractType } from "../../utils/constant/ContractType";
 
 
 
-const EmployeeModelSchema = new Schema<EmployeeDoc>({
+const EmployeeSchema = new Schema<EmployeeDoc>({
   employeeCode: { type: Number, required: false },
   hireDate: { type: Date, required: false },
   jobId: { type: Schema.Types.ObjectId, ref: "Job", required: false },
@@ -25,12 +25,9 @@ const EmployeeModelSchema = new Schema<EmployeeDoc>({
   //   required: false,
   // },
 });
-// toJsonSchema(EmployeeModelSchema)
+// const EmplyeeSch= toJsonSchema(EmployeeSchema)
 
-const EmployeeModel = UserModel.discriminator(
-  "EmployeeModel",
-  EmployeeModelSchema
-);
+const EmployeeModel = UserModel.discriminator("Employee", EmployeeSchema);
 
 
 export default EmployeeModel;

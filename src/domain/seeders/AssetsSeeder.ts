@@ -17,12 +17,12 @@ export class AssetsSeeder {
   static insertAssets = async () => {
     try {
       const materials = await MaterialModel.find({});
-      const equipments = await EquipmentModel.find({});
+      const equipment = await EquipmentModel.find({});
       const assets = [];
 
       for (let i = 0; i < 10; i++) {
         const materialIndex = Math.floor(Math.random() * materials.length);
-        const equipmentIndex = Math.floor(Math.random() * equipments.length);
+        const equipmentIndex = Math.floor(Math.random() * equipment.length);
 
         assets.push({
           materials: {
@@ -30,8 +30,8 @@ export class AssetsSeeder {
             value: Math.random() * 100,
             costPerUnit: Math.random() * 10,
           },
-          equipments: {
-            equipmentId: equipments[equipmentIndex].id,
+          equipment: {
+            equipmentId: equipment[equipmentIndex].id,
             countHour: Math.floor(Math.random() * 100),
             costPerHour: Math.random() * 50,
           },

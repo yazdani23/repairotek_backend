@@ -1,6 +1,6 @@
 
 import { generateSchema } from "../../utils/generators/modelGenerator";
-import { ReportSubjectDoc } from "../docs/ReportSubject";
+import { ProjectGallerySubjectDoc } from "../docs/ProjectGallerySubject";
 
 const ProjectGallerySubject = [
   "Daily",
@@ -10,7 +10,7 @@ const ProjectGallerySubject = [
   "Equipments",
   "Other",
 ];
-const ProjectGallerySubjectModel = generateSchema<ReportSubjectDoc>(
+const ProjectGallerySubjectModel = generateSchema<ProjectGallerySubjectDoc>(
   "ProjectGallerySubject",
   {
     title: { type: String, required: true },

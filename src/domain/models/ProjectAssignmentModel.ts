@@ -18,7 +18,7 @@ const ProjectAssignmentModel = generateSchema<ProjectAssignmentDoc>(
         },
       },
     ],
-    equipments: [
+    equipment: [
       {
         equipmentId: {
           type: Schema.Types.ObjectId,
@@ -32,9 +32,9 @@ const ProjectAssignmentModel = generateSchema<ProjectAssignmentDoc>(
     ],
     materials: [
       {
-        equipmentId: {
+        materialId: {
           type: Schema.Types.ObjectId,
-          ref: "Equipment",
+          ref: "Material",
           required: true,
         },
         estimatedValue: {

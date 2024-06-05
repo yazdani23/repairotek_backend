@@ -4,8 +4,8 @@ import { generateSchema } from "../../utils/generators/modelGenerator";
 import { UnitsProjectArea } from "../../utils/constant/UnitsProjectArea";
 import { StatusProject } from "../../utils/constant/StatusProject";
 
-
-const ProjectModel = generateSchema<ProjectDoc>("Project", {
+const ProjectModel = generateSchema<ProjectDoc>("Project", 
+{
   projectCode: { type: Number, required: true },
   adminId: { type: Schema.Types.ObjectId, ref: "Admin", required: true }, 
   title: { type: String, required: true },
@@ -22,21 +22,22 @@ const ProjectModel = generateSchema<ProjectDoc>("Project", {
   materials: [
     {
       type: Schema.Types.ObjectId,
-      ref: "MaterialModel",
+      ref: "Material",
     },
   ],
-  equipments: [
+  equipment: [
     {
       type: Schema.Types.ObjectId,
-      ref: "EquipmentModel",
+      ref: "Equipment",
     },
   ],
   employees: [
     {
       type: Schema.Types.ObjectId,
-      ref: "EmployeeModel",
+      ref: "Employee",
     },
   ],
 });
+
 
 export default ProjectModel;

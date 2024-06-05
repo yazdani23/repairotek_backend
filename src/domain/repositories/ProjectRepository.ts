@@ -6,27 +6,20 @@ import ProjectGalleryModel from "../models/ProjectGalleryModel";
 import ProjectModel from "../models/ProjectModel";
 import BaseRepository from "./BaseRepository";
 
-
-
-class ProjectRepository extends BaseRepository<ProjectDoc>{
+class ProjectRepository extends BaseRepository<ProjectDoc> {
   constructor() {
     super(ProjectModel);
   }
   async getById(id: string): Promise<ProjectDoc | null> {
     try {
       return await this.model
-      
+
         .findById(id)
-        //For two step jooing
-        // .populate({
-        //   path: "userId",
-        //   populate: {
-        //     path: "roleId",
-        //     model: "Role",
-        //   },
-        // })
-        .populate("userId")
-        .populate("zoneId") //returns all the role's properties
+        .populate("adminId")
+        .populate("zoneId")
+        .populate("employees")
+        .populate("materials")
+        .populate("equipment")
         .exec();
     } catch (error) {
       throw new Error(`Failed to fetch data: ${error}`);
@@ -34,20 +27,40 @@ class ProjectRepository extends BaseRepository<ProjectDoc>{
   }
   async getAll(): Promise<ProjectDoc[]> {
     try {
-      return await this.model
-        .find()
-        .populate("adminId")
-        .populate("zoneId")
-        .exec();
+      return await this.model.find().populate("adminId").populate("zoneId");
+    } catch (error) {
+      throw new Error(`Failed to fetch data: ${error}`);
+    }
+  }
+  async getProjectEmployees(projectId: string): Promise<ProjectDoc | null> {
+    try {
+      return await this.model.findById(projectId).populate("employees");
+    } catch (error) {
+      throw new Error(`Failed to fetch data: ${error}`);
+    }
+  }
+  async getProjectMaterials(projectId: string): Promise<ProjectDoc | null> {
+    try {
+      return await this.model.findById(projectId).populate("materials");
+    } catch (error) {
+      throw new Error(`Failed to fetch data: ${error}`);
+    }
+  }
+  async getProjectEquipment(projectId: string): Promise<ProjectDoc | null> {
+    try {
+      return await this.model.findById(projectId).populate("equipment");
     } catch (error) {
       throw new Error(`Failed to fetch data: ${error}`);
     }
   }
 
-
-  async getGallery(projectId:string): Promise<ProjectGalleryDoc[] | null>{
+  async getGallery(projectId: string): Promise<ProjectGalleryDoc[] | null> {
     const gallery = await ProjectGalleryModel.find({ projectId })
-    logger.info(gallery)
+      .populate("mediaSubjectId")
+      .populate("projectId")
+      .populate("userId");
+
+    logger.info(gallery);
     return gallery;
   }
 

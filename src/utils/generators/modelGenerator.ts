@@ -12,9 +12,9 @@ const toJsonSchema = <T>(
 ) => {
   schema.set("toJSON", {
     transform: (doc, ret) => {
-      if (!doc._id) {
-        return doc;
-      }
+     if (!ret._id) {
+       return ret;
+     }
       ret.id = ret._id.toString();
       deletedProperties.forEach((item) => delete ret[item]);
       return ret;

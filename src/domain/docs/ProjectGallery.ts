@@ -5,6 +5,7 @@ export interface ProjectGalleryDoc extends Document {
   userId: Schema.Types.ObjectId;
   mediaName: string;
   mediaUrl: string;
+  thumbnailMediaUrl: string;
   mediaDateTime?: string;
   mediaSubjectId: Schema.Types.ObjectId;
   location?: string;

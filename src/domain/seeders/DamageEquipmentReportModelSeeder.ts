@@ -25,7 +25,7 @@ export class DamageEquipmentReportSeeder {
       const projectGalleries = await ProjectGalleryModel.find({});
       const projects = await ProjectModel.find({});
       const users = await UserModel.find({});
-      const equipments = await EquipmentModel.find({});
+      const equipment = await EquipmentModel.find({});
 
       if (!reportSubjects.length)
         throw new Error("No report subjects found in the database.");
@@ -34,10 +34,10 @@ export class DamageEquipmentReportSeeder {
       if (!projects.length)
         throw new Error("No projects found in the database.");
       if (!users.length) throw new Error("No users found in the database.");
-      if (!equipments.length)
-        throw new Error("No equipments found in the database.");
+      if (!equipment.length)
+        throw new Error("No equipment found in the database.");
 
-      return { reportSubjects, projectGalleries, projects, users, equipments };
+      return { reportSubjects, projectGalleries, projects, users, equipment };
     } catch (error: any) {
       logger.error(`Failed to fetch required data: ${error.message}`);
       throw error;
@@ -46,7 +46,7 @@ export class DamageEquipmentReportSeeder {
 
   static insertDamageEquipmentReports = async (batchSize = 10) => {
     try {
-      const { reportSubjects, projectGalleries, projects, users, equipments } =
+      const { reportSubjects, projectGalleries, projects, users, equipment } =
         await this.fetchRequiredData();
 
       const damageEquipmentReports = [];
@@ -60,7 +60,7 @@ export class DamageEquipmentReportSeeder {
           projects[Math.floor(Math.random() * projects.length)];
         const randomUser = users[Math.floor(Math.random() * users.length)];
         const randomEquipment =
-          equipments[Math.floor(Math.random() * equipments.length)];
+          equipment[Math.floor(Math.random() * equipment.length)];
 
         damageEquipmentReports.push({
           title: faker.lorem.words(5),
