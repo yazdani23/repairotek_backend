@@ -18,5 +18,11 @@ class ProjectService extends BaseService<ProjectDoc> {
     logger.info(gallery);
     return gallery;
   }
+  // async getProjectStatuses(
+  // ): Promise<String[] | null> {
+  //   const statuses = await this.projectRepository.getProjectStatuses();
+  //   logger.info(statuses);
+  //   return statuses;
+  // }
 }
 export default new ProjectService();

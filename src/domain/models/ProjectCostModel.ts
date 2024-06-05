@@ -21,7 +21,7 @@ const ProjectCostModel = generateSchema<ProjectCostDoc>("ProjectCost", {
       },
     },
   ],
-  equipments: [
+  equipment: [
     {
       equipmentId: {
         type: Schema.Types.ObjectId,
@@ -94,7 +94,7 @@ export default ProjectCostModel;
 //       index: true,
 //     },
 //     materials: [materialSchema],
-//     equipments: [equipmentSchema],
+//     equipment: [equipmentSchema],
 //     employees: [employeeSchema],
 //     costDate: { type: Date, required: true },
 //     totalCost: { type: Number, required: true },

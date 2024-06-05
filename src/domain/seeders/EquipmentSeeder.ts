@@ -19,20 +19,20 @@ export class EquipmentSeeder {
   static removeAllEquipments = async () => {
     try {
       await EquipmentModel.deleteMany({});
-      logger.info("All equipments removed successfully.");
+      logger.info("All equipment removed successfully.");
     } catch (error: any) {
-      logger.error("Failed to remove equipments: " + error.message);
+      logger.error("Failed to remove equipment: " + error.message);
     }
   };
 
   static insertEquipments = async (batchSize = 10) => {
     try {
-      const equipments = [];
+      const equipment = [];
 
       for (let i = 0; i < roadConstructionEquipments.length; i++) {
         // const equipment =
         //   roadConstructionEquipments[i % roadConstructionEquipments.length];
-        equipments.push({
+        equipment.push({
           name: roadConstructionEquipments[i],
           equipmentModel: faker.vehicle.type(),
           description: `
@@ -48,11 +48,11 @@ Model: ${faker.vehicle.model()}`,
           count: faker.number.int({ min: 1, max: 100 }),
         });
       }
-      
-      await EquipmentModel.insertMany(equipments);
-      logger.info(`${batchSize} equipments seeded successfully.`);
+
+      await EquipmentModel.insertMany(equipment);
+      logger.info(`${batchSize} equipment seeded successfully.`);
     } catch (error: any) {
-      logger.error("Failed to seed equipments: " + error.message);
+      logger.error("Failed to seed equipment: " + error.message);
     }
   };
 

@@ -15,6 +15,6 @@ export interface ProjectDoc extends Document {
   latitude: number;
   status: string;
   materials: [];
-  equipments: [];
+  equipment: [];
   employees: [];
 }

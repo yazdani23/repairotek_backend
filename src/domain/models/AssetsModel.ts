@@ -11,7 +11,7 @@ const AssetsModel = generateSchema<AssetsDoc>("Assets", {
       costPerUnit: { type: Number, required: false },
     },
   ],
-  equipments: [
+  equipment: [
     {
       equipmentId: { type: Schema.Types.ObjectId, required: true },
       countHour: { type: Number, required: true },

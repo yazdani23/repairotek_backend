@@ -10,7 +10,7 @@ export interface ProjectAssignmentDoc extends Document {
     materialId: Types.ObjectId;
     estimatedValue: number;
   }[];
-  equipments?: {
+  equipment?: {
     equipmentId: Types.ObjectId;
     estimatedCountHour: number;
   }[];

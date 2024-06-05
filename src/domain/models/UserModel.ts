@@ -3,6 +3,7 @@ import { UserDoc } from "../docs/User";
 import { generateSchema } from "../../utils/generators/modelGenerator";
 import { Gender } from "../../utils/constant/enums/Gender";
 
+
 const UserModel = generateSchema<UserDoc>("User", {
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },

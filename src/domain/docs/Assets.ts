@@ -6,7 +6,7 @@ export interface AssetsDoc extends Document {
     value: number;
     costPerUnit: number;
   }[];
-  equipments: {
+  equipment: {
     equipmentId: Types.ObjectId;
     countHour: number;
     costPerHour?: number;

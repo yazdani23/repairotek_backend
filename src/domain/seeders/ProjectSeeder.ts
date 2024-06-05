@@ -6,8 +6,8 @@ import ZoneModel from "../models/ZoneModel";
 import MaterialModel from "../models/MaterialModel";
 import EquipmentModel from "../models/EquipmentModel";
 import EmployeeModel from "../models/EmployeeModel";
-import {UnitsProjectArea} from '../../utils/constant/UnitsProjectArea';
-import {StatusProject} from "../../utils/constant/StatusProject";
+import { UnitsProjectArea } from "../../utils/constant/UnitsProjectArea";
+import { StatusProject } from "../../utils/constant/StatusProject";
 
 export class ProjectSeeder {
   static removeAllProjects = async () => {
@@ -21,19 +21,19 @@ export class ProjectSeeder {
 
   static insertProjects = async (batchSize = 10) => {
     try {
-      const admin = await AdminModel.findOne({}); 
+      const admin = await AdminModel.findOne({});
 
       if (!admin) throw new Error("No admin found in the database.");
 
       const zones = await ZoneModel.find({});
       const materials = await MaterialModel.find({});
-      const equipments = await EquipmentModel.find({});
+      const equipment = await EquipmentModel.find({});
       const employees = await EmployeeModel.find({});
 
       if (
         zones.length === 0 ||
         materials.length === 0 ||
-        equipments.length === 0 ||
+        equipment.length === 0 ||
         employees.length === 0
       )
         throw new Error("No required data found in the database.");
@@ -42,12 +42,19 @@ export class ProjectSeeder {
 
       for (let i = 0; i < batchSize; i++) {
         const randomZone = zones[Math.floor(Math.random() * zones.length)];
-        const randomMaterial =
-          materials[Math.floor(Math.random() * materials.length)];
-        const randomEquipment =
-          equipments[Math.floor(Math.random() * equipments.length)];
-        const randomEmployee =
-          employees[Math.floor(Math.random() * employees.length)];
+        const randomNumber = Math.floor(Math.random() * (7 - 3 + 1)) + 3;
+        const employeeList = [];
+        const equipmentList = [];
+        const materialsList = [];
+        for (let j = 0; j < randomNumber; j++) {
+          const randomMaterial = faker.helpers.arrayElement(materials);
+          const randomEquipment = faker.helpers.arrayElement(equipment);
+          const randomEmployee:any = faker.helpers.arrayElement(employees); // Cast randomEmployee to EmployeeModel type
+
+          employeeList.push(randomEmployee.id);
+          materialsList.push(randomMaterial.id);
+          equipmentList.push(randomEquipment.id);
+        }
 
         projects.push({
           projectCode: faker.number.int({ min: 1000, max: 9999 }),
@@ -63,9 +70,9 @@ export class ProjectSeeder {
           longitude: faker.location.longitude(),
           latitude: faker.location.latitude(),
           status: faker.helpers.arrayElement(StatusProject),
-          materials: [randomMaterial.id],
-          equipments: [randomEquipment.id],
-          employees: [randomEmployee.id],
+          materials: materialsList,
+          equipment: equipmentList,
+          employees: employeeList,
         });
       }
 

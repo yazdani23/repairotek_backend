@@ -9,6 +9,7 @@ const ProjectGalleryModel = generateSchema<ProjectGalleryDoc>(
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     mediaName: { type: String, required: true },
     mediaUrl: { type: String, required: true },
+    thumbnailMediaUrl: { type: String, required: false },
     mediaDateTime: { type: String, required: false },
     mediaSubjectId: {
       type: Schema.Types.ObjectId,

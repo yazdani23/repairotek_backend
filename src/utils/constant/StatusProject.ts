@@ -1,2 +1,2 @@
-export const StatusProject = ["Pre-Construction", "Initiated", "In Progress", "Compeleted"];
+export const StatusProject = ["Pre-Construction", "Initialed", "In-Progress", "Compeleted"];
 

@@ -23,6 +23,8 @@ export class ProjectGallerySeeder {
       const employees = await EmployeeModel.find({});
       const admin = await AdminModel.findOne({});
       const subjects = await ProjectGallerySubjectModel.find({});
+      console.log(subjects);
+      
       const initialMediaSubject = await ProjectGallerySubjectModel.findOne({
         title: "Initialed Project",
       });
@@ -48,8 +50,16 @@ export class ProjectGallerySeeder {
           userId: admin.id,
           mediaName: faker.system.fileName(),
           mediaUrl: faker.image.urlPlaceholder({
-            width: 150,
-            height: 170,
+            width: 300,
+            height: 350,
+            backgroundColor: "ffb938",
+            textColor: "FFFFFF",
+            format: "png",
+            text: "Initialed Project",
+          }),
+          thumbnailMediaUrl: faker.image.urlPlaceholder({
+            width: 100,
+            height: 115,
             backgroundColor: "ffb938",
             textColor: "FFFFFF",
             format: "png",
@@ -87,12 +97,20 @@ export class ProjectGallerySeeder {
           userId: randomUser.id,
           mediaName: faker.system.fileName(),
           mediaUrl: faker.image.urlPlaceholder({
-            width: 150,
-            height: 170,
+            width: 300,
+            height: 350,
             backgroundColor: "ffb938",
             textColor: "FFFFFF",
             format: "png",
             text: randomSubject.title,
+          }),
+          thumbnailMediaUrl: faker.image.urlPlaceholder({
+            width: 100,
+            height: 115,
+            backgroundColor: "ffb938",
+            textColor: "FFFFFF",
+            format: "png",
+            text: "Initialed Project",
           }),
           mediaDateTime: faker.date.past().toISOString(),
           mediaSubjectId: randomSubject.id,
