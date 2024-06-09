@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 import { UserDoc } from "../docs/User";
 import { generateSchema } from "../../utils/generators/modelGenerator";
 import { Gender } from "../../utils/constant/enums/Gender";
+import { RoleNames } from "../../utils/constant/RoleNames";
 
 
 const UserModel = generateSchema<UserDoc>("User", {
@@ -13,14 +14,16 @@ const UserModel = generateSchema<UserDoc>("User", {
   telephone: { type: String, required: false },
   mobile: { type: String, required: true },
   profilePhoto: { type: String },
-  roleId: { type: Schema.Types.ObjectId, ref: "Role", required: true },
+  role: { type: String, enum: RoleNames, required: true },
   password: { type: String, required: true },
   lastActivity: { type: Number },
   nationalId: { type: String },
-  permissions: [{
-     type: Schema.Types.ObjectId//permissionId
-    , ref: "Permission" 
-  }],
+  permissions: [
+    {
+      type: Schema.Types.ObjectId, //permissionId
+      ref: "Permission",
+    },
+  ],
 });
 
 export default UserModel;

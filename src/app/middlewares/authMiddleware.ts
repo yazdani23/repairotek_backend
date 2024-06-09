@@ -8,7 +8,7 @@ interface AuthRequest extends Request {
   user?: UserDoc;
 }
 
-const authMiddleware = async (err: any,req: AuthRequest,res: Response,next: NextFunction) => {
+const isLogin = async (err: any,req: AuthRequest,res: Response,next: NextFunction) => {
  
      logger.error(err);
     const authHeader = req.headers.authorization;
@@ -37,4 +37,31 @@ const authMiddleware = async (err: any,req: AuthRequest,res: Response,next: Next
   }
 };
 
-export default authMiddleware;
+const isAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req as any).user?.id; // Assuming you have a way to get the user ID from the request
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const user = await(req as any).user.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.role="Admin") {
+      return next();
+    }
+      return res.status(403).json({ message: "Forbidden" });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export default { isLogin, isAdmin };

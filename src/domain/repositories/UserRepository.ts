@@ -8,10 +8,7 @@ class UserRepository extends BaseRepository<UserDoc> {
   }
   async getById(id: string): Promise<UserDoc | null> {
     try {
-      return await this.model
-        .findById(id)
-        .populate("roleId", "name") 
-        .exec();
+      return await this.model.findById(id).populate("roleId", "name").exec();
     } catch (error) {
       throw new Error(`Failed to fetch data: ${error}`);
     }
@@ -34,9 +31,9 @@ class UserRepository extends BaseRepository<UserDoc> {
       throw new Error(`Failed to fetch data: ${error}`);
     }
   }
-  async findByEmail(email: string): Promise<UserDoc | null> {
-    return await this.model.findOne({ email });
-  }
+ async getUserByEmail(email: string): Promise<UserDoc | null>{
+  return await this.model.findOne({ email });
+ }
 }
 
 
