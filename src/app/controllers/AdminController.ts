@@ -10,3 +10,4 @@ class AdminController extends BaseController<AdminDoc> {
   }
 }
 export default new AdminController();
+//test

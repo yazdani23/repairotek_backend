@@ -8,3 +8,4 @@ export interface PermissionDoc extends Document {
   canEdit: boolean;
   canDelete: boolean;
 }
+

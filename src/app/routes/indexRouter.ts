@@ -16,6 +16,7 @@ import galleryRouter from "./galleryRouter";
 import adminRouter from "./adminRouter";
 import materialRouter from "./materialRouter";
 import projectGallerySubjectRouter from "./projectGallerySubjectRouter";
+import resourceRouter from "./resourceRouter";
 
 const indexRouter = express.Router();
 // const { index, notFound } = require("../controllers/indexController");
@@ -37,6 +38,7 @@ indexRouter.use(projectGallerySubjectRouter);
 
 ;
 // indexRouter.use(userZoneRouter);
+indexRouter.use(resourceRouter);
 indexRouter.use(permissionRouter);
 // indexRouter.use("*", notFound);
 //todo remove
