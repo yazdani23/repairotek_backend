@@ -1,3 +1,4 @@
+import { userInfo } from 'os';
 // auth.controller.ts
 import { Request, Response } from "express";
 import AuthService, { AuthServiceType } from "../../domain/services/AuthService";
@@ -12,15 +13,16 @@ class AuthController {
   constructor(private authService: AuthServiceType) {}
 
   async login(req: Request, res: Response): Promise<Response> {
-    const { accessToken, refreshToken } = await this.authService.login(
+    const { accessToken, refreshToken , userInfo} = await this.authService.login(
       req.body.email,
       req.body.password
     );
     if (!accessToken || !refreshToken) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
-    const user = await this.authService.getByEmail(req.body.email); // Assuming this method fetches user details
-    return res.status(200).json({ accessToken, refreshToken, user });
+    // const user = await this.authService.getByEmail(req.body.email); // Assuming this method fetches user details
+   
+    return res.status(200).json({ accessToken, refreshToken, userInfo });
   }
 
   async refreshToken(req: Request, res: Response): Promise<Response> {

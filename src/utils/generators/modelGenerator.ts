@@ -1,22 +1,20 @@
 import {
-    Model,
+  Model,
   Schema,
   SchemaDefinition,
   SchemaDefinitionType,
   model,
 } from "mongoose";
 
-const toJsonSchema = <T>(
-  schema: Schema<T>,
-  deletedProperties: string[] = ["__v", "_id"]//defualt value
-) => {
+const toJsonSchema = <T>(schema: Schema<T>, deletedProperties?: string[]) => {
+  const deleltedProp = ["__v", "_id", ...(deletedProperties ?? [])];
   schema.set("toJSON", {
     transform: (doc, ret) => {
-     if (!ret._id) {
-       return ret;
-     }
+      if (!ret._id) {
+        return ret;
+      }
       ret.id = ret._id.toString();
-      deletedProperties.forEach((item) => delete ret[item]);
+      deleltedProp.forEach((item) => delete ret[item]);
       return ret;
     },
   });
@@ -26,10 +24,11 @@ const toJsonSchema = <T>(
 
 const generateSchema = <T>(
   modelName: string,
-  schemaDefinition: SchemaDefinition<SchemaDefinitionType<T>, T>
-): Model<T> => {  
+  schemaDefinition: SchemaDefinition<SchemaDefinitionType<T>, T>,
+  deletedProperties?: string[]
+): Model<T> => {
   const schema = new Schema<T>(schemaDefinition, { timestamps: true });
-  toJsonSchema(schema);
+  toJsonSchema(schema, deletedProperties);
 
   try {
     return model<T>(modelName, schema);

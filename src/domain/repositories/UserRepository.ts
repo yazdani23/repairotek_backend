@@ -35,7 +35,7 @@ class UserRepository extends BaseRepository<UserDoc> {
     }
   }
   async findByEmail(email: string): Promise<UserDoc | null> {
-    return await this.model.findOne({ email });
+    return await this.model.findOne({ email }).populate("roleId");
   }
 }
 

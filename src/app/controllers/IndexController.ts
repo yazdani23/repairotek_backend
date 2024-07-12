@@ -1,13 +1,12 @@
+import { Request, Response } from "express";
 
-// const index = (req: Request, res: Response) => {
-//   return res.statusText; //.end("Welcome route");
-// };
+class IndexController {
+  index(req: Request, res: Response): Response {
+    return res.status(200).send("Welcome route");
+  }
+  route404(req: Request, res: Response): Response {
+    return res.status(404).send("not found 404");
+  }
+}
 
-// const route404 = (req: Request, res: Response) => {
-//   return res.statusText;//.end("not found 404");
-// };
-
-// module.exports = {
-//   index,
-//   route404,
-// };
+export default new IndexController();

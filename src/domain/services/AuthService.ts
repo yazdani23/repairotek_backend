@@ -1,10 +1,11 @@
 // auth.service.ts
 import bcrypt from "bcrypt";
-import { UserDoc } from "../docs/User";
+import { UserDoc, UserInfoDoc } from "../docs/User";
 import BaseService from "./BaseService";
 import UserValidationSchema from "../validations/UserValidation";
 import UserRepository from "../repositories/UserRepository";
-import {setToken}  from "../../utils/functions/setToken";
+import { setToken } from "../../utils/functions/setToken";
+import { RoleDoc } from '../docs/Role';
 
 class AuthService extends BaseService<UserDoc> {
   private userRepository = this.repository as typeof UserRepository;
@@ -15,7 +16,11 @@ class AuthService extends BaseService<UserDoc> {
   async login(
     email: string,
     password: string
-  ): Promise<{ accessToken: string; refreshToken: string }> {
+  ): Promise<{
+    accessToken: string;
+    refreshToken: string;
+    userInfo: UserInfoDoc;
+  }> {
     if (!email || !password) {
       throw new Error("Email and password are required");
     }
@@ -32,8 +37,14 @@ class AuthService extends BaseService<UserDoc> {
 
     const accessToken = setToken(user, "15m"); // توکن دسترسی با مدت اعتبار کوتاه
     const refreshToken = setToken(user, "7d"); // توکن نوسازی با مدت اعتبار طولانی
-
-    return { accessToken, refreshToken };
+    const userInfo = {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      email: user?.email,
+      profilePhoto:user.profilePhoto,
+      role: user.roleId && (user.roleId as RoleDoc).name,
+    };
+    return { accessToken, refreshToken, userInfo };
   }
 
   async getByEmail(email: string): Promise<UserDoc | null> {
