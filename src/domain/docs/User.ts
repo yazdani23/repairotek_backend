@@ -16,3 +16,11 @@ export interface UserDoc extends Document {
   nationalId?: string;
   permissions: Schema.Types.ObjectId[]; //permissionIds
 }
+
+export interface UserInfoDoc {
+  firstName: string,
+  lastName: string,
+  email: string,
+  profilePhoto: string; 
+  role: string;
+};
