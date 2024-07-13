@@ -44,7 +44,8 @@ app.get("/api-docs/swagger-json", (req, res) => {
   res.send(swaggerSpec);
 });
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "../../public")));
+
 app.use("/api", indexRouter);
 
 app.use(sessionMiddleware);

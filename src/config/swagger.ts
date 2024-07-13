@@ -14,8 +14,8 @@ const options: Options = {
   },
   apis: isProduction
     ? [
-        path.resolve(__dirname, "../../dist/app/routes/*.js"),
-        path.resolve(__dirname, "../../dist/domain/models/*.js"),
+        path.resolve(__dirname, "../app/routes/*.js"),
+        path.resolve(__dirname, "../domain/models/*.js"),
       ]
     : [
         path.resolve(__dirname, "../app/routes/*.ts"),
