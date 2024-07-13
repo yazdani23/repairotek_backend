@@ -1,5 +1,5 @@
 import { RoleDoc } from "../docs/Role";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
 
 /**
  * @swagger
@@ -21,7 +21,7 @@ import { generateSchema } from "../../utils/generators/modelGenerator";
  *         name: Admin
  *         description: Administrator with full access
  */
-const RoleModel = generateSchema<RoleDoc>("Role", {
+const RoleModel = generateModel<RoleDoc>("Role", {
   name: { type: String, required: true },
   description: { type: String, required: false, default: "" }, // Optional with default empty string
 });

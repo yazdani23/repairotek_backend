@@ -1,10 +1,6 @@
-
 import { TestDoc } from "../docs/Test";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
 
-const TestModel = generateSchema<TestDoc>("Test", {
-
-});
+const TestModel = generateModel<TestDoc>("Test", {});
 
 export default TestModel;
-

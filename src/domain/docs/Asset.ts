@@ -1,6 +1,6 @@
 import { Document, Types } from "mongoose";
 
-export interface AssetsDoc extends Document {
+export interface AssetDoc extends Document {
   materials: {
     materialId: Types.ObjectId;
     value: number;

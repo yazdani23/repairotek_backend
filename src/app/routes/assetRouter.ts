@@ -1,139 +1,139 @@
 import express from "express";
-import AdminController from "../controllers/AdminController";
+import AssetController from "../controllers/AssetController";
 
 /**
  * @swagger
  * tags:
- *   name: Admins
- *   description: Admin management
+ *   name: Assets
+ *   description: Asset management
  */
 
 /**
  * @swagger
- * /admins:
+ * /assets:
  *   get:
- *     summary: Get all admins
- *     tags: [Admins]
+ *     summary: Get all assets
+ *     tags: [Assets]
  *     responses:
  *       200:
- *         description: List of all admins
+ *         description: List of all assets
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Admin'
+ *                 $ref: '#/components/schemas/Asset'
  *       500:
  *         description: Server error
  */
 
 /**
  * @swagger
- * /admins/{id}:
+ * /assets/{id}:
  *   get:
- *     summary: Get admin by ID
- *     tags: [Admins]
+ *     summary: Get asset by ID
+ *     tags: [Assets]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Admin ID
+ *         description: Asset ID
  *     responses:
  *       200:
- *         description: Admin data
+ *         description: Asset data
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Admin'
+ *               $ref: '#/components/schemas/Asset'
  *       404:
- *         description: Admin not found
+ *         description: Asset not found
  *       500:
  *         description: Server error
  */
 
 /**
  * @swagger
- * /admins:
+ * /assets:
  *   post:
- *     summary: Create a new admin
- *     tags: [Admins]
+ *     summary: Create a new asset
+ *     tags: [Assets]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Admin'
+ *             $ref: '#/components/schemas/Asset'
  *     responses:
  *       201:
- *         description: Admin created successfully
+ *         description: Asset created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Admin'
+ *               $ref: '#/components/schemas/Asset'
  *       500:
  *         description: Server error
  */
 
 /**
  * @swagger
- * /admins/{id}:
+ * /assets/{id}:
  *   put:
- *     summary: Update an admin by ID
- *     tags: [Admins]
+ *     summary: Update an asset by ID
+ *     tags: [Assets]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Admin ID
+ *         description: Asset ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Admin'
+ *             $ref: '#/components/schemas/Asset'
  *     responses:
  *       200:
- *         description: Admin updated successfully
+ *         description: Asset updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Admin'
+ *               $ref: '#/components/schemas/Asset'
  *       404:
- *         description: Admin not found
+ *         description: Asset not found
  *       500:
  *         description: Server error
  */
 
 /**
  * @swagger
- * /admins/{id}:
+ * /assets/{id}:
  *   delete:
- *     summary: Delete an admin by ID
- *     tags: [Admins]
+ *     summary: Delete an asset by ID
+ *     tags: [Assets]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Admin ID
+ *         description: Asset ID
  *     responses:
  *       204:
- *         description: No content, admin deleted successfully
+ *         description: No content, asset deleted successfully
  *       500:
  *         description: Server error
  */
 
-const adminRouter = express.Router();
+const assetRouter = express.Router();
 
-adminRouter.get("/admins/:id", AdminController.getById);
-adminRouter.get("/admins", AdminController.getAll);
-adminRouter.post("/admins", AdminController.create);
-adminRouter.put("/admins/:id", AdminController.update);
-adminRouter.delete("/admins/:id", AdminController.delete);
+assetRouter.get("/assets/:id", AssetController.getById);
+assetRouter.get("/assets", AssetController.getAll);
+assetRouter.post("/assets", AssetController.create);
+assetRouter.put("/assets/:id", AssetController.update);
+assetRouter.delete("/assets/:id", AssetController.delete);
 
-export default adminRouter;
+export default assetRouter;

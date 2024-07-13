@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 import { EquipmentEmployeeDoc } from "../../docs/unuse/EquipmentEmployee";
-import { generateSchema } from "../../../utils/generators/modelGenerator";
+import { generateModel } from "../../../utils/generators/modelGenerator";
 
-const EquipmentEmployeeModel = generateSchema<EquipmentEmployeeDoc>(
+const EquipmentEmployeeModel = generateModel<EquipmentEmployeeDoc>(
   "Equipment",
   {
     equipmentTypeId: {

@@ -1,9 +1,6 @@
-import { AssetsProjectDoc } from "../../docs/unuse/AssetsProject";
-import { generateSchema } from "../../../utils/generators/modelGenerator";
+import { AssetProjectDoc } from "../../docs/unuse/AssetProject";
+import { generateModel } from "../../../utils/generators/modelGenerator";
 
-const AssetsProjectModel = generateSchema<AssetsProjectDoc>(
-  "AssetsProject",
-  {}
-);
+const AssetsProjectModel = generateModel<AssetProjectDoc>("AssetsProject", {});
 
 export default AssetsProjectModel;

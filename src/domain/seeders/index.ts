@@ -12,7 +12,7 @@ import { EmployeeSeeder } from "./EmployeeSeeder";
 import { AdminSeeder } from "./AdminSeeder";
 import { JobSeeder } from "./JobSeeder";
 import { ZoneSeeder } from "./ZoneSeeder";
-import { AssetsSeeder } from "./AssetsSeeder";
+import { AssetSeeder } from "./AssetSeeder";
 import { ReportSubjectSeeder } from "./ReportSubjectSeeder";
 import { ProjectGallerySubjectSeeder } from "./ProjectGallerySubjectSeeder";
 import { ProjectGallerySeeder } from "./ProjectGallerySeeder";
@@ -38,7 +38,7 @@ const seedDatabase = async () => {
     await EquipmentSeeder.seed();
 
     await ProjectSeeder.seed();
-    await AssetsSeeder.seed();
+    await AssetSeeder.seed();
 
     await ReportSubjectSeeder.seed();
     await ProjectGallerySubjectSeeder.seed();

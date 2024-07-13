@@ -1,30 +1,30 @@
 import { faker } from "@faker-js/faker";
 import logger from "../../utils/helpers/logger";
-import AssetsModel from "../models/AssetsModel";
+import AssetModel from "../models/AssetModel";
 import MaterialModel from "../models/MaterialModel";
 import EquipmentModel from "../models/EquipmentModel";
 
-export class AssetsSeeder {
-  static removeAllAssets = async () => {
+export class AssetSeeder {
+  static removeAllasset = async () => {
     try {
-      await AssetsModel.deleteMany({});
-      logger.info("All assets removed successfully.");
+      await AssetModel.deleteMany({});
+      logger.info("All asset removed successfully.");
     } catch (error: any) {
-      logger.error("Failed to remove assets: " + error.message);
+      logger.error("Failed to remove asset: " + error.message);
     }
   };
 
-  static insertAssets = async () => {
+  static insertasset = async () => {
     try {
       const materials = await MaterialModel.find({});
       const equipment = await EquipmentModel.find({});
-      const assets = [];
+      const asset = [];
 
       for (let i = 0; i < 10; i++) {
         const materialIndex = Math.floor(Math.random() * materials.length);
         const equipmentIndex = Math.floor(Math.random() * equipment.length);
 
-        assets.push({
+        asset.push({
           materials: {
             materialId: materials[materialIndex].id,
             value: Math.random() * 100,
@@ -38,16 +38,16 @@ export class AssetsSeeder {
         });
       }
 
-      // Insert assets into the database
-      await AssetsModel.insertMany(assets);
-      logger.info(`${assets.length} assets seeded successfully.`);
+      // Insert asset into the database
+      await AssetModel.insertMany(asset);
+      logger.info(`${asset.length} asset seeded successfully.`);
     } catch (error: any) {
-      logger.error("Failed to seed assets: " + error.message);
+      logger.error("Failed to seed asset: " + error.message);
     }
   };
 
   static seed = async () => {
-    await this.removeAllAssets();
-    await this.insertAssets();
+    await this.removeAllasset();
+    await this.insertasset();
   };
 }

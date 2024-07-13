@@ -1,18 +1,20 @@
 import { Schema } from "mongoose";
 import ReportModel from "./ReportModel";
 import { DamageEquipmentReportDoc } from "../docs/DamageEquipmentReport";
+import { generateModel } from "../../utils/generators/modelGenerator";
 
-const DamageEquipmentReportSchema = new Schema<DamageEquipmentReportDoc>({
-  equipmentId: {
-    type: Schema.Types.ObjectId,
-    ref: "Equipment",
-    required: true,
-  }
-});
-
-const DamageEquipmentReportModel = ReportModel.discriminator(
+///////////// Discriminat //////////////////
+const DamageEquipmentReportModel = generateModel<DamageEquipmentReportDoc>(
   "DamageEquipmentReport",
-  DamageEquipmentReportSchema
+  {
+    equipmentId: {
+      type: Schema.Types.ObjectId,
+      ref: "Equipment",
+      required: true,
+    },
+  },
+  [],
+  ReportModel
 );
 
 export default DamageEquipmentReportModel;

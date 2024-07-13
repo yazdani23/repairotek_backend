@@ -1,8 +1,8 @@
-
 import { AdminDoc } from "../docs/Admin";
-import { Schema, SchemaDefinition, SchemaDefinitionType } from "mongoose";
 import UserModel from "./UserModel";
-import { toJsonSchema } from "../../utils/generators/modelGenerator";
+import {
+  generateModel,
+} from "../../utils/generators/modelGenerator";
 
 /**
  * @swagger
@@ -28,7 +28,7 @@ import { toJsonSchema } from "../../utils/generators/modelGenerator";
  *           description: Last name of the user
  *         gender:
  *           type: string
- *           enum: 
+ *           enum:
  *             - Male
  *             - Female
  *             - Other
@@ -103,19 +103,12 @@ import { toJsonSchema } from "../../utils/generators/modelGenerator";
  *         permissions: ['60c72b2f9b1d8c001f8e4ca0']
  */
 
-const AdminSchemaDefinition: SchemaDefinition<
-  SchemaDefinitionType<AdminDoc>,
-  AdminDoc
-> = {};
-
-const AdminSchema = new Schema<AdminDoc>(AdminSchemaDefinition, {
-  timestamps: true,
-});
-toJsonSchema(AdminSchema, ["password"]);
-
 ///////////// Discriminat //////////////////
-
-const AdminModel = UserModel.discriminator<AdminDoc>("Admin", AdminSchema);
+const AdminModel = generateModel<AdminDoc>(
+  "Admin",
+  {},
+  ["password"],
+  UserModel
+);
 
 export default AdminModel;
-

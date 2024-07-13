@@ -1,8 +1,55 @@
-
 import { CountryDoc } from "../docs/Country";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
 
-const CountryModel = generateSchema<CountryDoc>("Country", {
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Country:
+ *       type: object
+ *       properties:
+ *         geonameId:
+ *           type: number
+ *           description: Unique Geoname ID of the country
+ *         code:
+ *           type: string
+ *           description: Unique code of the country
+ *         name:
+ *           type: string
+ *           description: Name of the country
+ *         capital:
+ *           type: string
+ *           description: Capital city of the country
+ *         population:
+ *           type: number
+ *           description: Population of the country
+ *         area:
+ *           type: number
+ *           description: Total area of the country
+ *         languages:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: Languages spoken in the country
+ *         currency:
+ *           type: string
+ *           description: Currency used in the country
+ *         flagUrl:
+ *           type: string
+ *           description: URL of the country's flag
+ *       required:
+ *         - geonameId
+ *         - code
+ *         - name
+ *         - capital
+ *         - population
+ *         - area
+ *         - languages
+ *         - currency
+ *         - flagUrl
+ */
+
+const CountryModel = generateModel<CountryDoc>("Country", {
   geonameId: { type: Number, required: true, unique: true },
   code: { type: String, required: true, unique: true },
   name: { type: String, required: true },
@@ -16,4 +63,3 @@ const CountryModel = generateSchema<CountryDoc>("Country", {
 });
 
 export default CountryModel;
-

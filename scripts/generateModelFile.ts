@@ -2,7 +2,9 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import { MODELS_PATH, doesFileExist } from "./utils";
 
-export const generateModelFile = async (resourceNameUC: string): Promise<void> => {
+export const generateModelFile = async (
+  resourceNameUC: string
+): Promise<void> => {
   const modelPath = path.join(MODELS_PATH, `${resourceNameUC}Model.ts`);
 
   if (await doesFileExist(modelPath)) {
@@ -12,9 +14,9 @@ export const generateModelFile = async (resourceNameUC: string): Promise<void> =
 
   const modelContent = `
 import { ${resourceNameUC}Doc } from "../docs/${resourceNameUC}";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
 
-const ${resourceNameUC}Model = generateSchema<${resourceNameUC}Doc>("${resourceNameUC}", {
+const ${resourceNameUC}Model = generateModel<${resourceNameUC}Doc>("${resourceNameUC}", {
 
 });
 

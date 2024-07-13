@@ -1,12 +1,13 @@
 import { DailyReportDoc } from "../docs/DailyReport";
-import { Schema } from "mongoose";
 import ReportModel from "./ReportModel";
+import { generateModel } from "../../utils/generators/modelGenerator";
 
-const DailyReportSchema = new Schema<DailyReportDoc>({});
-
-const DailyReportModel = ReportModel.discriminator(
+///////////// Discriminat //////////////////
+const DailyReportModel = generateModel<DailyReportDoc>(
   "DailyReport",
-  DailyReportSchema
+  {},
+  [],
+  ReportModel
 );
 
 export default DailyReportModel;

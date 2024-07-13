@@ -1,7 +1,7 @@
 import { InsuranceDoc } from "../../docs/unuse/Insurance";
-import { generateSchema } from "../../../utils/generators/modelGenerator";
+import { generateModel } from "../../../utils/generators/modelGenerator";
 
-const InsuranceModel = generateSchema<InsuranceDoc>("Insurance", {
+const InsuranceModel = generateModel<InsuranceDoc>("Insurance", {
   title: { type: String, required: true },
   code: { type: String, required: true },
   description: { type: String, required: false, default: "" }, // Optional with default empty string

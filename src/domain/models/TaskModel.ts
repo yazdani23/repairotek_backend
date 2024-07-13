@@ -1,9 +1,38 @@
-
 import { TaskDoc } from "../docs/Task";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
 import { TaskStatus } from "../../utils/constant/enums/StatusTask";
 
-const TaskModel = generateSchema<TaskDoc>("Task", {
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Task:
+ *       type: object
+ *       required:
+ *        - title
+ *        - status
+ *       properties:
+ *         title:
+ *            type: string
+ *            description: Title of the task
+ *            required: true
+ *            example: "Complete the project documentation"
+ *         description:
+ *            type: string
+ *            description: Description of the task
+ *            default: ""
+ *            example: "Detail the steps to complete the project documentation"
+ *         status:
+ *            type: string
+ *            description: Status of the task
+ *            enum:
+ *             - Pending
+ *             - InProgress
+ *             - Completed
+ *            default: "Pending"
+ */
+
+const TaskModel = generateModel<TaskDoc>("Task", {
   title: {
     type: String,
     required: true,
@@ -25,4 +54,3 @@ const TaskModel = generateSchema<TaskDoc>("Task", {
 });
 
 export default TaskModel;
-

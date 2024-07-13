@@ -1,8 +1,79 @@
 import { Schema } from "mongoose";
 import { ProjectCostDoc } from "../docs/ProjectCost";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *   ProjectCost:
+ *     type: object
+ *     required:
+ *       - projectId
+ *       - materials
+ *       - equipment
+ *       - employees
+ *       - costDate
+ *       - totalCost
+ *     properties:
+ *       projectId:
+ *         type: string
+ *         format: ObjectId
+ *         description: ID of the project
+ *       materials:
+ *         type: array
+ *         items:
+ *           type: object
+ *           properties:
+ *             materialId:
+ *               type: string
+ *               format: ObjectId
+ *               description: ID of the material
+ *             value:
+ *               type: number
+ *               description: Value of the material
+ *             costPerUnit:
+ *               type: number
+ *               description: Cost per unit of the material
+ *       equipment:
+ *         type: array
+ *         items:
+ *           type: object
+ *           properties:
+ *             equipmentId:
+ *               type: string
+ *               format: ObjectId
+ *               description: ID of the equipment
+ *             countHour:
+ *               type: number
+ *               description: Number of hours the equipment is used
+ *             costPerHour:
+ *               type: number
+ *               description: Cost per hour of using the equipment
+ *       employees:
+ *         type: array
+ *         items:
+ *           type: object
+ *           properties:
+ *             employeeId:
+ *               type: string
+ *               format: ObjectId
+ *               description: ID of the employee
+ *             countHour:
+ *               type: number
+ *               description: Number of hours the employee worked
+ *             costPerHour:
+ *               type: number
+ *               description: Cost per hour of the employee
+ *       costDate:
+ *         type: string
+ *         format: date
+ *         description: Date when the cost was recorded
+ *       totalCost:
+ *         type: number
+ *         description: Total cost of the project
+ */
 
-const ProjectCostModel = generateSchema<ProjectCostDoc>("ProjectCost", {
+const ProjectCostModel = generateModel<ProjectCostDoc>("ProjectCost", {
   projectId: { type: Schema.Types.ObjectId, ref: "Project", required: true },
   materials: [
     {
@@ -59,9 +130,7 @@ const ProjectCostModel = generateSchema<ProjectCostDoc>("ProjectCost", {
   totalCost: { type: Number, required: true },
 });
 
-
 export default ProjectCostModel;
- 
 
 // // Subdocument Schema برای مواد
 // const materialSchema = new Schema({
@@ -104,7 +173,5 @@ export default ProjectCostModel;
 //   }
 // );
 
-// const ProjectCostModel = generateSchema<ProjectCostDoc>("ProjectCost", projectCostSchema);
+// const ProjectCostModel = generateModel<ProjectCostDoc>("ProjectCost", projectCostSchema);
 // export default ProjectCostModel;
- 
-  

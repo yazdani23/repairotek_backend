@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 import { UserDoc } from "../docs/User";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
 import { Gender } from "../../utils/constant/enums/Gender";
 
 /**
@@ -39,7 +39,6 @@ import { Gender } from "../../utils/constant/enums/Gender";
  *         role: admin
  */
 
-
 /**
  * @swagger
  * components:
@@ -64,7 +63,7 @@ import { Gender } from "../../utils/constant/enums/Gender";
  *           description: Last name of the user
  *         gender:
  *           type: string
- *           enum: 
+ *           enum:
  *             - Male
  *             - Female
  *             - Other
@@ -105,7 +104,7 @@ import { Gender } from "../../utils/constant/enums/Gender";
  *             format: ObjectId
  *           description: List of permission IDs associated with the user
  */
-const UserModel = generateSchema<UserDoc>("User", {
+const UserModel = generateModel<UserDoc>("User", {
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   gender: { type: String, enum: Gender, required: true },
@@ -118,12 +117,12 @@ const UserModel = generateSchema<UserDoc>("User", {
   password: { type: String, required: true },
   lastActivity: { type: Number },
   nationalId: { type: String },
-  permissions: [{
-     type: Schema.Types.ObjectId//permissionId
-    , ref: "Permission" 
-  }],
+  permissions: [
+    {
+      type: Schema.Types.ObjectId, //permissionId
+      ref: "Permission",
+    },
+  ],
 });
 
 export default UserModel;
-
-
