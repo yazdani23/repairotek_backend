@@ -43,8 +43,6 @@
     "cross-env": "^7.0.3",
     "mocha": "^10.4.0",
     "nodemon": "^3.1.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3",
     "typescript-di": "^0.6.1"
@@ -65,6 +63,8 @@
     "morgan": "^1.10.0",
     "pino": "^9.1.0",
     "pino-multi-stream": "^6.0.0",
-    "pino-pretty": "^11.0.0"
+    "pino-pretty": "^11.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
