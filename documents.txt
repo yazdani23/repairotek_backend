@@ -38,3 +38,76 @@ Materials
 Project Gallery 
 Tasks
 Time Card
+
+
+
+project-root/
+├── src/
+│   ├── app/
+│   │   ├── controllsers/
+│   │   │      ├── productController.ts
+│   │   │      └── userController.ts
+│   │   │      └── indexController.ts
+│   │   ├── middlewares/
+│   │   │      ├── productMiddleware.ts
+│   │   │      └── userMiddleware.ts
+│   │   │      └── indexMiddleware.ts
+│   │   ├── routes/
+│   │   │      ├── productRouter.ts
+│   │   │      └── userRouter.ts
+│   │   │      └── indexRouter.ts
+│   │   ├── app.ts
+│   ├── domain/
+│   │   ├── docs/
+│   │   │      ├── userDoc.ts
+│   │   │      └── productDoc.ts
+│   │   ├── models/
+│   │   │      ├── userModel.ts
+│   │   │      └── productModel.ts
+│   │   ├── repositories/
+│   │   │      ├── userRepository.ts
+│   │   │      └── productRepository.ts
+│   │   ├── services/
+│   │   │      ├── userService.ts
+│   │   │      └── productService.ts
+│   │   ├── validations/
+│   │   │      ├── userValidation.ts
+│   │   │      └── productValidation.ts
+│   ├── config/
+│   │   ├── db.ts
+│   │   └── swagger.ts
+│   ├── index.ts
+
+
+
+project-root/
+├── dist/
+├── public/
+├── ├── client(react)/
+├── src/
+│   ├── app/
+│   │   ├── controllsers/
+│   │   │      ├── productController.ts
+│   │   │      └── userController.ts
+│   │   │      └── indexController.ts
+│   │   ├── routes/
+│   │   │      ├── productRouter.ts
+│   │   │      └── userRouter.ts
+│   │   │      └── indexRouter.ts
+│   │   ├── app.ts
+│   ├── domain/
+│   │   ├── models/
+│   │   │      ├── userModel.ts
+│   │   │      └── productModel.ts
+│   │   ├── repositories/
+│   │   │      ├── userRepository.ts
+│   │   │      └── productRepository.ts
+│   │   ├── services/
+│   │   │      ├── userService.ts
+│   │   │      └── productService.ts
+│   ├── config/
+│   │   ├── db.ts
+│   │   └── swagger.ts
+│   ├── index.ts
+│   ├── package.json
+│   ├── vercel.json
