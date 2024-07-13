@@ -47,7 +47,6 @@ app.get("/api-docs/swagger-json", (req, res) => {
 app.use(express.static(path.join(__dirname, "/public")));
 app.use("/api", indexRouter);
 
-// اضافه کردن middleware session به برنامه
 app.use(sessionMiddleware);
 
 app.use(errorHandlerMiddleware);
