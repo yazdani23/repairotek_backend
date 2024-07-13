@@ -15,3 +15,4 @@ const UserValidationSchema = Joi.object({
   password: Joi.string().required(),
   // password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{8,30}$")).required(),
 });
+export default UserValidationSchema
