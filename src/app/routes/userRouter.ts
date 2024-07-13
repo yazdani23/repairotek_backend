@@ -1,6 +1,7 @@
 import express from "express";
 import UserController from "../controllers/UserController";
 
+
 const userRouter = express.Router();
 
 // Define routes for handling CRUD operations on users
