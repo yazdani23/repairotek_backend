@@ -41,16 +41,36 @@ class AuthService extends BaseService<UserDoc> {
       firstName: user?.firstName,
       lastName: user?.lastName,
       email: user?.email,
-      profilePhoto:user.profilePhoto,
+      profilePhoto: user.profilePhoto,
       role: user.roleId && (user.roleId as RoleDoc).name,
     };
     return { accessToken, refreshToken, userInfo };
+  }
+
+  async signup(user: Partial<UserDoc>): Promise<UserDoc> {
+    // if (!user.firstName || !user.email || !user.password) {
+    //    throw new Error("Email and password and First Name are required");
+    // }
+    const hashedPassword = await bcrypt.hash(user.password as string, 10);
+    const newUser = await this.userRepository.signup({
+      ...user,
+      password: hashedPassword,
+    });
+    return newUser;
+  }
+
+  async sendPasswordResetEmail(email: string): Promise<void> {
+    // پیاده‌سازی ارسال ایمیل بازنشانی رمز عبور
+    // این بخش نیاز به سرویس ارسال ایمیل دارد
   }
 
   async getByEmail(email: string): Promise<UserDoc | null> {
     return await this.userRepository.findByEmail(email);
   }
 
+  // async getById(id: string): Promise<UserDoc | null> {
+  //   return await this.userRepository.findById(id);
+  // }
   //  async logout(token: string): Promise<void> {
   //     const decoded: any = jwt.decode(token);
   //     const expiresIn = decoded.exp - Math.floor(Date.now() / 1000);

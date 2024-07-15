@@ -31,7 +31,15 @@ const sessionMiddleware = session({
 });
 
 connentDB();
-app.use(cors());
+
+const corsOptions = {
+  origin: "http://localhost",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(loggerMiddleware);

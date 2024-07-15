@@ -10,9 +10,9 @@ class TokenBlackListService extends BaseService<TokenBlackListDoc> {
     super(TokenBlackListRepository, TokenBlackListValidationSchema);
   }
 
-  create(data: TokenBlackListDoc): Promise<TokenBlackListDoc> {
-    throw new Error("Method not implemented.");
-  }
+  // create(data: TokenBlackListDoc): Promise<TokenBlackListDoc> {
+  //   throw new Error("Method not implemented.");
+  // }
   // async update(
   //   id: string,
   //   data: Partial<ResourceData<TokenBlackListDoc>>
@@ -24,9 +24,9 @@ class TokenBlackListService extends BaseService<TokenBlackListDoc> {
   //   throw new Error("Method not implemented.");
   //  }
 
-  async getAll(): Promise<ResourceData<TokenBlackListDoc>[]> {
-    throw new Error("Method not implemented.");
-  }
+  // async getAll(): Promise<ResourceData<TokenBlackListDoc>[]> {
+  //   throw new Error("Method not implemented.");
+  // }
   // async getById(id: string): Promise<ResourceData<TokenBlackListDoc> | null> {
   //   throw new Error("Method not implemented.");
   // }

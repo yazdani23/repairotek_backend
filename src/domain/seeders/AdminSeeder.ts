@@ -1,3 +1,4 @@
+import bcrypt  from 'bcrypt';
 import { faker } from "@faker-js/faker";
 import logger from "../../utils/helpers/logger";
 import AdminModel from "../models/AdminModel";
@@ -23,7 +24,8 @@ export class AdminSeeder {
         return;
       }
       const admins = [];
-
+      const password="Admin@1234"
+      const hashedPassword = await bcrypt.hash(password as string, 10);
       for (let i = 0; i < batchSize; i++) {
         admins.push(
           {
@@ -36,7 +38,7 @@ export class AdminSeeder {
             mobile: "1-780-453-5196 x59913",
             profilePhoto: "https://avatars.githubusercontent.com/u/94115880",
             roleId: adminRole.id,
-            password: "AHjuQBdLrScGLUe",
+            password: hashedPassword,
             lastActivity: 5583722709516288,
             nationalId: "4120253265",
             permissions: [],
@@ -51,7 +53,7 @@ export class AdminSeeder {
             mobile: "1-780-453-5196 x59913",
             profilePhoto: "https://avatars.githubusercontent.com/u/94115881",
             roleId: adminRole.id,
-            password: "AHjuQBdLrScGLUe",
+            password: hashedPassword,
             lastActivity: 5583722709516288,
             nationalId: "4120253267",
             permissions: [],

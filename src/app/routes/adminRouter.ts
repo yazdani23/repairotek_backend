@@ -87,62 +87,62 @@ adminRouter.get("/admins/:id", AdminController.getById);
 
 adminRouter.post("/admins", AdminController.create);
 
-/**
- * @swagger
- * /admins/{id}:
- *   put:
- *     summary: Update an admin by ID
- *     tags: [Admins]
- *     operationId: updateAdmin
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Admin ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Admin'
- *     responses:
- *       200:
- *         description: Admin updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Admin'
- *       404:
- *         description: Admin not found
- *       500:
- *         description: Server error
- */
+// /**
+//  * @swagger
+//  * /admins/{id}:
+//  *   put:
+//  *     summary: Update an admin by ID
+//  *     tags: [Admins]
+//  *     operationId: updateAdmin
+//  *     parameters:
+//  *       - in: path
+//  *         name: id
+//  *         schema:
+//  *           type: string
+//  *         required: true
+//  *         description: Admin ID
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             $ref: '#/components/schemas/Admin'
+//  *     responses:
+//  *       200:
+//  *         description: Admin updated successfully
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               $ref: '#/components/schemas/Admin'
+//  *       404:
+//  *         description: Admin not found
+//  *       500:
+//  *         description: Server error
+//  */
 
-adminRouter.put("/admins/:id", AdminController.update);
+// adminRouter.put("/admins/:id", AdminController.update);
 
-/**
- * @swagger
- * /admins/{id}:
- *   delete:
- *     summary: Delete an admin by ID
- *     tags: [Admins]
- *     operationId: deleteAdmin
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Admin ID
- *     responses:
- *       204:
- *         description: No content, admin deleted successfully
- *       500:
- *         description: Server error
- */
+// /**
+//  * @swagger
+//  * /admins/{id}:
+//  *   delete:
+//  *     summary: Delete an admin by ID
+//  *     tags: [Admins]
+//  *     operationId: deleteAdmin
+//  *     parameters:
+//  *       - in: path
+//  *         name: id
+//  *         schema:
+//  *           type: string
+//  *         required: true
+//  *         description: Admin ID
+//  *     responses:
+//  *       204:
+//  *         description: No content, admin deleted successfully
+//  *       500:
+//  *         description: Server error
+//  */
 
-adminRouter.delete("/admins/:id", AdminController.delete);
+// adminRouter.delete("/admins/:id", AdminController.delete);
 
 export default adminRouter;

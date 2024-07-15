@@ -131,59 +131,59 @@ authRouter.post("/auth/login", AuthController.login);
 
 authRouter.post("/auth/refreshToken", AuthController.refreshToken);
 
-// /**
-//  * @swagger
-//  * /auth/signup:
-//  *   post:
-//  *     summary: Signs up a new user
-//  *     tags: [Auth]
-//  *     operationId: signupUser
-//  *     requestBody:
-//  *       required: true
-//  *       content:
-//  *         application/json:
-//  *           schema:
-//  *             type: object
-//  *             required:
-//  *               - email
-//  *               - password
-//  *               - name
-//  *             properties:
-//  *               email:
-//  *                 type: string
-//  *                 format: email
-//  *                 description: The user's email address
-//  *               password:
-//  *                 type: string
-//  *                 format: password
-//  *                 description: The user's password
-//  *               name:
-//  *                 type: string
-//  *                 description: The user's name
-//  *           example:
-//  *             email: johndoe@example.com
-//  *             password: securepassword123
-//  *             name: John Doe
-//  *     responses:
-//  *       201:
-//  *         description: User created successfully
-//  *         content:
-//  *           application/json:
-//  *             schema:
-//  *               $ref: '#/components/schemas/UserInfo'
-//  *       400:
-//  *         description: Invalid input
-//  *         content:
-//  *           application/json:
-//  *             schema:
-//  *               type: object
-//  *               properties:
-//  *                 error:
-//  *                   type: string
-//  *                   description: Error message
-//  *           example:
-//  *             error: Invalid input
-//  */
+/**
+ * @swagger
+ * /auth/signup:
+ *   post:
+ *     summary: Signs up a new user
+ *     tags: [Auth]
+ *     operationId: signupUser
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - name
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: The user's email address
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: The user's password
+ *               name:
+ *                 type: string
+ *                 description: The user's name
+ *           example:
+ *             email: johndoe@example.com
+ *             password: securepassword123
+ *             name: John Doe
+ *     responses:
+ *       201:
+ *         description: User created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserInfo'
+ *       400:
+ *         description: Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ *           example:
+ *             error: Invalid input
+ */
 
 // /**
 //  * @swagger
