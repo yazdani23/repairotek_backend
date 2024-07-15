@@ -5,7 +5,7 @@ import TokenBlackListValidationSchema from "../validations/TokenBlackListValidat
 
 type ResourceData<T> = T;
 class TokenBlackListService extends BaseService<TokenBlackListDoc> {
-  private blackListRepository = this.repository as typeof TokenBlackListRepository;
+  private tokenBlackListRepository = this.repository as typeof TokenBlackListRepository;
   constructor() {
     super(TokenBlackListRepository, TokenBlackListValidationSchema);
   }
@@ -46,7 +46,7 @@ class TokenBlackListService extends BaseService<TokenBlackListDoc> {
   // }
 
   async isBlackToken(token: string): Promise<boolean> {
-    const result = await this.blackListRepository.findByToken(token);
+    const result = await this.tokenBlackListRepository.findByToken(token);
     return result ? true : false;
   }
 }

@@ -1,38 +1,6 @@
 import express from "express";
 import EquipmentController from "../controllers/EquipmentController";
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     Equipment:
- *       type: object
- *       required:
- *         - name
- *         - type
- *       properties:
- *         id:
- *           type: string
- *           format: uuid
- *           description: Unique identifier for the equipment
- *         name:
- *           type: string
- *           description: Name of the equipment
- *         type:
- *           type: string
- *           description: Type of the equipment
- *         description:
- *           type: string
- *           description: Description of the equipment
- *         createdAt:
- *           type: string
- *           format: date-time
- *           description: The time when the equipment was created
- *         updatedAt:
- *           type: string
- *           format: date-time
- *           description: The time when the equipment was last updated
- */
 
 const equipmentRouter = express.Router();
 
@@ -49,6 +17,7 @@ const equipmentRouter = express.Router();
  *   get:
  *     summary: Get all equipment
  *     tags: [Equipment]
+ *     operationId: getAllEquipment
  *     responses:
  *       200:
  *         description: List of all equipment
@@ -69,6 +38,7 @@ equipmentRouter.get("/equipment", EquipmentController.getAll);
  *   get:
  *     summary: Get equipment by ID
  *     tags: [Equipment]
+ *     operationId: getEquipmentById
  *     parameters:
  *       - in: path
  *         name: id
@@ -97,6 +67,7 @@ equipmentRouter.get("/equipment/:id", EquipmentController.getById);
  *   post:
  *     summary: Create a new equipment
  *     tags: [Equipment]
+ *     operationId: createEquipment
  *     requestBody:
  *       required: true
  *       content:
@@ -121,6 +92,7 @@ equipmentRouter.post("/equipment", EquipmentController.create);
  *   put:
  *     summary: Update equipment by ID
  *     tags: [Equipment]
+ *     operationId: updateEquipment
  *     parameters:
  *       - in: path
  *         name: id
@@ -155,6 +127,7 @@ equipmentRouter.put("/equipment/:id", EquipmentController.update);
  *   delete:
  *     summary: Delete equipment by ID
  *     tags: [Equipment]
+ *     operationId: deleteEquipment
  *     parameters:
  *       - in: path
  *         name: id

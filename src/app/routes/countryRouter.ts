@@ -1,5 +1,7 @@
+
 import express from "express";
 import CountryController from "../controllers/CountryController";
+const countryRouter = express.Router();
 
 /**
  * @swagger
@@ -10,36 +12,18 @@ import CountryController from "../controllers/CountryController";
 
 /**
  * @swagger
- * /countrys:
+ * /countries/{id}:
  *   get:
- *     summary: Get all countries
  *     tags: [Countries]
- *     responses:
- *       200:
- *         description: List of all countries
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Country'
- *       500:
- *         description: Server error
- */
-
-/**
- * @swagger
- * /countrys/{id}:
- *   get:
  *     summary: Get country by ID
- *     tags: [Countries]
+ *     description: Retrieve a country by its ID
+ *     operationId: getCountryById
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         in: path
+ *         required: true
  *         schema:
  *           type: string
- *         required: true
- *         description: Country ID
  *     responses:
  *       200:
  *         description: Country data
@@ -53,90 +37,16 @@ import CountryController from "../controllers/CountryController";
  *         description: Server error
  */
 
-/**
- * @swagger
- * /countrys:
- *   post:
- *     summary: Create a new country
- *     tags: [Countries]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Country'
- *     responses:
- *       201:
- *         description: Country created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Country'
- *       500:
- *         description: Server error
- */
+countryRouter.get("/countries/:id", CountryController.getById);
 
 /**
  * @swagger
- * /countrys/{id}:
- *   put:
- *     summary: Update a country by ID
- *     tags: [Countries]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Country ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Country'
- *     responses:
- *       200:
- *         description: Country updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Country'
- *       404:
- *         description: Country not found
- *       500:
- *         description: Server error
- */
-
-/**
- * @swagger
- * /countrys/{id}:
- *   delete:
- *     summary: Delete a country by ID
- *     tags: [Countries]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Country ID
- *     responses:
- *       204:
- *         description: No content, country deleted successfully
- *       500:
- *         description: Server error
- */
-
-const countryRouter = express.Router();
-
-countryRouter.get("/countrys/:id", CountryController.getById);
-/**
- * @swagger
- * /countrys:
+ * /countries:
  *   get:
- *     summary: Get all countries
  *     tags: [Countries]
+ *     summary: Get all countries
+ *     description: Retrieve a list of all countries
+ *     operationId: getAllCountries
  *     responses:
  *       200:
  *         description: List of all countries
@@ -149,13 +59,17 @@ countryRouter.get("/countrys/:id", CountryController.getById);
  *       500:
  *         description: Server error
  */
-countryRouter.get("/countrys", CountryController.getAll);
+
+countryRouter.get("/countries", CountryController.getAll);
+
 /**
  * @swagger
- * /countrys:
+ * /countries:
  *   post:
- *     summary: Create a new country
  *     tags: [Countries]
+ *     summary: Create a new country
+ *     description: Create a new country with the provided data
+ *     operationId: createCountry
  *     requestBody:
  *       required: true
  *       content:
@@ -172,20 +86,23 @@ countryRouter.get("/countrys", CountryController.getAll);
  *       500:
  *         description: Server error
  */
-countryRouter.post("/countrys", CountryController.create);
+
+countryRouter.post("/countries", CountryController.create);
+
 /**
  * @swagger
- * /countrys/{id}:
+ * /countries/{id}:
  *   put:
- *     summary: Update a country by ID
  *     tags: [Countries]
+ *     summary: Update a country by ID
+ *     description: Update a country by its ID
+ *     operationId: updateCountry
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         in: path
+ *         required: true
  *         schema:
  *           type: string
- *         required: true
- *         description: Country ID
  *     requestBody:
  *       required: true
  *       content:
@@ -204,26 +121,30 @@ countryRouter.post("/countrys", CountryController.create);
  *       500:
  *         description: Server error
  */
-countryRouter.put("/countrys/:id", CountryController.update);
+
+countryRouter.put("/countries/:id", CountryController.update);
+
 /**
  * @swagger
- * /countrys/{id}:
+ * /countries/{id}:
  *   delete:
- *     summary: Delete a country by ID
  *     tags: [Countries]
+ *     summary: Delete a country by ID
+ *     description: Delete a country by its ID
+ *     operationId: deleteCountry
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         in: path
+ *         required: true
  *         schema:
  *           type: string
- *         required: true
- *         description: Country ID
  *     responses:
  *       204:
  *         description: No content, country deleted successfully
  *       500:
  *         description: Server error
  */
-countryRouter.delete("/countrys/:id", CountryController.delete);
+
+countryRouter.delete("/countries/:id", CountryController.delete);
 
 export default countryRouter;

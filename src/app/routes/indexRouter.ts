@@ -14,11 +14,18 @@ import zoneRouter from "./zoneRouter";
 import permissionRouter from "./permissionRouter";
 import galleryRouter from "./galleryRouter";
 import adminRouter from "./adminRouter";
-import materialRouter from "./materialRouter";
 import projectGallerySubjectRouter from "./projectGallerySubjectRouter";
 import resourceRouter from "./resourceRouter";
 import IndexController from "../controllers/IndexController";
+import materialRouter from "./materialRouter";
 const indexRouter = express.Router();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Index
+ *   description: Main router including all sub-routers
+ */
 
 indexRouter.use(authRouter);
 indexRouter.use(adminRouter);
@@ -32,13 +39,39 @@ indexRouter.use(roleRouter);
 indexRouter.use(zoneRouter);
 indexRouter.use(galleryRouter);
 indexRouter.use(projectGallerySubjectRouter);
-
-// indexRouter.use(userZoneRouter);
+// indexRouter.use(userZoneRouter); // Uncomment and provide relevant details if needed
 indexRouter.use(resourceRouter);
 indexRouter.use(permissionRouter);
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Home page
+ *     tags: [Index]
+ *     operationId: getHomePage
+ *     responses:
+ *       200:
+ *         description: Welcome message or application landing page
+ *       500:
+ *         description: Server error
+ */
 indexRouter.get("/", IndexController.index);
+
+/**
+ * @swagger
+ * /*:
+ *   all:
+ *     summary: Route not found
+ *     tags: [Index]
+ *     operationId: route404
+ *     responses:
+ *       404:
+ *         description: Route not found
+ *       500:
+ *         description: Server error
+ */
 indexRouter.use("*", IndexController.route404);
-//todo remove
 
 export default indexRouter;
 

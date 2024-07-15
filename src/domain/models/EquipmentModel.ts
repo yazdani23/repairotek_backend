@@ -39,6 +39,7 @@ import { EquipmentDoc } from "../docs/Equipment";
  */
 
 const EquipmentModel = generateModel<EquipmentDoc>("Equipment", {
+  equipmentCode: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   equipmentModel: { type: String, required: true },
   description: { type: String, required: false },

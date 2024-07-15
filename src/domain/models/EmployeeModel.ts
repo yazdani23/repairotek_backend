@@ -6,6 +6,7 @@ import UserModel from "./UserModel";
 import { EmployeeDoc } from "../docs/Employee";
 import { MaritalStatus } from "../../utils/constant/MaritalStatus";
 import { ContractType } from "../../utils/constant/ContractType";
+import { generateCode } from "../../utils/functions/generateCode";
 
 /**
  * @swagger
@@ -88,7 +89,12 @@ import { ContractType } from "../../utils/constant/ContractType";
 const EmployeeModel = generateModel<EmployeeDoc>(
   "Employee",
   {
-    employeeCode: { type: Number, required: false },
+    employeeCode: {
+      type: String,
+      required: true,
+      unique: true,
+      default: generateCode("E"),
+    },
     hireDate: { type: Date, required: false },
     jobId: { type: Schema.Types.ObjectId, ref: "Job", required: false },
     skillDescription: { type: String, required: false },
