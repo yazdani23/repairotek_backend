@@ -12,6 +12,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import swaggerOptions from "../config/swagger";
 import helmet from "helmet";
+import updateLastActivityMiddleware from "./middlewares/updateLastActivityMiddleware";
 
 dotenv.config();
 const app: Application = express();
@@ -32,14 +33,9 @@ const sessionMiddleware = session({
 
 connentDB();
 
-const corsOptions = {
-  origin: "http://localhost",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
 
-app.use(cors(corsOptions));
+
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(loggerMiddleware);
@@ -54,7 +50,7 @@ app.get("/api-docs/swagger-json", (req, res) => {
 
 app.use(express.static(path.join(__dirname, "../../public")));
 
-app.use("/api", indexRouter);
+app.use("/api/v1", indexRouter);
 
 app.use(sessionMiddleware);
 

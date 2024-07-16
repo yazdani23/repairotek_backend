@@ -184,6 +184,7 @@ authRouter.post("/auth/refreshToken", AuthController.refreshToken);
  *           example:
  *             error: Invalid input
  */
+authRouter.post("/auth/signup", AuthController.signup);
 
 // /**
 //  * @swagger

@@ -34,5 +34,16 @@ class UserController extends BaseController<UserDoc> {
       return res.status(500).json({ error: error.message });
     }
   };
+
+  // getOnlineUsers = async (req: Request, res: Response) => {
+  //   const currentTime = Date.now();
+  //   const onlineThreshold = 5 * 60 * 1000; // 5 minutes
+
+  //   const onlineUsers = await this.userService.find({
+  //     lastActivity: { $gte: currentTime - onlineThreshold },
+  //   });
+
+  //   return res.status(200).json(onlineUsers);
+  // };
 }
 export default new UserController();

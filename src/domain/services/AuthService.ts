@@ -8,6 +8,7 @@ import { setToken } from "../../utils/functions/setToken";
 import { RoleDoc } from '../docs/Role';
 
 class AuthService extends BaseService<UserDoc> {
+  
   private userRepository = this.repository as typeof UserRepository;
   constructor() {
     super(UserRepository, UserValidationSchema);

@@ -10,11 +10,13 @@ import { setToken } from "../../utils/functions/setToken";
 import { TokenBlackListDoc } from "../../domain/docs/TokenBlackList";
 
 class AuthController {
+  // private authService = this.service as typeof AuthService;
   constructor(private authService: AuthServiceType) {}
 
   async login(req: Request, res: Response): Promise<Response> {
     const { accessToken, refreshToken, userInfo } =
       await this.authService.login(req.body.email, req.body.password);
+      
     if (!accessToken || !refreshToken) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
@@ -27,9 +29,8 @@ class AuthController {
       throw createError(400, "Name, email, and password are required");
     }
     const user = await this.authService.signup({ firstName, email, password });
-    const accessToken = setToken(user, "20s");
-    const refreshToken = setToken(user, "7m");
-    return res.status(201).json({ accessToken, refreshToken });
+
+    return res.status(201).json({ message: "Signup successful", user });
   }
 
   async forgotPassword(req: Request, res: Response): Promise<Response> {
@@ -57,7 +58,7 @@ class AuthController {
 
   async logout(req: Request, res: Response): Promise<Response> {
     const token = extractToken(req);
-    const data= { token } as TokenBlackListDoc
+    const data = { token } as TokenBlackListDoc;
     await TokenBlackListService.create(data);
     return res.status(200).json({ message: "Logged out successfully" });
   }

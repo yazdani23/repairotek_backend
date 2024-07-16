@@ -11,6 +11,12 @@ const options: Options = {
       version: "1.0.0",
       description: "API documentation for Repairotek project",
     },
+    servers: [
+      {
+        url: "/api/v1",
+        description: "Base URL",
+      },
+    ],
   },
   apis: isProduction
     ? [
