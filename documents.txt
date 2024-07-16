@@ -111,3 +111,53 @@ project-root/
 │   ├── index.ts
 │   ├── package.json
 │   ├── vercel.json
+
+
+###################  Postman #############################3
+Postman-Collections/
+├── Local-Collection/
+│   ├── user/
+│   │   ├── Success-Responses/
+│   │   │   ├── GET-users
+│   │   │   ├── POST-users
+│   │   │   ├── PUT-users
+│   │   │   └── DELETE-users
+│   │   ├── Error-Responses/
+│   │   │   ├── GET-users-invalid-id
+│   │   │   ├── POST-users-invalid-data
+│   │   │   ├── PUT-users-invalid-id
+│   │   │   └── DELETE-users-invalid-id
+│   ├── product/
+│   │   ├── Success-Responses/
+│   │   │   ├── GET-products
+│   │   │   ├── POST-products
+│   │   │   ├── PUT-products
+│   │   │   └── DELETE-products
+│   │   ├── Error-Responses/
+│   │   │   ├── GET-products-invalid-id
+│   │   │   ├── POST-products-invalid-data
+│   │   │   ├── PUT-products-invalid-id
+│   │   │   └── DELETE-products-invalid-id
+└── Deployed-Collection/
+    ├── user/
+    │   ├── Success-Responses/
+    │   │   ├── GET-users
+    │   │   ├── POST-users
+    │   │   ├── PUT-users
+    │   │   └── DELETE-users
+    │   ├── Error-Responses/
+    │   │   ├── GET-users-invalid-id
+    │   │   ├── POST-users-invalid-data
+    │   │   ├── PUT-users-invalid-id
+    │   │   └── DELETE-users-invalid-id
+    ├── product/
+    │   ├── Success-Responses/
+    │   │   ├── GET-products
+    │   │   ├── POST-products
+    │   │   ├── PUT-products
+    │   │   └── DELETE-products
+    │   ├── Error-Responses/
+    │   │   ├── GET-products-invalid-id
+    │   │   ├── POST-products-invalid-data
+    │   │   ├── PUT-products-invalid-id
+    │   │   └── DELETE-products-invalid-id

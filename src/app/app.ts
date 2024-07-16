@@ -42,11 +42,19 @@ app.use(loggerMiddleware);
 
 app.use(helmet());
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs/swagger-ui", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(
+  "/api-docs/swagger-ui",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
+    swaggerOptions: { basePath: "/api-docs/swagger-ui" },
+  })
+);
 app.get("/api-docs/swagger-json", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
+
 
 app.use(express.static(path.join(__dirname, "../../public")));
 
