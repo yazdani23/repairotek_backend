@@ -54,6 +54,16 @@ app.get("/swagger-json", (req, res) => {
 
 app.use(express.static(path.join(__dirname, "../../public")));
 
+app.use(
+  "/api-docs/swagger-ui",
+  express.static(path.join(__dirname, "../../node_modules/sswagger-ui-dist"))
+);
+app.use(
+  "/api-docs/swagger-express",
+  express.static(path.join(__dirname, "../../node_modules/sswagger-ui-express"))
+);
+
+
 app.use("/api/v1", indexRouter);
 
 app.use(sessionMiddleware);
