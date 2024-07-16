@@ -2,17 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/index.ts",
+      "src": "src/index.js",
       "use": "@vercel/node",
       "config": { "includeFiles": ["dist/**"] }
     }
   ],
-
   "routes": [
     {
-      "src": "/api-docs/(.*)",
-      "headers": { "Cache-Control": "no-store" },
-      "continue": true
+      "src": "/(.*)",
+      "dest": "src/index.js"
     },
     {
       "src": "/api-docs/swagger-ui/(.*)",

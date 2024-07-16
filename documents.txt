@@ -211,3 +211,29 @@ Postman-Collections/
 
 
 }
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
+    }
+  ],
+
+  "routes": [
+    {
+      "src": "/api-docs/(.*)",
+      "headers": { "Cache-Control": "no-store" },
+      "continue": true
+    },
+    {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "text/css" }
+    },
+    {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "application/javascript" }
+    }
+  ]
+}
