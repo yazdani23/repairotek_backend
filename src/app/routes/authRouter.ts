@@ -69,7 +69,9 @@ const authRouter = express.Router();
  *             error: Invalid email or password
  */
 
-authRouter.post("/auth/login", AuthController.login);
+authRouter.post("/auth/login", (req, res, next) =>
+  AuthController.login(req, res, next)
+);
 
 /**
  * @swagger
@@ -129,7 +131,9 @@ authRouter.post("/auth/login", AuthController.login);
  *             error: User not found
  */
 
-authRouter.post("/auth/refreshToken", AuthController.refreshToken);
+authRouter.post("/auth/refreshToken", (req, res, next) =>
+  AuthController.refreshToken(req, res, next)
+);
 
 /**
  * @swagger
@@ -184,7 +188,9 @@ authRouter.post("/auth/refreshToken", AuthController.refreshToken);
  *           example:
  *             error: Invalid input
  */
-authRouter.post("/auth/signup", AuthController.signup);
+authRouter.post("/auth/signup", (req, res, next) =>
+  AuthController.signup(req, res, next)
+);
 
 // /**
 //  * @swagger
