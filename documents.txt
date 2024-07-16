@@ -161,3 +161,53 @@ Postman-Collections/
     │   │   ├── POST-products-invalid-data
     │   │   ├── PUT-products-invalid-id
     │   │   └── DELETE-products-invalid-id
+
+
+
+
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
+    }
+  ],
+
+  "routes": [
+    {
+      "src": "/api-docs/(.*)",
+      "headers": { "Cache-Control": "no-store" },
+      "continue": true
+    },
+       {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "text/css" }
+    },
+    {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "application/javascript" }
+    },
+    {
+      "src": "/api-docs/(.*)",
+      "dest": "/api-docs/$1"
+    },
+    {
+      "handle": "filesystem",
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "handle": "filesystem",
+      "src": "/app/(.*)",
+      "dest": "/app/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "app"
+    }
+  ]
+
+
+}
