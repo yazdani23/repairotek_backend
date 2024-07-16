@@ -21,24 +21,6 @@
     {
       "src": "/api-docs/swagger-ui/(.*)",
       "headers": { "Content-Type": "application/javascript" }
-    },
-    {
-      "src": "/api-docs/(.*)",
-      "dest": "/api-docs/$1"
-    },
-    {
-      "handle": "filesystem",
-      "src": "/public/(.*)",
-      "dest": "/public/$1"
-    },
-    {
-      "handle": "filesystem",
-      "src": "/app/(.*)",
-      "dest": "/app/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "app"
     }
   ]
 }
