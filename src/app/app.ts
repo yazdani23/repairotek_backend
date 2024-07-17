@@ -40,6 +40,7 @@ app.use(loggerMiddleware);
 
 app.use(helmet());
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
 app.use(
   "/api-docs",
   swaggerUi.serve,
@@ -49,29 +50,16 @@ app.get("/swagger-json", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
-
-
-app.use(express.static(path.join(__dirname, "../../public")));
-
 app.use(
   "/api-docs/swagger-ui",
   express.static(path.join(__dirname, "../../node_modules/swagger-ui-dist"))
 );
-console.log(__dirname)
-console.log(path.join(__dirname, "../../node_modules/swagger-ui-dist"));
 
 
-
-app.use(
-  "/api-docs/swagger-express",
-  express.static(path.join(__dirname, "../../node_modules/swagger-ui-express"))
-);
-
+app.use(express.static(path.join(__dirname, "../../public")));
 
 app.use("/api/v1", indexRouter);
-
 app.use(sessionMiddleware);
-
 app.use(errorHandlerMiddleware);
 
 export default app;
