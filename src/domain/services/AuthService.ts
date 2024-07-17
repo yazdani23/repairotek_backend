@@ -5,7 +5,7 @@ import BaseService from "./BaseService";
 import UserValidationSchema from "../validations/UserValidation";
 import UserRepository from "../repositories/UserRepository";
 import { setToken } from "../../utils/functions/setToken";
-import { RoleDoc } from '../docs/Role';
+import { RoleDoc } from "../docs/Role";
 import createError from "http-errors";
 
 class AuthService extends BaseService<UserDoc> {
@@ -21,6 +21,8 @@ class AuthService extends BaseService<UserDoc> {
     accessToken: string;
     refreshToken: string;
     userInfo: UserInfoDoc;
+    expiresIn: number;
+    refreshTokenExpiresIn: number;
   }> {
     if (!email || !password) {
       throw createError(400, "Email and password are required");
@@ -36,16 +38,23 @@ class AuthService extends BaseService<UserDoc> {
       throw createError(401, "Invalid password");
     }
 
-    const accessToken = setToken(user, "15m"); // توکن دسترسی با مدت اعتبار کوتاه
+    const accessToken = setToken(user, "20s"); // توکن دسترسی با مدت اعتبار کوتاه
     const refreshToken = setToken(user, "7d"); // توکن نوسازی با مدت اعتبار طولانی
     const userInfo = {
+      id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       profilePhoto: user.profilePhoto,
       role: user.roleId && (user.roleId as RoleDoc).name,
     };
-    return { accessToken, refreshToken, userInfo };
+    return {
+      accessToken,
+      refreshToken,
+      userInfo,
+      expiresIn: 20,
+      refreshTokenExpiresIn: 604800,
+    };
   }
 
   async signup(user: Partial<UserDoc>): Promise<UserDoc> {
@@ -81,4 +90,3 @@ class AuthService extends BaseService<UserDoc> {
 
 export type AuthServiceType = AuthService;
 export default new AuthService();
-

@@ -6,7 +6,7 @@ import { generateModel } from "../../utils/generators/modelGenerator";
 const DailyReportModel = generateModel<DailyReportDoc>(
   "DailyReport",
   {},
-  [],
+  ["__t"],
   ReportModel
 );
 

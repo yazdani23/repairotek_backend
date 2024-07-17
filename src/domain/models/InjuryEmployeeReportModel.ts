@@ -13,7 +13,7 @@ const InjuryEmployeeReportModel = generateModel<InjuryEmployeeReportDoc>(
       required: true,
     },
   },
-  [],
+  ["__t"],
   ReportModel
 );
 

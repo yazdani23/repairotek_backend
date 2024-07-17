@@ -36,8 +36,8 @@ const authRouter = express.Router();
  *                 format: password
  *                 description: The user's password
  *           example:
- *             email: johndoe@example.com
- *             password: securepassword123
+ *             email: shervin.sheikh@gmail.com
+ *             password: Admin@1234
  *     responses:
  *       200:
  *         description: Successful login
@@ -52,9 +52,15 @@ const authRouter = express.Router();
  *                 refreshToken:
  *                   type: string
  *                   description: JWT refresh token
- *                 user:
+ *                 userInfo:
  *                   $ref: '#/components/schemas/UserInfo'
  *                   description: The logged-in user's details
+ *                 expiresIn:
+ *                   type: number
+ *                   description: Access token expiration time in seconds
+ *                 refreshTokenExpiresIn:
+ *                   type: number
+ *                   description: Refresh token expiration time in seconds
  *       400:
  *         description: Invalid email or password
  *         content:

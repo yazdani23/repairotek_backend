@@ -2,6 +2,7 @@ import { Document, Schema } from "mongoose";
 import { RoleDoc } from "./Role";
 
 export interface UserDoc extends Document {
+  id: string;
   firstName: string;
   lastName: string;
   gender: string;
@@ -18,6 +19,7 @@ export interface UserDoc extends Document {
 }
 
 export interface UserInfoDoc {
+  id:string,
   firstName: string,
   lastName: string,
   email: string,

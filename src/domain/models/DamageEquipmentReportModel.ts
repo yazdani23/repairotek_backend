@@ -13,7 +13,7 @@ const DamageEquipmentReportModel = generateModel<DamageEquipmentReportDoc>(
       required: true,
     },
   },
-  [],
+  ["__t"],
   ReportModel
 );
 

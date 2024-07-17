@@ -13,6 +13,14 @@ import { TokenBlackListDoc } from "../../domain/docs/TokenBlackList";
 class AuthController {
   constructor(private authService: AuthServiceType) {}
 
+  /**
+   * @summary Logs in a user
+   * @description Authenticates a user and returns access and refresh tokens along with user information.
+   * @param {Request} req - Express request object
+   * @param {Response} res - Express response object
+   * @param {NextFunction} next - Express next middleware function
+   * @returns {Promise<Response | void>} - Response containing accessToken, refreshToken, userInfo, expiresIn, and refreshTokenExpiresIn
+   */
   async login(
     req: Request,
     res: Response,
@@ -20,9 +28,22 @@ class AuthController {
   ): Promise<Response | void> {
     try {
       const { email, password } = req.body;
-      const { accessToken, refreshToken, userInfo } =
-        await this.authService.login(email, password);
-      return res.status(200).json({ accessToken, refreshToken, userInfo });
+      const {
+        accessToken,
+        refreshToken,
+        userInfo,
+        expiresIn,
+        refreshTokenExpiresIn,
+      } = await this.authService.login(email, password);
+      return res
+        .status(200)
+        .json({
+          accessToken,
+          refreshToken,
+          expiresIn,
+          refreshTokenExpiresIn,
+          userInfo,
+        });
     } catch (err) {
       next(err);
     }
@@ -32,7 +53,7 @@ class AuthController {
     req: Request,
     res: Response,
     next: NextFunction
-  ):Promise<Response | void> {
+  ): Promise<Response | void> {
     try {
       const { firstName, email, password } = req.body;
       const user = await this.authService.signup({
@@ -50,7 +71,7 @@ class AuthController {
     req: Request,
     res: Response,
     next: NextFunction
-  ):Promise<Response | void> {
+  ): Promise<Response | void> {
     try {
       const { email } = req.body;
       await this.authService.sendPasswordResetEmail(email);
@@ -64,7 +85,7 @@ class AuthController {
     req: Request,
     res: Response,
     next: NextFunction
-  ):Promise<Response | void> {
+  ): Promise<Response | void> {
     try {
       const { refreshToken } = req.body;
       const decoded = await verifyToken(refreshToken);
@@ -83,7 +104,7 @@ class AuthController {
     req: Request,
     res: Response,
     next: NextFunction
-  ):Promise<Response | void> {
+  ): Promise<Response | void> {
     try {
       const token = extractToken(req);
       const data = { token } as TokenBlackListDoc;

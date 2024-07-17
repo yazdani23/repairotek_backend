@@ -1,5 +1,6 @@
 import express from "express";
 import UserController from "../controllers/UserController";
+import { isLogged } from "../middlewares/authMiddleware";
 
 const userRouter = express.Router();
 
@@ -57,6 +58,30 @@ userRouter.get("/users", UserController.getAll);
  */
 
 userRouter.get("/users/:id", UserController.getById);
+
+/**
+ * @swagger
+ * /me:
+ *   get:
+ *     tags: [Users]
+ *     summary: Get user info by Token
+ *     description: Retrieve a user by its Token
+ *     operationId: getUser
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       401:
+ *         description: Unauthorized - Missing or invalid token
+ *       404:
+ *         description: User not found
+ */
+userRouter.get("/me", isLogged, UserController.getUser);
 
 /**
  * @swagger

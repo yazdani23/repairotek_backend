@@ -1,5 +1,5 @@
-import path from 'path';
-import { Options } from 'swagger-jsdoc';
+import path from "path";
+import { Options } from "swagger-jsdoc";
 
 const isProduction = process.env.ENV_MODE === "production";
 
@@ -17,6 +17,20 @@ const options: Options = {
         description: "Base URL",
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   apis: isProduction
     ? [
@@ -30,10 +44,6 @@ const options: Options = {
 };
 
 export default options;
-
-
-
-
 
 // const options: Options = {
 //   definition: {

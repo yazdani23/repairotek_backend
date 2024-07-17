@@ -106,7 +106,7 @@ const EmployeeModel = generateModel<EmployeeDoc>(
     bankAccountInfo: { type: String, required: false }, // اطلاعات حساب بانکی برای پرداخت حقوق
     insuranceNumber: { type: Number, required: false }, // شماره بیمه
   },
-  ["password"],
+  ["__t", "password"],
   UserModel
 );
 

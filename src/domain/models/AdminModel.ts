@@ -107,7 +107,7 @@ import {
 const AdminModel = generateModel<AdminDoc>(
   "Admin",
   {},
-  ["password"],
+  ["__t", "password"],
   UserModel
 );
 

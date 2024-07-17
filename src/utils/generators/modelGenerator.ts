@@ -29,15 +29,15 @@ const generateModel = <T>(
   baseModel?: Model<any> // پارامتر اختیاری برای مدل پایه
 ): Model<T> => {
   const schema = new Schema<T>(schemaDefinition, { timestamps: true });
-  toJsonSchema(schema, deletedProperties);
+  const jsonSchema= toJsonSchema(schema, deletedProperties);
 
   try {
     if (baseModel) {
       // در صورت وجود مدل پایه، یک discriminator ایجاد می‌کند
-      return baseModel.discriminator<T>(modelName, schema);
+      return baseModel.discriminator<T>(modelName, jsonSchema);
     } else {
       // در غیر این صورت، یک مدل جدید ایجاد می‌کند
-      return model<T>(modelName, schema);
+      return model<T>(modelName, jsonSchema);
     }
   } catch (error) {
     console.error(`Error creating model ${modelName}:`, error);
