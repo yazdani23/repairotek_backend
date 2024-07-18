@@ -3,6 +3,7 @@ import { ProjectDoc } from "../docs/Project";
 import { generateModel } from "../../utils/generators/modelGenerator";
 import { UnitsProjectArea } from "../../utils/constant/UnitsProjectArea";
 import { StatusProject } from "../../utils/constant/StatusProject";
+import { generateCode } from "../../utils/functions/generateCode";
 
 /**
  * @swagger
@@ -70,11 +71,12 @@ import { StatusProject } from "../../utils/constant/StatusProject";
  *       status:
  *         type: string
  *         enum:
- *           - UnderGoing
- *           - Completed
- *           - OnHold
+ *           - Initialed
+ *           - Pre-Construction
+ *           - In-Progress
+ *           - Compeleted
  *         description: Status of the project
- *         default: UnderGoing
+ *         default: Initialed
  *       materials:
  *         type: array
  *         items:
@@ -96,11 +98,10 @@ import { StatusProject } from "../../utils/constant/StatusProject";
  */
 
 const ProjectModel = generateModel<ProjectDoc>("Project", {
-  projectCode: { type: Number, required: true },
+  projectCode: { type: String, required: true, default: generateCode("P") },
   adminId: { type: Schema.Types.ObjectId, ref: "Admin", required: true },
   title: { type: String, required: true },
   zoneId: { type: Schema.Types.ObjectId, ref: "Zone", required: true },
-  issueDateTime: { type: Date, required: true },
   areaLength: { type: Number, required: true },
   areaWidth: { type: Number, required: true },
   areaHeight: { type: Number, required: true },
@@ -108,7 +109,7 @@ const ProjectModel = generateModel<ProjectDoc>("Project", {
   description: { type: String, required: false },
   longitude: { type: Number, required: true },
   latitude: { type: Number, required: true },
-  status: { type: String, enum: StatusProject, default: "UnderGoing" },
+  status: { type: String, enum: StatusProject, default: "Initiation" },
   materials: [
     {
       type: Schema.Types.ObjectId,

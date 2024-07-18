@@ -1,6 +1,7 @@
 
 import express from "express";
 import ProjectController from "../controllers/ProjectController";
+import { isAdmin, isLogged } from "../middlewares/authMiddleware";
 
 const projectRouter = express.Router();
 
@@ -30,7 +31,7 @@ const projectRouter = express.Router();
  *                 $ref: '#/components/schemas/Project'
  */
 
-projectRouter.get("/projects", ProjectController.getAll);
+projectRouter.get("/projects",isAdmin, ProjectController.getAll);
 
 /**
  * @swagger

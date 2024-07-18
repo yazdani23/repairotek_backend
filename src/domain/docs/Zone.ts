@@ -1,6 +1,7 @@
-import { Document, Schema } from "mongoose";
+import { Document, Schema, Types } from "mongoose";
 
 export interface ZoneDoc extends Document {
+  id: Types.ObjectId;
   name: string;
   provinceId: Schema.Types.ObjectId;
   state: string;
@@ -14,4 +15,6 @@ export interface ZoneDoc extends Document {
     coordinates: [number, number];
   };
   description?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

@@ -3,11 +3,6 @@ export const StatusProject = [
   "Initialed",
   "In-Progress",
   "Compeleted",
+  // "Archived"
 ];
 
-// const f = {
-//   Pre-Construction
-//   Initialed
-//   In-Progress
-//   Compeleted
-// };

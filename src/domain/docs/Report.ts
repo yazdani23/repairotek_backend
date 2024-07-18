@@ -1,6 +1,7 @@
-import { Document, Schema } from "mongoose";
+import { Document, Schema, Types } from "mongoose";
 
 export interface ReportDoc extends Document {
+  id: Types.ObjectId;
   title: string;
   reportSubjectId: Schema.Types.ObjectId;
   description: string;
@@ -9,4 +10,6 @@ export interface ReportDoc extends Document {
   projectGalleryId: Schema.Types.ObjectId[];
   projectId: Schema.Types.ObjectId;
   createdBy: Schema.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }

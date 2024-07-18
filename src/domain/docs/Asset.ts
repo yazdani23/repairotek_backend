@@ -1,6 +1,7 @@
 import { Document, Types } from "mongoose";
 
 export interface AssetDoc extends Document {
+   id: Types.ObjectId;
   materials: {
     materialId: Types.ObjectId;
     value: number;
@@ -11,4 +12,6 @@ export interface AssetDoc extends Document {
     countHour: number;
     costPerHour?: number;
   }[];
+  createdAt: Date;
+  updatedAt: Date;
 }
