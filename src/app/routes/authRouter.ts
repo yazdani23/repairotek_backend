@@ -140,7 +140,6 @@ authRouter.post("/auth/login", (req, res, next) =>
 
 authRouter.post(
   "/auth/refreshToken",
-  AuthMiddleware.isLogged,
   (req, res, next) => AuthController.refreshToken(req, res, next)
 );
 

@@ -36,16 +36,17 @@ export class EquipmentSeeder {
           name: roadConstructionEquipments[i],
           equipmentModel: faker.vehicle.type(),
           description: `
-VIN: ${faker.vehicle.vin()},
-VRM: ${faker.vehicle.vrm()},
-Manufacturer: ${faker.vehicle.manufacturer()},
-Color: ${faker.vehicle.color()}, 
-Fuel: ${faker.vehicle.fuel()},
-Model: ${faker.vehicle.model()}`,
+                  VRM: ${faker.vehicle.vrm()},
+                  Color: ${faker.vehicle.color()}, 
+                  Fuel: ${faker.vehicle.fuel()},
+                  Model: ${faker.vehicle.model()}
+                  `,
           pricePerHour: parseFloat(
             faker.commerce.price({ min: 100, max: 200, dec: 2 })
           ),
           count: faker.number.int({ min: 1, max: 100 }),
+          Manufacturer: faker.vehicle.manufacturer(),
+          VIN: faker.vehicle.vin(),
         });
       }
 

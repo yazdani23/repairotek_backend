@@ -38,7 +38,7 @@ class AuthService extends BaseService<UserDoc> {
       throw createError(401, "Invalid password");
     }
 
-    const accessToken = setToken(user, "1d"); // توکن دسترسی با مدت اعتبار کوتاه
+    const accessToken = setToken(user, "15m"); // توکن دسترسی با مدت اعتبار کوتاه
     const refreshToken = setToken(user, "7d"); // توکن نوسازی با مدت اعتبار طولانی
     const userInfo = {
       id: user.id,
@@ -52,7 +52,7 @@ class AuthService extends BaseService<UserDoc> {
       accessToken,
       refreshToken,
       userInfo,
-      expiresIn: 10000,
+      expiresIn: 900,
       refreshTokenExpiresIn: 604800,
     };
   }

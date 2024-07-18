@@ -8,7 +8,7 @@ import EquipmentModel from "../models/EquipmentModel";
 import EmployeeModel from "../models/EmployeeModel";
 import { UnitsProjectArea } from "../../utils/constant/UnitsProjectArea";
 import { StatusProject } from "../../utils/constant/StatusProject";
-
+import { generateCode } from "../../utils/functions/generateCode";
 export class ProjectSeeder {
   static removeAllProjects = async () => {
     try {
@@ -57,11 +57,10 @@ export class ProjectSeeder {
         }
 
         projects.push({
-          projectCode: faker.number.int({ min: 1000, max: 9999 }),
+          projectCode: generateCode("PRJ"),
           adminId: admin.id,
           title: faker.lorem.words(3),
           zoneId: randomZone.id,
-          issueDateTime: faker.date.past(),
           areaLength: faker.number.float({ min: 1, max: 1000 }),
           areaWidth: faker.number.float({ min: 1, max: 1000 }),
           areaHeight: faker.number.float({ min: 1, max: 1000 }),

@@ -120,7 +120,7 @@ import { generateCode } from "../../utils/functions/generateCode";
  */
 
 const ProjectModel = generateModel<ProjectDoc>("Project", {
-  projectCode: { type: String, required: true, default: () => generateCode("PRJ") },
+  projectCode: { type: String, required: true, default: () => generateCode("PRJ") , unique:true },
   adminId: { type: Schema.Types.ObjectId, ref: "Admin", required: true },
   title: { type: String, required: true },
   zoneId: { type: Schema.Types.ObjectId, ref: "Zone", required: true },
