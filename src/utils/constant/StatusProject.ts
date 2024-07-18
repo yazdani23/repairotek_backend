@@ -1,6 +1,6 @@
 export const StatusProject = [
   "Pre-Construction",
-  "Initialed",
+  "Initiation",
   "In-Progress",
   "Compeleted",
   // "Archived"

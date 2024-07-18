@@ -11,7 +11,7 @@
     "sourceMap": true /* Generate source map files for debugging */,
     "typeRoots": ["./node_modules/@types", "src/types"]
   },
-  "include": ["src"] /* Include all files in the src directory */,
+  "include": ["src", "typings"] /* Include all files in the src directory */,
   "exclude": [
     "node_modules",
     "dist"

@@ -1,7 +1,6 @@
-
 import express from "express";
 import ProjectController from "../controllers/ProjectController";
-import { isAdmin, isLogged } from "../middlewares/authMiddleware";
+import AuthMiddleware from "../middlewares/authMiddleware";
 
 const projectRouter = express.Router();
 
@@ -31,7 +30,11 @@ const projectRouter = express.Router();
  *                 $ref: '#/components/schemas/Project'
  */
 
-projectRouter.get("/projects",isAdmin, ProjectController.getAll);
+projectRouter.get(
+  "/projects",
+  AuthMiddleware.isLogged,
+  ProjectController.getAll
+);
 
 /**
  * @swagger
@@ -58,7 +61,11 @@ projectRouter.get("/projects",isAdmin, ProjectController.getAll);
  *         description: Project not found
  */
 
-projectRouter.get("/projects/:id", ProjectController.getById);
+projectRouter.get(
+  "/projects/:id",
+  AuthMiddleware.isLogged,
+  ProjectController.getById
+);
 
 /**
  * @swagger
@@ -68,6 +75,8 @@ projectRouter.get("/projects/:id", ProjectController.getById);
  *     summary: Create a new project
  *     description: Create a new project with the provided data
  *     operationId: createProject
+ *     security:
+ *       - BearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -81,9 +90,17 @@ projectRouter.get("/projects/:id", ProjectController.getById);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Project'
+ *       401:
+ *         description: Unauthorized, token is missing or invalid
+ *       403:
+ *         description: Forbidden, user is not authorized to perform this action
  */
 
-projectRouter.post("/projects", ProjectController.create);
+projectRouter.post(
+  "/projects",
+  AuthMiddleware.isAdmin,
+  ProjectController.create
+);
 
 /**
  * @swagger
@@ -116,7 +133,11 @@ projectRouter.post("/projects", ProjectController.create);
  *         description: Project not found
  */
 
-projectRouter.put("/projects/:id", ProjectController.update);
+projectRouter.put(
+  "/projects/:id",
+  AuthMiddleware.isAdmin,
+  ProjectController.update
+);
 
 /**
  * @swagger
@@ -139,7 +160,11 @@ projectRouter.put("/projects/:id", ProjectController.update);
  *         description: Project not found
  */
 
-projectRouter.delete("/projects/:id", ProjectController.delete);
+projectRouter.delete(
+  "/projects/:id",
+  AuthMiddleware.isAdmin,
+  ProjectController.delete
+);
 
 /**
  * @swagger
@@ -168,7 +193,11 @@ projectRouter.delete("/projects/:id", ProjectController.delete);
  *         description: Project not found
  */
 
-projectRouter.get("/projects/:id/gallery", ProjectController.getProjectGallery);
+projectRouter.get(
+  "/projects/:id/gallery",
+  AuthMiddleware.isLogged,
+  ProjectController.getProjectGallery
+);
 
 /**
  * @swagger
@@ -189,6 +218,10 @@ projectRouter.get("/projects/:id/gallery", ProjectController.getProjectGallery);
  *                 type: string
  */
 
-projectRouter.get("/project-statuses", ProjectController.getProjectStatuses);
+projectRouter.get(
+  "/project-statuses",
+  AuthMiddleware.isLogged,
+  ProjectController.getProjectStatuses
+);
 
 export default projectRouter;

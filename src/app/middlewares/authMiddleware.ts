@@ -10,7 +10,9 @@ interface AuthRequest extends Request {
   user?: UserDoc;
 }
 
-const verifyToken = async (token: string): Promise<UserDoc> => {
+class AuthMiddleware {
+
+ verifyToken = async (token: string): Promise<UserDoc> => {
    const isTokenBlacklisted = await TokenBlackListService.isBlackToken(token);
    if (isTokenBlacklisted) {
      throw createError(401, "Token is blacklisted");
@@ -27,8 +29,9 @@ const verifyToken = async (token: string): Promise<UserDoc> => {
    }
 };
 
-const extractToken = (req: Request): string => {
+ extractToken = (req: Request): string => { 
   const authHeader = req.headers.authorization;
+  
   if (!authHeader) {
     throw createError(401, "Authorization header missing");
   }
@@ -40,14 +43,14 @@ const extractToken = (req: Request): string => {
 };
 
 
-const isLogged = async (
+isLogged = async (
   req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const token = extractToken(req);
-    const decoded = await verifyToken(token);
+    const token = this.extractToken(req);
+    const decoded = await this.verifyToken(token);
     req.user = decoded;
     next();
   } catch (err: any) {
@@ -55,17 +58,15 @@ const isLogged = async (
   }
 };
 
-const isAdmin = async (
-  err: any,
+isAdmin = async (
   req: AuthRequest,
   res: Response,
   next: NextFunction
 ) => {
-  logger.error(err);
 
   try {
-     const token = extractToken(req);
-     const decoded = await verifyToken(token);
+     const token = this.extractToken(req);
+     const decoded = await this.verifyToken(token);
     if ((decoded.roleId as RoleDoc).name !== "Admin") {
       return res.status(403).json({ message: "You are not authorized" });
     }
@@ -75,5 +76,7 @@ const isAdmin = async (
     return res.status(401).json({ error: err.message });
   }
 };
+}
 
-export { isLogged, isAdmin, verifyToken, extractToken};
+// export { isLogged, isAdmin, verifyToken, extractToken};
+export default new AuthMiddleware()

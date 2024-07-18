@@ -1,5 +1,6 @@
 import express from "express";
 import AuthController from "../controllers/AuthController";
+import AuthMiddleware from "../middlewares/authMiddleware";
 
 const authRouter = express.Router();
 
@@ -137,9 +138,76 @@ authRouter.post("/auth/login", (req, res, next) =>
  *             error: User not found
  */
 
-authRouter.post("/auth/refreshToken", (req, res, next) =>
-  AuthController.refreshToken(req, res, next)
+authRouter.post(
+  "/auth/refreshToken",
+  AuthMiddleware.isLogged,
+  (req, res, next) => AuthController.refreshToken(req, res, next)
 );
+
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Refreshes the access token
+ *     tags: [Auth]
+ *     operationId: refreshToken
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - refreshToken
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *                 description: JWT refresh token
+ *           example:
+ *             refreshToken: your-refresh-token
+ *     responses:
+ *       200:
+ *         description: New access token generated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 accessToken:
+ *                   type: string
+ *                   description: JWT access token
+ *       400:
+ *         description: Refresh token is required
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ *           example:
+ *             error: Refresh token is required
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ *           example:
+ *             error: User not found
+ */
+
+authRouter.post(
+  "/auth/logout",
+  AuthMiddleware.isLogged,
+  (req, res, next) => AuthController.refreshToken(req, res, next)
+);
+
 
 /**
  * @swagger

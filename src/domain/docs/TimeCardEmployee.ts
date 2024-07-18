@@ -1,7 +1,6 @@
-import { Schema, Document, model, Types } from "mongoose";
+import { Schema, Document, model } from "mongoose";
 
 export interface TimeCardEmployeeDoc extends Document {
-  id: Types.ObjectId;
   employeeId: Schema.Types.ObjectId;
   timeCardDate: Date;
   scheduledStartTime: string; // ISO 8601 string
@@ -17,6 +16,4 @@ export interface TimeCardEmployeeDoc extends Document {
   taskId?: Schema.Types.ObjectId;
   createdBy: Schema.Types.ObjectId;
   updatedBy: Schema.Types.ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
 }

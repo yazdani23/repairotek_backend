@@ -6,9 +6,9 @@ import AuthService, {
 import TokenBlackListService from "../../domain/services/TokenBlackListService";
 import createError from "http-errors";
 import { UserDoc } from "../../domain/docs/User";
-import { extractToken, verifyToken } from "../middlewares/authMiddleware";
 import { setToken } from "../../utils/functions/setToken";
 import { TokenBlackListDoc } from "../../domain/docs/TokenBlackList";
+import AuthMiddleware from "../middlewares/authMiddleware";
 
 class AuthController {
   constructor(private authService: AuthServiceType) {}
@@ -35,15 +35,13 @@ class AuthController {
         expiresIn,
         refreshTokenExpiresIn,
       } = await this.authService.login(email, password);
-      return res
-        .status(200)
-        .json({
-          accessToken,
-          refreshToken,
-          expiresIn,
-          refreshTokenExpiresIn,
-          userInfo,
-        });
+      return res.status(200).json({
+        accessToken,
+        refreshToken,
+        expiresIn,
+        refreshTokenExpiresIn,
+        userInfo,
+      });
     } catch (err) {
       next(err);
     }
@@ -87,9 +85,11 @@ class AuthController {
     next: NextFunction
   ): Promise<Response | void> {
     try {
-      const { refreshToken } = req.body;
-      const decoded = await verifyToken(refreshToken);
-      const user = await this.authService.getById(decoded.id);
+      if (!req.user) {
+        throw createError(401, "User not authenticated");
+      }
+      const { id } = req.user;
+      const user = await this.authService.getById(id);
       if (!user) {
         throw createError(404, "User not found");
       }
@@ -106,7 +106,7 @@ class AuthController {
     next: NextFunction
   ): Promise<Response | void> {
     try {
-      const token = extractToken(req);
+      const token = AuthMiddleware.extractToken(req);
       const data = { token } as TokenBlackListDoc;
       await TokenBlackListService.create(data);
       return res.status(200).json({ message: "Logged out successfully" });

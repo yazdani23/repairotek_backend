@@ -1,7 +1,6 @@
 import { Document, Types } from "mongoose";
 
 export interface ProjectAssignmentDoc extends Document {
-  id: Types.ObjectId;
   projectId: Types.ObjectId;
   employees: {
     employeeId: Types.ObjectId;
@@ -17,6 +16,4 @@ export interface ProjectAssignmentDoc extends Document {
   }[];
   description: string;
   totalEstimatedCountDays?: number;
-  createdAt: Date;
-  updatedAt: Date;
 }

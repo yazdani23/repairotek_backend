@@ -1,32 +1,32 @@
+import { Schema, Types } from 'mongoose';
 import { NextFunction, Request, Response } from "express";
 import { ProjectDoc } from "../../domain/docs/Project";
 import ProjectService from "../../domain/services/ProjectService";
 import BaseController from "./BaseController";
 import { StatusProject } from "../../utils/constant/StatusProject";
 import logger from "../../utils/helpers/logger";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
+
 
 class ProjectController extends BaseController<ProjectDoc> {
   private projectService = this.service as typeof ProjectService;
   constructor() {
     super(ProjectService);
   }
+  
   create = async (
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<Response | void> => {
     try {
+      
       if (!req.user) {
         throw new Error("User not authenticated");
       }
       const { id } = req.user;
       const {
-        projectCode,
         title,
         zoneId,
-        issueDateTime,
         areaLength,
         areaWidth,
         areaHeight,
@@ -34,13 +34,12 @@ class ProjectController extends BaseController<ProjectDoc> {
         description,
         longitude,
         latitude,
-        status,
       } = req.body;
 
       const user = await this.projectService.create({
-        adminId: new Types.ObjectId(id),
+        adminId: id,
         title,
-        zoneId: new Types.ObjectId(zoneId),
+        zoneId: zoneId,
         areaLength,
         areaWidth,
         areaHeight,
@@ -48,10 +47,7 @@ class ProjectController extends BaseController<ProjectDoc> {
         description,
         longitude,
         latitude,
-        materials: [],
-        equipment: [],
-        employees: [],
-      });
+      } as ProjectDoc);
       console.log(user);
 
       if (!user) {

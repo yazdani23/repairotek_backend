@@ -1,8 +1,6 @@
-import { Types } from "mongoose";
 import { Document, Schema } from "mongoose";
 
 export interface ProjectGalleryDoc extends Document {
-  id: Types.ObjectId;
   projectId: Schema.Types.ObjectId;
   userId: Schema.Types.ObjectId;
   mediaName: string;
@@ -12,6 +10,4 @@ export interface ProjectGalleryDoc extends Document {
   mediaSubjectId: Schema.Types.ObjectId;
   location?: string;
   description?: string;
-  createdAt: Date;
-  updatedAt: Date;
 }

@@ -1,6 +1,6 @@
 import express from "express";
 import UserController from "../controllers/UserController";
-import { isLogged } from "../middlewares/authMiddleware";
+import AuthMiddleware from "../middlewares/authMiddleware";
 
 const userRouter = express.Router();
 
@@ -81,7 +81,7 @@ userRouter.get("/users/:id", UserController.getById);
  *       404:
  *         description: User not found
  */
-userRouter.get("/me", isLogged, UserController.getUser);
+userRouter.get("/me", AuthMiddleware.isLogged, UserController.getUser);
 
 /**
  * @swagger

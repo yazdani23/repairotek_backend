@@ -16,15 +16,13 @@ export interface UserDoc extends Document {
   lastActivity?: number;
   nationalId?: string;
   permissions: Schema.Types.ObjectId[]; //permissionIds
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export interface UserInfoDoc {
-  id:string,
-  firstName: string,
-  lastName: string,
-  email: string,
+  id:string;
+  firstName: string;
+  lastName: string;
+  email: string;
   profilePhoto: string; 
   role: string;
 };

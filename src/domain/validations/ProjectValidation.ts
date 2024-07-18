@@ -1,11 +1,9 @@
 import Joi from "joi";
 
 const ProjectValidationSchema = Joi.object({
-  projectCode: Joi.string().required(),
-  userId: Joi.string().required(),
+  adminId: Joi.string().required(),
   title: Joi.string().required(),
   zoneId: Joi.string().required(),
-  issueDateTime: Joi.date().required(),
   areaLength: Joi.number().required(),
   areaWidth: Joi.number().required(),
   areaHeight: Joi.number().required(),
@@ -13,7 +11,9 @@ const ProjectValidationSchema = Joi.object({
   description: Joi.string().required(),
   longitude: Joi.number().required(),
   latitude: Joi.number().required(),
-  status: Joi.string().required(),
+  materials: Joi.array().items(Joi.string().optional()).default([]),
+  equipment: Joi.array().items(Joi.string().optional()).default([]),
+  employees: Joi.array().items(Joi.string().optional()).default([]),
 });
 
 export default ProjectValidationSchema;
