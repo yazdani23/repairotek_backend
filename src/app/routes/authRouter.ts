@@ -144,52 +144,31 @@ authRouter.post(
   (req, res, next) => AuthController.refreshToken(req, res, next)
 );
 
+
 /**
  * @swagger
  * /auth/logout:
  *   post:
- *     summary: Refreshes the access token
+ *     summary: Log out the user
  *     tags: [Auth]
- *     operationId: refreshToken
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - refreshToken
- *             properties:
- *               refreshToken:
- *                 type: string
- *                 description: JWT refresh token
- *           example:
- *             refreshToken: your-refresh-token
+ *     operationId: logout
+ *     description: Log out the user by blacklisting the provided access token.
+ *     security:
+ *       - BearerAuth: []
  *     responses:
  *       200:
- *         description: New access token generated
+ *         description: Logged out successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 accessToken:
+ *                 message:
  *                   type: string
- *                   description: JWT access token
- *       400:
- *         description: Refresh token is required
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Error message
- *           example:
- *             error: Refresh token is required
- *       404:
- *         description: User not found
+ *                   description: Success message
+ *                   example: Logged out successfully
+ *       401:
+ *         description: Unauthorized, token is missing or invalid
  *         content:
  *           application/json:
  *             schema:
@@ -198,8 +177,18 @@ authRouter.post(
  *                 error:
  *                   type: string
  *                   description: Error message
- *           example:
- *             error: User not found
+ *                   example: Unauthorized
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ *                   example: An error occurred while logging out
  */
 
 authRouter.post(
