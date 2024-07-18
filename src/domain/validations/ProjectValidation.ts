@@ -1,4 +1,5 @@
 import Joi from "joi";
+  
 
 const ProjectValidationSchema = Joi.object({
   adminId: Joi.string().required(),
@@ -8,7 +9,7 @@ const ProjectValidationSchema = Joi.object({
   areaWidth: Joi.number().required(),
   areaHeight: Joi.number().required(),
   measureUnit: Joi.string().required(),
-  description: Joi.string().required(),
+  description: Joi.string(),
   longitude: Joi.number().required(),
   latitude: Joi.number().required(),
   materials: Joi.array().items(Joi.string().optional()).default([]),

@@ -1,6 +1,5 @@
 import { generateModel } from "../../utils/generators/modelGenerator";
 import { EquipmentDoc } from "../docs/Equipment";
-
 /**
  * @swagger
  * components:
@@ -9,6 +8,9 @@ import { EquipmentDoc } from "../docs/Equipment";
  *       type: object
  *       description: Schema for equipment details
  *       properties:
+ *         id:
+ *           type: string
+ *           description: Unique identifier for the equipment
  *         name:
  *           type: string
  *           description: Name of the equipment
@@ -30,12 +32,25 @@ import { EquipmentDoc } from "../docs/Equipment";
  *           type: string
  *           description: Manufacturer of the equipment
  *         VIN:
- *           type: number
+ *           type: string
  *           description: Vehicle Identification Number of the equipment
- *           default: 0
+ *           default: "0"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the equipment was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the equipment was last updated
  *       required:
  *         - name
  *         - equipmentModel
+ *         - count
+ *         - Manufacturer
+ *         - VIN
+ *         - createdAt
+ *         - updatedAt
  */
 
 const EquipmentModel = generateModel<EquipmentDoc>("Equipment", {
@@ -46,7 +61,7 @@ const EquipmentModel = generateModel<EquipmentDoc>("Equipment", {
   pricePerHour: { type: Number, required: false, default: 0 },
   count: { type: Number, required: false, default: 0 },
   Manufacturer: { type: String, required: false },
-  VIN: { type: Number, required: false, default: 0 },
+  VIN: { type: String, required: false, default: "0" },
 });
 
 export default EquipmentModel;

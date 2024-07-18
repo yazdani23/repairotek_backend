@@ -17,6 +17,17 @@ import { generateCode } from "../../utils/functions/generateCode";
  *         - $ref: '#/components/schemas/User'
  *         - type: object
  *           properties:
+ *             id:
+ *               type: string
+ *               description: Unique identifier for the admin
+ *             createdAt:
+ *               type: string
+ *               format: date-time
+ *               description: Timestamp when the admin was created
+ *             updatedAt:
+ *               type: string
+ *               format: date-time
+ *               description: Timestamp when the admin was last updated
  *             employeeCode:
  *               type: number
  *               description: Unique code assigned to the employee

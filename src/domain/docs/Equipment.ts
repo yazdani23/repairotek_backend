@@ -8,5 +8,5 @@ export interface EquipmentDoc extends Document {
   pricePerHour?: number;
   count: number;
   Manufacturer: string;
-  VIN: number;
+  VIN: string;
 }

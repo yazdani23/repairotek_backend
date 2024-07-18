@@ -18,6 +18,7 @@ import projectGallerySubjectRouter from "./projectGallerySubjectRouter";
 import resourceRouter from "./resourceRouter";
 import IndexController from "../controllers/IndexController";
 import materialRouter from "./materialRouter";
+import roadRouter from "./roadRouter";
 const indexRouter = express.Router();
 
 /**
@@ -36,6 +37,7 @@ indexRouter.use(employeeRouter);
 indexRouter.use(equipmentRouter);
 indexRouter.use(provinceRouter);
 indexRouter.use(roleRouter);
+// indexRouter.use(roadRouter)
 indexRouter.use(zoneRouter);
 indexRouter.use(galleryRouter);
 indexRouter.use(projectGallerySubjectRouter);

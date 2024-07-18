@@ -3,13 +3,14 @@ import UserModel from "./UserModel";
 import {
   generateModel,
 } from "../../utils/generators/modelGenerator";
-
 /**
  * @swagger
  * components:
  *   schemas:
- *     User:
- *       type: object
+ *     Admin:
+ *       allOf:
+ *         - $ref: '#/components/schemas/User'
+ *         - type: object
  *       required:
  *         - firstName
  *         - lastName
@@ -20,77 +21,72 @@ import {
  *         - roleId
  *         - password
  *       properties:
+ *         id:
+ *           type: string
+ *           description: Unique identifier for the admin
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the admin was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the admin was last updated
  *         firstName:
  *           type: string
- *           description: First name of the user
+ *           description: First name of the admin
  *         lastName:
  *           type: string
- *           description: Last name of the user
+ *           description: Last name of the admin
  *         gender:
  *           type: string
  *           enum:
- *             - Male
- *             - Female
- *             - Other
- *           description: Gender of the user
+ *             - male
+ *             - female
+ *             - other
+ *           description: Gender of the admin
  *         email:
  *           type: string
  *           format: email
- *           description: Email address of the user
+ *           description: Email address of the admin
  *         address:
  *           type: string
- *           description: Address of the user
+ *           description: Address of the admin
  *         telephone:
  *           type: string
- *           description: Telephone number of the user (optional)
+ *           description: Telephone number of the admin (optional)
  *         mobile:
  *           type: string
- *           description: Mobile number of the user
+ *           description: Mobile number of the admin
  *         profilePhoto:
  *           type: string
- *           description: URL to the profile photo of the user (optional)
+ *           description: URL to the profile photo of the admin (optional)
  *         roleId:
  *           type: string
  *           format: ObjectId
- *           description: Role ID of the user
+ *           description: Role ID of the admin
  *         password:
  *           type: string
- *           description: Password for the user
+ *           description: Password for the admin
  *         lastActivity:
  *           type: number
- *           description: Timestamp of the user's last activity (optional)
+ *           description: Timestamp of the admin's last activity (optional)
  *         nationalId:
  *           type: string
- *           description: National ID of the user (optional)
+ *           description: National ID of the admin (optional)
  *         permissions:
  *           type: array
  *           items:
  *             type: string
  *             format: ObjectId
- *           description: List of permission IDs associated with the user
+ *           description: List of permission IDs associated with the admin
  *       example:
- *         firstName: John
- *         lastName: Doe
- *         gender: Male
- *         email: johndoe@example.com
- *         address: 123 Main St
- *         telephone: '123-456-7890'
- *         mobile: '098-765-4321'
- *         profilePhoto: 'http://example.com/photo.jpg'
- *         roleId: '60c72b2f9b1d8c001f8e4c9e'
- *         password: 'securepassword123'
- *         lastActivity: 1622520000
- *         nationalId: 'A12345678'
- *         permissions: ['60c72b2f9b1d8c001f8e4c9d']
- *     Admin:
- *       allOf:
- *         - $ref: '#/components/schemas/User'
- *         - type: object
- *           description: Admin model extending the User model
- *       example:
+ *         id: 60c72b2f9b1d8c001f8e4ca1
+ *         createdAt: 2021-06-13T18:30:00.000Z
+ *         updatedAt: 2021-06-14T18:30:00.000Z
  *         firstName: Jane
  *         lastName: Smith
- *         gender: Female
+ *         gender: female
  *         email: janesmith@example.com
  *         address: 456 Another St
  *         telephone: '321-654-0987'
@@ -102,6 +98,7 @@ import {
  *         nationalId: 'B98765432'
  *         permissions: ['60c72b2f9b1d8c001f8e4ca0']
  */
+
 
 ///////////// Discriminat //////////////////
 const AdminModel = generateModel<AdminDoc>(

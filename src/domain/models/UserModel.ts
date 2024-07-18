@@ -55,6 +55,17 @@ import { Gender } from "../../utils/constant/enums/Gender";
  *         - roleId
  *         - password
  *       properties:
+ *         id:
+ *           type: string
+ *           description: Unique identifier for the user
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the user was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the user was last updated
  *         firstName:
  *           type: string
  *           description: First name of the user
@@ -64,9 +75,9 @@ import { Gender } from "../../utils/constant/enums/Gender";
  *         gender:
  *           type: string
  *           enum:
- *             - Male
- *             - Female
- *             - Other
+ *             - male
+ *             - female
+ *             - other
  *           description: Gender of the user
  *         email:
  *           type: string
@@ -103,7 +114,25 @@ import { Gender } from "../../utils/constant/enums/Gender";
  *             type: string
  *             format: ObjectId
  *           description: List of permission IDs associated with the user
+ *       example:
+ *         id: 60c72b2f9b1d8c001f8e4ca1
+ *         createdAt: 2021-06-13T18:30:00.000Z
+ *         updatedAt: 2021-06-14T18:30:00.000Z
+ *         firstName: John
+ *         lastName: Doe
+ *         gender: male
+ *         email: johndoe@example.com
+ *         address: 123 Main St
+ *         telephone: '123-456-7890'
+ *         mobile: '098-765-4321'
+ *         profilePhoto: 'http://example.com/photo.jpg'
+ *         roleId: '60c72b2f9b1d8c001f8e4c9e'
+ *         password: 'securepassword123'
+ *         lastActivity: 1622520000
+ *         nationalId: 'A12345678'
+ *         permissions: ['60c72b2f9b1d8c001f8e4c9d']
  */
+
 const UserModel = generateModel<UserDoc>(
   "User",
   {

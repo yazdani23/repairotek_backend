@@ -1,41 +1,45 @@
 import { generateModel } from "../../utils/generators/modelGenerator";
 import { ProjectGallerySubjectDoc } from "../docs/ProjectGallerySubject";
 
-/**
- * @swagger
- * components:
- *   schemas:
- *   ProjectGallerySubject:
- *     type: object
- *     required:
- *       - title
- *     properties:
- *       title:
- *         type: string
- *         description: Title of the gallery subject
- *       description:
- *         type: string
- *         description: Description of the gallery subject
- */
 
 /**
- * Possible values for ProjectGallerySubject
  * @swagger
  * components:
  *   schemas:
- *      ProjectGallerySubject:
- *        type: array
- *        items:
- *          type: string
- *          enum:
- *            - Daily
- *            - Injury Employee
- *            - Damage Equipment
- *            - Materials
- *            - Equipments
- *            - Other
+ *     ProjectGallerySubject:
+ *       type: object
+ *       required:
+ *         - title
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: Unique identifier for the gallery subject
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the gallery subject was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the gallery subject was last updated
+ *         title:
+ *           type: string
+ *           description: Title of the gallery subject
+ *           example: Daily
+ *         description:
+ *           type: string
+ *           description: Description of the gallery subject
+ *           example: "This subject covers daily project activities."
+ *       example:
+ *         id: 60c72b2f9b1d8c001f8e4caa
+ *         createdAt: 2023-01-01T12:00:00Z
+ *         updatedAt: 2023-01-02T12:00:00Z
+ *         title: Daily
+ *         description: "This subject covers daily project activities."
  */
-const ProjectGallerySubject = [
+
+
+const title = [
   "Daily",
   "Injury Employee",
   "Damage Equipment",

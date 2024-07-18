@@ -237,3 +237,7 @@ Postman-Collections/
     }
   ]
 }
+
+
+ "dev": "cross-env ENV_MODE=develop ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
+ "dev": "cross-env ENV_MODE=develop tsx watch -r tsconfig-paths/register src/index.ts",
