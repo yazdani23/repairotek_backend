@@ -3,7 +3,7 @@ import { generateSchema } from "../../utils/generators/modelGenerator";
 import { Schema } from "mongoose";
 
 const ReportModel = generateSchema<ReportDoc>("Report", {
-  title: { type: String, required: true },
+  title: { type: String, required: true},
   reportSubjectId: {
     type: Schema.Types.ObjectId,
     ref: "ReportSubject",

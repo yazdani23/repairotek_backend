@@ -5,7 +5,7 @@ import BaseRepository from "./BaseRepository";
 
 class CountryRepository extends BaseRepository<CountryDoc> {
   constructor(){
-    super(CountryModel)
+       super(CountryModel)
   }
 }
 

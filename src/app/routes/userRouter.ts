@@ -1,6 +1,6 @@
 import express from "express";
 import UserController from "../controllers/UserController";
-
+import {isLogined} from "../middlewares/authMiddleware";
 
 const userRouter = express.Router();
 

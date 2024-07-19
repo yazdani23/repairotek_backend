@@ -7,6 +7,7 @@ class BaseRepository<T> implements Repository<T> {
   constructor(protected model: Model<T>) {}
 
   async create(data: ResourceData<T>): Promise<ResourceData<T>> {
+ 
     try {
       const newRecource = new this.model(data);
 

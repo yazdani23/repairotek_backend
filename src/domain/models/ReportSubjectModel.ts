@@ -4,7 +4,7 @@ import { ReportSubjectDoc } from "../docs/ReportSubject";
 
 const types = ["Daily", "Injury Employee", "Damage Equipment"];
 const ReportSubjectModel = generateSchema<ReportSubjectDoc>("ReportSubject", {
-  title: { type: String, required: true },
+  title: { type: String, required: true, unique: true},
   description: { type: String, required: false },
 });
 

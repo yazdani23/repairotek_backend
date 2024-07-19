@@ -2,17 +2,19 @@ import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import { UserDoc } from "../../domain/docs/User";
 
-// تنظیم توکن JWT
 const setToken = (user: UserDoc): string => {
+  console.log(user);
   const payload = {
     id: user._id,
     email: user.email,
-    roleId: user.roleId, // فرض کنید roleId نقش کاربر را نشان می‌دهد
+    role: user.role, 
   };
-
-  const token = jwt.sign(payload, process.env.SECRET as string, {
-    expiresIn: "48h",
-  });
+ const SECRET_KEY = process.env.SECRET || "secret key";
+  const token = jwt.sign(payload,SECRET_KEY,
+    {
+      expiresIn: "48h",
+    }
+  );
 
   return token;
 };

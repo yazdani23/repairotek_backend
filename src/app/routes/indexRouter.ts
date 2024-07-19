@@ -3,6 +3,7 @@ import express from "express";
 // const { index, route404 } = require("../controllers/indexController");
 //
 import authRouter from "./authRouter";
+import adminRouter from "./adminRouter";
 import userRouter from "./userRouter";
 import projectRouter from "./projectRouter";
 import employeeRouter from "./employeeRouter";
@@ -13,9 +14,11 @@ import zoneRouter from "./zoneRouter";
 // import userZoneRouter from "./userZoneRouter";
 import permissionRouter from "./permissionRouter";
 import galleryRouter from "./galleryRouter";
-import adminRouter from "./adminRouter";
 import materialRouter from "./materialRouter";
 import projectGallerySubjectRouter from "./projectGallerySubjectRouter";
+import countryRouter from "./countryRouter";
+
+
 
 const indexRouter = express.Router();
 // const { index, notFound } = require("../controllers/indexController");
@@ -34,6 +37,7 @@ indexRouter.use(roleRouter);
 indexRouter.use(zoneRouter);
 indexRouter.use(galleryRouter);
 indexRouter.use(projectGallerySubjectRouter);
+indexRouter.use(countryRouter);
 
 ;
 // indexRouter.use(userZoneRouter);

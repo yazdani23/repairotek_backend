@@ -9,7 +9,7 @@ const UserModel = generateSchema<UserDoc>("User", {
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   gender: { type: String, enum: Gender, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   address: { type: String, required: true },
   telephone: { type: String, required: false },
   mobile: { type: String, required: true },
@@ -18,12 +18,12 @@ const UserModel = generateSchema<UserDoc>("User", {
   password: { type: String, required: true },
   lastActivity: { type: Number },
   nationalId: { type: String },
-  permissions: [
-    {
-      type: Schema.Types.ObjectId, //permissionId
-      ref: "Permission",
-    },
-  ],
+  // permissions: [
+  //   {
+  //     type: Schema.Types.ObjectId, //permissionId
+  //     ref: "Permission",
+  //   },
+  // ],
 });
 
 export default UserModel;

@@ -8,7 +8,7 @@ interface AuthRequest extends Request {
   user?: UserDoc;
 }
 
-const isLogin = async (err: any,req: AuthRequest,res: Response,next: NextFunction) => {
+const isLogined = async (err: any,req: AuthRequest,res: Response,next: NextFunction) => {
  
      logger.error(err);
     const authHeader = req.headers.authorization;
@@ -64,4 +64,4 @@ const isAdmin = async (
   }
 };
 
-export default { isLogin, isAdmin };
+export  { isLogined, isAdmin };

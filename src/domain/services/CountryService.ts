@@ -7,7 +7,7 @@ import CountryValidationSchema from "../validations/CountryValidation";
 class CountryService extends BaseService<CountryDoc> {
   private countryRepository = this.repository as typeof CountryRepository;
   constructor() {
-    super(CountryRepository, CountryValidationSchema);
+   super(CountryRepository, CountryValidationSchema);
   }
 }
 export default new CountryService();

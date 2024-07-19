@@ -8,7 +8,7 @@ import { ContractType } from "../../utils/constant/ContractType";
 
 
 const EmployeeSchema = new Schema<EmployeeDoc>({
-  employeeCode: { type: Number, required: false },
+  employeeCode: { type: Number, required: false, unique: true},
   hireDate: { type: Date, required: false },
   jobId: { type: Schema.Types.ObjectId, ref: "Job", required: false },
   skillDescription: { type: String, required: false },

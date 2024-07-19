@@ -4,10 +4,10 @@ import CountryController from "../controllers/CountryController";
 
 const countryRouter = express.Router();
 
-countryRouter.get("/countrys/:id", CountryController.getById);
-countryRouter.get("/countrys", CountryController.getAll);
-countryRouter.post("/countrys", CountryController.create);
-countryRouter.put("/countrys/:id", CountryController.update);
-countryRouter.delete("/countrys/:id", CountryController.delete);
+countryRouter.get("/countries/:id", CountryController.getById);
+countryRouter.get("/countries", CountryController.getAll);
+countryRouter.post("/countries", CountryController.create);
+countryRouter.put("/countries/:id", CountryController.update);
+countryRouter.delete("/countries/:id", CountryController.delete);
 
 export default countryRouter;
