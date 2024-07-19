@@ -6,4 +6,6 @@ export interface EquipmentDoc extends Document {
   description: string;
   pricePerHour?: number;
   count: number;
+  Manufacturer:string;
+  VIN:number;
 }

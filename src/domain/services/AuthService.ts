@@ -1,12 +1,11 @@
-import  bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
-import { UserDoc } from "../docs/User";
+// auth.service.ts
+import bcrypt from "bcrypt";
+import { UserDoc, UserInfoDoc } from "../docs/User";
 import BaseService from "./BaseService";
 import UserValidationSchema from "../validations/UserValidation";
 import UserRepository from "../repositories/UserRepository";
-import {setToken}  from "../../utils/functions/setToken";
-import logger from "../../utils/helpers/logger";
-
+import { setToken } from "../../utils/functions/setToken";
+import { RoleDoc } from '../docs/Role';
 
 class AuthService extends BaseService<UserDoc> {
   private userRepository = this.repository as typeof UserRepository;
@@ -15,13 +14,21 @@ class AuthService extends BaseService<UserDoc> {
 
   constructor() {
     super(UserRepository, UserValidationSchema);
-    
-    // this.userRepository = this.repository as typeof UserRepository;
   }
 
-  async login(email: string, password: string): Promise<string | null> {
-    const user = await this.userRepository.getUserByEmail(email);
+  async login(
+    email: string,
+    password: string
+  ): Promise<{
+    accessToken: string;
+    refreshToken: string;
+    userInfo: UserInfoDoc;
+  }> {
+    if (!email || !password) {
+      throw new Error("Email and password are required");
+    }
 
+    const user = await this.userRepository.findByEmail(email);
     if (!user) {
       throw new Error("User not found");
     }
@@ -31,64 +38,28 @@ class AuthService extends BaseService<UserDoc> {
       throw new Error("Invalid password");
     }
 
-    const token = setToken(user);
-    // jwt.sign({ id: user._id, email: user.email }, this.jwtSecret);
-    return token;
-
-    //  logger.info(user);
-    //  return user?.password;
-    // }
-    //   catch (error) {
-    //     console.error("Login error:", error); // Log the error for debugging
-    //     return null; // Or provide a more user-friendly error message
-    //   }
-  }
-  async logout(token: string): Promise<void> {
-    // const decoded: any = jwt.decode(token);
-    // const expiresIn = decoded.exp - Math.floor(Date.now() / 1000);
+    const accessToken = setToken(user, "15m"); // توکن دسترسی با مدت اعتبار کوتاه
+    const refreshToken = setToken(user, "7d"); // توکن نوسازی با مدت اعتبار طولانی
+    const userInfo = {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      email: user?.email,
+      profilePhoto:user.profilePhoto,
+      role: user.roleId && (user.roleId as RoleDoc).name,
+    };
+    return { accessToken, refreshToken, userInfo };
   }
 
-  async forgetPassword(email: string): Promise<string> {
-    //   const user = await this.userRepository.getUserByEmail(email);
-    //   if (!user) {
-    //     throw new Error("User not found");
-    //   }
-    //   const token = setToken(user);
-    //   const resetUrl = this.generateResetUrl(user.id, token); // Implement generateResetUrl
-
-    // // Send email with password reset instructions
-    // const emailContent = this.createPasswordResetEmail(user.email, resetUrl); // Implement createPasswordResetEmail
-
-    // Return a success message (optional)
-    return "Password reset instructions have been sent to your email.";
+  async getByEmail(email: string): Promise<UserDoc | null> {
+    return await this.userRepository.findByEmail(email);
   }
 
-  generateResetUrl(userId: number, token: string): string {
-    // Implement logic to create a secure URL with user ID and token
-    // Example: https://your-app.com/reset-password?userId=${userId}&token=${token}
-    // Ensure the URL is properly encoded to handle special characters
-    return `https://your-app.com/reset-password?userId=${encodeURIComponent(
-      userId
-    )}&token=${encodeURIComponent(token)}`;
-  }
-
-  createPasswordResetEmail(userEmail: string, resetUrl: string): string {
-    const subject = "Reset Your Password for Your Account";
-    const body = `
-    Hi ${userEmail},
-
-    You recently requested to reset your password for your account.
-    Click the link below to set a new password:
-
-    ${resetUrl}
-
-    This link will expire in [duration, e.g., 24 hours]. If you did not request a password reset, you can safely ignore this email.
-
-    Sincerely,
-    The Your App Team
-  `;
-    return `Subject: ${subject}\n\n${body}`;
-  }
+  //  async logout(token: string): Promise<void> {
+  //     const decoded: any = jwt.decode(token);
+  //     const expiresIn = decoded.exp - Math.floor(Date.now() / 1000);
+  //     await BlacklistService.addToBlacklist(token, expiresIn);
+  //   }
 }
 
+export type AuthServiceType = AuthService;
 export default new AuthService();

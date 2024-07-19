@@ -1,3 +1,4 @@
+
 import { Request, Response } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
@@ -10,6 +11,7 @@ class AdminController extends BaseController<AdminDoc> {
   constructor() {
     super(AdminService);
   }
+
 }
 export default new AdminController();
 //test

@@ -16,14 +16,16 @@ import permissionRouter from "./permissionRouter";
 import galleryRouter from "./galleryRouter";
 import materialRouter from "./materialRouter";
 import projectGallerySubjectRouter from "./projectGallerySubjectRouter";
+<<<<<<< HEAD
 import countryRouter from "./countryRouter";
 
 
 
+=======
+import resourceRouter from "./resourceRouter";
+import IndexController from "../controllers/IndexController";
+>>>>>>> c2f1b0748f75a3d0c33db94631c26ce9c725c4f1
 const indexRouter = express.Router();
-// const { index, notFound } = require("../controllers/indexController");
-
-
 
 indexRouter.use(authRouter);
 indexRouter.use(adminRouter);
@@ -31,7 +33,7 @@ indexRouter.use(materialRouter);
 indexRouter.use(userRouter);
 indexRouter.use(projectRouter);
 indexRouter.use(employeeRouter);
-indexRouter.use(equipmentRouter); 
+indexRouter.use(equipmentRouter);
 indexRouter.use(provinceRouter);
 indexRouter.use(roleRouter);
 indexRouter.use(zoneRouter);
@@ -39,29 +41,17 @@ indexRouter.use(galleryRouter);
 indexRouter.use(projectGallerySubjectRouter);
 indexRouter.use(countryRouter);
 
-;
 // indexRouter.use(userZoneRouter);
+indexRouter.use(resourceRouter);
 indexRouter.use(permissionRouter);
-// indexRouter.use("*", notFound);
+indexRouter.get("/", IndexController.index);
+indexRouter.use("*", IndexController.route404);
 //todo remove
-// indexRouter.get("/", index);
 
 export default indexRouter;
-
 
 // const verifyToken =require('../middlewares/jwt')
 // const upload = require("../middlewares/multer")
 // const multer = require("multer");
 // const path = require("path");
 // router.post("projects/uploadImage", uploadImageProduct);
-
-
-
-
-
-
-
-
-
-
-

@@ -46,8 +46,13 @@ class UserRepository extends BaseRepository<UserDoc> {
       throw new Error(`Failed to fetch data: ${error}`);
     }
   }
+<<<<<<< HEAD
   async getUserByEmail(email: string): Promise<UserDoc | null> {
     return await this.model.findOne({ email });
+=======
+  async findByEmail(email: string): Promise<UserDoc | null> {
+    return await this.model.findOne({ email }).populate("roleId");
+>>>>>>> c2f1b0748f75a3d0c33db94631c26ce9c725c4f1
   }
 }
 

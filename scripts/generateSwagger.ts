@@ -12,4 +12,4 @@ const generateSwaggerJson = () => {
   console.log("swagger.json has been generated!");
 };
 
-export default generateSwaggerJson;
+export default generateSwaggerJson
