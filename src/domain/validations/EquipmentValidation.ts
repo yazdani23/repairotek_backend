@@ -4,4 +4,7 @@ const EquipmentValidationSchema = Joi.object({
 
 });
 
-export default EquipmentValidationSchema;
+const EquipmentPatchValidationSchema = Joi.object({
+
+});
+export {EquipmentValidationSchema,EquipmentPatchValidationSchema};

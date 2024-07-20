@@ -117,6 +117,7 @@ reportSubjectRouter.post("/reportSubjects", ReportSubjectController.create);
  */
 
 reportSubjectRouter.put("/reportSubjects/:id", ReportSubjectController.update);
+reportSubjectRouter.patch("/reportSubjects/:id", ReportSubjectController.edit);
 
 /**
  * @swagger

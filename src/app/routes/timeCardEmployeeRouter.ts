@@ -127,6 +127,10 @@ timeCardEmployeeRouter.put(
   "/timeCardEmployees/:id",
   TimeCardEmployeeController.update
 );
+timeCardEmployeeRouter.patch(
+  "/timeCardEmployees/:id",
+  TimeCardEmployeeController.edit
+);
 
 /**
  * @swagger

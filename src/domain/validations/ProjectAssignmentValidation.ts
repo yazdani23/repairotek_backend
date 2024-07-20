@@ -4,5 +4,9 @@ import Joi from "joi";
 const ProjectAssignmentValidationSchema = Joi.object({
 
 });
+const ProjectAssignmentPatchValidationSchema = Joi.object({});
 
-export default ProjectAssignmentValidationSchema;
+export {
+  ProjectAssignmentPatchValidationSchema,
+  ProjectAssignmentValidationSchema,
+};

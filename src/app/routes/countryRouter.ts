@@ -123,6 +123,7 @@ countryRouter.post("/countries", CountryController.create);
  */
 
 countryRouter.put("/countries/:id", CountryController.update);
+countryRouter.patch("/countries/:id", CountryController.edit);
 
 /**
  * @swagger

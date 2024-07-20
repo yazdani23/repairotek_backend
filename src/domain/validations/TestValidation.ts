@@ -4,5 +4,5 @@ import Joi from "joi";
 const TestValidationSchema = Joi.object({
 
 });
-
-export default TestValidationSchema;
+const TestPatchValidationSchema = Joi.object({});
+export {TestPatchValidationSchema, TestValidationSchema};

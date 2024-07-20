@@ -6,6 +6,11 @@ export interface IRepository<T> {
     id: string,
     data: Partial<ResourceData<T>>
   ) => Promise<ResourceData<T> | null>;
+  edit: (
+    id: string,
+    data: Partial<ResourceData<T>>
+  ) => Promise<ResourceData<T> | null>;
+  
   delete: (id: string) => Promise<void>;
 
   getAll: () => Promise<ResourceData<T>[]>;

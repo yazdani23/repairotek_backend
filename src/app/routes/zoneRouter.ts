@@ -115,6 +115,7 @@ zoneRouter.post("/zones", ZoneController.create);
  */
 
 zoneRouter.put("/zones/:id", ZoneController.update);
+zoneRouter.patch("/zones/:id", ZoneController.edit);
 
 /**
  * @swagger

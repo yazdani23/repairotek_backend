@@ -134,6 +134,7 @@ assetRouter.get("/assets/:id", AssetController.getById);
 assetRouter.get("/assets", AssetController.getAll);
 assetRouter.post("/assets", AssetController.create);
 assetRouter.put("/assets/:id", AssetController.update);
+assetRouter.patch("/assets/:id", AssetController.edit);
 assetRouter.delete("/assets/:id", AssetController.delete);
 
 export default assetRouter;

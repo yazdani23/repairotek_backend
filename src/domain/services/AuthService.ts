@@ -2,7 +2,7 @@
 import bcrypt from "bcrypt";
 import { UserDoc, UserInfoDoc } from "../docs/User";
 import BaseService from "./BaseService";
-import UserValidationSchema from "../validations/UserValidation";
+import {UserValidationSchema} from "../validations/UserValidation";
 import UserRepository from "../repositories/UserRepository";
 import { setToken } from "../../utils/functions/setToken";
 import { RoleDoc } from "../docs/Role";
@@ -11,7 +11,7 @@ import createError from "http-errors";
 class AuthService extends BaseService<UserDoc> {
   private userRepository = this.repository as typeof UserRepository;
   constructor() {
-    super(UserRepository, UserValidationSchema);
+    super(UserRepository, UserValidationSchema, UserValidationSchema);
   }
 
   async login(

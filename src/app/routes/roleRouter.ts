@@ -115,6 +115,7 @@ roleRouter.post("/roles", RoleController.create);
  */
 
 roleRouter.put("/roles/:id", RoleController.update);
+roleRouter.patch("/roles/:id", RoleController.edit);
 
 /**
  * @swagger

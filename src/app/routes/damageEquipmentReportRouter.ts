@@ -132,7 +132,10 @@ damageEquipmentReportRouter.put(
   "/damageEquipmentReports/:id",
   DamageEquipmentReportController.update
 );
-
+damageEquipmentReportRouter.patch(
+  "/damageEquipmentReports/:id",
+  DamageEquipmentReportController.edit
+);
 /**
  * @swagger
  * /damageEquipmentReports/{id}:

@@ -115,6 +115,7 @@ resourceRouter.post("/resources", ResourceController.create);
  */
 
 resourceRouter.put("/resources/:id", ResourceController.update);
+resourceRouter.patch("/resources/:id", ResourceController.edit);
 
 /**
  * @swagger

@@ -2,10 +2,17 @@ type ResourceData<T> = T; // Generic type for resource data
 
 export interface IService<T> {
   create: (data: ResourceData<T>) => Promise<ResourceData<T>>;
+  
   update: (
     id: string,
     data: Partial<ResourceData<T>>
   ) => Promise<ResourceData<T> | null>;
+
+  edit: (
+    id: string,
+    data: Partial<ResourceData<T>>
+  ) => Promise<ResourceData<T> | null>;
+
   delete: (id: string) => Promise<void>;
 
   getAll: () => Promise<ResourceData<T>[]>;

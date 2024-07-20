@@ -128,6 +128,11 @@ projectGallerySubjectRouter.put(
   ProjectGallerySubjectController.update
 );
 
+projectGallerySubjectRouter.patch(
+  "/projectGallerySubjects/:id",
+  ProjectGallerySubjectController.edit
+);
+
 /**
  * @swagger
  * /projectGallerySubjects/{id}:

@@ -8,6 +8,7 @@ roadRouter.get("/roads/:id", RoadController.getById);
 roadRouter.get("/roads", RoadController.getAll);
 roadRouter.post("/roads", RoadController.create);
 roadRouter.put("/roads/:id", RoadController.update);
+roadRouter.patch("/roads/:id", RoadController.edit);
 roadRouter.delete("/roads/:id", RoadController.delete);
 
 export default roadRouter;

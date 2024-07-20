@@ -115,6 +115,7 @@ galleryRouter.post("/galleries", GalleryController.create);
  */
 
 galleryRouter.put("/galleries/:id", GalleryController.update);
+galleryRouter.patch("/galleries/:id", GalleryController.edit);
 
 /**
  * @swagger

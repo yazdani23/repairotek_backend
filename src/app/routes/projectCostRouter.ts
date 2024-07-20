@@ -115,6 +115,7 @@ projectCostRouter.post("/projectCosts", ProjectCostController.create);
  */
 
 projectCostRouter.put("/projectCosts/:id", ProjectCostController.update);
+projectCostRouter.patch("/projectCosts/:id", ProjectCostController.edit);
 
 /**
  * @swagger

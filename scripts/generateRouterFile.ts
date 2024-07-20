@@ -23,6 +23,7 @@ ${resourceNameLC}Router.get("/${resourceNameLC}s/:id", ${resourceNameUC}Controll
 ${resourceNameLC}Router.get("/${resourceNameLC}s", ${resourceNameUC}Controller.getAll);
 ${resourceNameLC}Router.post("/${resourceNameLC}s", ${resourceNameUC}Controller.create);
 ${resourceNameLC}Router.put("/${resourceNameLC}s/:id", ${resourceNameUC}Controller.update);
+${resourceNameLC}Router.patch("/${resourceNameLC}s/:id", ${resourceNameUC}Controller.edit);
 ${resourceNameLC}Router.delete("/${resourceNameLC}s/:id", ${resourceNameUC}Controller.delete);
 
 export default ${resourceNameLC}Router;

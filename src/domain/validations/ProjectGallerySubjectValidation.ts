@@ -4,5 +4,5 @@ import Joi from "joi";
 const ProjectGallerySubjectValidationSchema = Joi.object({
 
 });
-
-export default ProjectGallerySubjectValidationSchema;
+const ProjectGallerySubjectPatchValidationSchema = Joi.object({});
+export {ProjectGallerySubjectPatchValidationSchema, ProjectGallerySubjectValidationSchema};

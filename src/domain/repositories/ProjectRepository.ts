@@ -72,3 +72,5 @@ class ProjectRepository extends BaseRepository<ProjectDoc> {
 }
 
 export default new ProjectRepository();
+
+

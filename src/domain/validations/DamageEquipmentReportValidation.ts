@@ -1,8 +1,13 @@
-
 import Joi from "joi";
 
 const DamageEquipmentReportValidationSchema = Joi.object({
 
 });
+const DamageEquipmentReportPatchValidationSchema = Joi.object({
+    
+});
 
-export default DamageEquipmentReportValidationSchema;
+export {
+  DamageEquipmentReportValidationSchema,
+  DamageEquipmentReportPatchValidationSchema,
+};

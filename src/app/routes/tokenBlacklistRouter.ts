@@ -92,6 +92,10 @@ TokenBlacklistRouter.put(
   TokenBlackListController.update
 );
 
+TokenBlacklistRouter.patch(
+  "/tokenblacklists/:id",
+  TokenBlackListController.edit
+);
 /**
  * @swagger
  * /tokenblacklists/{id}:

@@ -4,7 +4,7 @@ import BaseService from "../../domain/services/BaseService";
 
 type ResourceData<T> = T;
 
-class BaseController<T> implements Controller<T>{
+class BaseController<T> implements Controller<T> {
   constructor(protected service: BaseService<T>) {}
 
   getAll = async (
@@ -108,6 +108,25 @@ class BaseController<T> implements Controller<T>{
       const id = req.params.id;
       const updatedData = req.body as ResourceData<T>;
       const updatedResource = await this.service.update(id, updatedData);
+      if (!updatedResource) {
+        return res
+          .status(404)
+          .json({ error: `Resource not found with id ${id}` });
+      }
+      return res.status(200).json(updatedResource);
+    } catch (error) {
+      next(error);
+    }
+  };
+  edit = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const id = req.params.id;
+      const updatedData = req.body as ResourceData<T>;
+      const updatedResource = await this.service.edit(id, updatedData);
       if (!updatedResource) {
         return res
           .status(404)

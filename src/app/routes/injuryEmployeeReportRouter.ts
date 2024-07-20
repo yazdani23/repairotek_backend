@@ -129,6 +129,11 @@ injuryEmployeeReportRouter.put(
   InjuryEmployeeReportController.update
 );
 
+
+injuryEmployeeReportRouter.patch(
+  "/injuryEmployeeReports/:id",
+  InjuryEmployeeReportController.edit
+);
 /**
  * @swagger
  * /injuryEmployeeReports/{id}:

@@ -2,11 +2,11 @@ import { JobDoc } from "../docs/Job";
 
 import BaseService from "./BaseService";
 import JobRepository from "../repositories/JobRepository";
-import JobValidationSchema from "../validations/JobValidation";
+import {JobValidationSchema, JobPatchValidationSchema } from "../validations/JobValidation";
 
 class JobService extends BaseService<JobDoc> {
   constructor() {
-    super(JobRepository, JobValidationSchema);
+    super(JobRepository, JobValidationSchema, JobPatchValidationSchema);
   }
 }
 export default new JobService();

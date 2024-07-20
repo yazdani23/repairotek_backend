@@ -4,4 +4,5 @@ const ZoneValidationSchema = Joi.object({
   
 });
 
-export default ZoneValidationSchema;
+const ZonePatchValidationSchema = Joi.object({});
+export {ZonePatchValidationSchema, ZoneValidationSchema};

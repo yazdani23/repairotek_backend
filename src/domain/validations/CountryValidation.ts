@@ -4,5 +4,6 @@ import Joi from "joi";
 const CountryValidationSchema = Joi.object({
 
 });
+const CountryPatchValidationSchema = Joi.object({});
 
-export default CountryValidationSchema;
+export { CountryValidationSchema, CountryPatchValidationSchema };

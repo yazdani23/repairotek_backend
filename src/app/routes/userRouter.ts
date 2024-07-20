@@ -140,6 +140,7 @@ userRouter.post("/users", UserController.create);
  */
 
 userRouter.put("/users/:id", UserController.update);
+userRouter.patch("/users/:id", UserController.edit);
 
 /**
  * @swagger

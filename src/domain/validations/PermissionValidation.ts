@@ -8,4 +8,12 @@ const PermissionValidationSchema = Joi.object({
   roleIds: Joi.array().required(),
 });
 
-export default PermissionValidationSchema;
+const PermissionPatchValidationSchema = Joi.object({
+  name: Joi.string().optional(),
+  description: Joi.string().optional(),
+  resource: Joi.string().optional(),
+  action: Joi.string().optional(),
+  roleIds: Joi.array().optional(),
+});
+
+export { PermissionValidationSchema , PermissionPatchValidationSchema};

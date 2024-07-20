@@ -1,13 +1,20 @@
 import { TokenBlackListDoc } from "../docs/TokenBlackList";
 import BaseService from "./BaseService";
 import TokenBlackListRepository from "../repositories/TokenBlackListRepository";
-import TokenBlackListValidationSchema from "../validations/TokenBlackListValidation";
+import {
+  TokenBlackListPatchValidationSchema,
+  TokenBlackListValidationSchema,
+} from "../validations/TokenBlackListValidation";
 
-type ResourceData<T> = T;
 class TokenBlackListService extends BaseService<TokenBlackListDoc> {
-  private tokenBlackListRepository = this.repository as typeof TokenBlackListRepository;
+  private tokenBlackListRepository = this
+    .repository as typeof TokenBlackListRepository;
   constructor() {
-    super(TokenBlackListRepository, TokenBlackListValidationSchema);
+    super(
+      TokenBlackListRepository,
+      TokenBlackListValidationSchema,
+      TokenBlackListPatchValidationSchema
+    );
   }
 
   // create(data: TokenBlackListDoc): Promise<TokenBlackListDoc> {

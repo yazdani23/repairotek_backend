@@ -115,6 +115,7 @@ taskRouter.post("/tasks", TaskController.create);
  */
 
 taskRouter.put("/tasks/:id", TaskController.update);
+taskRouter.patch("/tasks/:id", TaskController.edit);
 
 /**
  * @swagger

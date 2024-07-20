@@ -4,5 +4,8 @@ import Joi from "joi";
 const JobValidationSchema = Joi.object({
 
 });
+const JobPatchValidationSchema = Joi.object({});
 
-export default JobValidationSchema;
+
+
+export {JobPatchValidationSchema, JobValidationSchema};

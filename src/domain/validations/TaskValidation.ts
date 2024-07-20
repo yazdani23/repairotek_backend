@@ -5,4 +5,5 @@ const TaskValidationSchema = Joi.object({
 
 });
 
-export default TaskValidationSchema;
+const TaskPatchValidationSchema = Joi.object({});
+export {TaskPatchValidationSchema, TaskValidationSchema};

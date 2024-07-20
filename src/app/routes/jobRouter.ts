@@ -121,6 +121,7 @@ jobRouter.post("/jobs", JobController.create);
  */
 
 jobRouter.put("/jobs/:id", JobController.update);
+jobRouter.patch("/jobs/:id", JobController.edit);
 
 /**
  * @swagger

@@ -1,11 +1,11 @@
 import { UserDoc } from "../docs/User";
 import BaseService from "./BaseService";
 import UserRepository from "../repositories/UserRepository";
-import UserValidationSchema from "../validations/UserValidation";
+import {UserPatchValidationSchema, UserValidationSchema} from "../validations/UserValidation";
 
 class UserService extends BaseService<UserDoc> {
   constructor() {
-    super(UserRepository, UserValidationSchema);
+    super(UserRepository, UserValidationSchema, UserPatchValidationSchema);
   }
   // updateUserActivity = async (id: string): Promise<void> => {
   //   await UserRepository.findByIdAndUpdate(id, { lastActivity: Date.now() });

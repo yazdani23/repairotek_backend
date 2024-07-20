@@ -4,5 +4,6 @@ import Joi from "joi";
 const RoadValidationSchema = Joi.object({
 
 });
+const RoadPatchValidationSchema = Joi.object({});
 
-export default RoadValidationSchema;
+export {RoadPatchValidationSchema, RoadValidationSchema};

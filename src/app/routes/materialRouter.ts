@@ -114,6 +114,7 @@ materialRouter.post("/materials", MaterialController.create);
  */
 
 materialRouter.put("/materials/:id", MaterialController.update);
+materialRouter.patch("/materials/:id", MaterialController.edit);
 
 /**
  * @swagger

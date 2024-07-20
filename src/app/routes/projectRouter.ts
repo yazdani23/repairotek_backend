@@ -139,6 +139,83 @@ projectRouter.put(
   ProjectController.update
 );
 
+projectRouter.patch(
+  "/projects/:id",
+  AuthMiddleware.isAdmin,
+  ProjectController.edit
+);
+/**
+ * @swagger
+ * /projects/{id}:
+ *   patch:
+ *     tags: [Projects]
+ *     summary: Partially update a project
+ *     description: Partially update a project by its ID. Only the fields provided in the request body will be updated.
+ *     operationId: patchProject
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               zoneId:
+ *                 type: string
+ *               areaLength:
+ *                 type: number
+ *               areaWidth:
+ *                 type: number
+ *               areaHeight:
+ *                 type: number
+ *               measureUnit:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               longitude:
+ *                 type: number
+ *               latitude:
+ *                 type: number
+ *               materials:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               equipment:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               employees:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *             example:
+ *               title: "Updated Project Title"
+ *               description: "Updated description"
+ *     responses:
+ *       200:
+ *         description: Project updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Project'
+ *       404:
+ *         description: Project not found
+ */
+
+projectRouter.patch(
+  "/projects/:id",
+  AuthMiddleware.isAdmin,
+  ProjectController.update
+);
+
+
 /**
  * @swagger
  * /projects/{id}:

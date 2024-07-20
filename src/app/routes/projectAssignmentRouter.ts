@@ -128,6 +128,11 @@ projectAssignmentRouter.put(
   ProjectAssignmentController.update
 );
 
+projectAssignmentRouter.patch(
+  "/projectAssignments/:id",
+  ProjectAssignmentController.edit
+);
+
 /**
  * @swagger
  * /projectAssignments/{id}:

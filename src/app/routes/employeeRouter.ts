@@ -117,6 +117,7 @@ employeeRouter.post("/employees", EmployeeController.create);
  *         description: Server error
  */
 employeeRouter.put("/employees/:id", EmployeeController.update);
+employeeRouter.patch("/employees/:id", EmployeeController.edit);
 
 /**
  * @swagger

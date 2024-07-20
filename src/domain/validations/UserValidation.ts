@@ -5,14 +5,25 @@ const UserValidationSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   email: Joi.string().email().required(),
-  webSite: Joi.string(),
   address: Joi.string(),
   telephone: Joi.string(),
   mobile: Joi.number().required(),
   profilePhoto: Joi.string(),
   roleId: Joi.string().required(),
-  //todo: remove
   password: Joi.string().required(),
   // password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{8,30}$")).required(),
 });
-export default UserValidationSchema
+
+const UserPatchValidationSchema = Joi.object({
+  userCode: Joi.number().optional(),
+  firstName: Joi.string().optional(),
+  lastName: Joi.string().optional(),
+  email: Joi.string().email().optional(),
+  address: Joi.string(),
+  telephone: Joi.string(),
+  mobile: Joi.number().optional(),
+  profilePhoto: Joi.string(),
+  roleId: Joi.string().optional(),
+  // password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{8,30}$")).required(),
+});
+export {UserPatchValidationSchema, UserValidationSchema}

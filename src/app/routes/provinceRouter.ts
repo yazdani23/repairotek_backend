@@ -115,6 +115,7 @@ provinceRouter.post("/provinces", ProvinceController.create);
  */
 
 provinceRouter.put("/provinces/:id", ProvinceController.update);
+provinceRouter.patch("/provinces/:id", ProvinceController.edit);
 
 /**
  * @swagger

@@ -1,8 +1,9 @@
-
 import Joi from "joi";
 
-const InjuryEmployeeReportValidationSchema = Joi.object({
+const InjuryEmployeeReportValidationSchema = Joi.object({});
+const InjuryEmployeeReportPatchValidationSchema = Joi.object({});
 
-});
-
-export default InjuryEmployeeReportValidationSchema;
+export {
+  InjuryEmployeeReportValidationSchema,
+  InjuryEmployeeReportPatchValidationSchema,
+};

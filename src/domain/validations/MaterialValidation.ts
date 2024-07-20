@@ -5,4 +5,5 @@ const MaterialValidationSchema = Joi.object({
 
 });
 
-export default MaterialValidationSchema;
+const MaterialPatchValidationSchema = Joi.object({});
+export {MaterialPatchValidationSchema,MaterialValidationSchema};

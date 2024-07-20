@@ -1,8 +1,7 @@
-
 import Joi from "joi";
 
-const DamageTypeValidationSchema = Joi.object({
+const DamageTypeValidationSchema = Joi.object({});
 
-});
+const DamageTypePatchValidationSchema = Joi.object({});
 
-export default DamageTypeValidationSchema;
+export { DamageTypeValidationSchema, DamageTypePatchValidationSchema };

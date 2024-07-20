@@ -119,6 +119,7 @@ dailyReportRouter.post("/dailyReports", DailyReportController.create);
  *         description: Server error
  */
 dailyReportRouter.put("/dailyReports/:id", DailyReportController.update);
+dailyReportRouter.patch("/dailyReports/:id", DailyReportController.edit);
 
 /**
  * @swagger

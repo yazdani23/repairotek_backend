@@ -120,6 +120,7 @@ equipmentRouter.post("/equipment", EquipmentController.create);
  *         description: An unknown error occurred
  */
 equipmentRouter.put("/equipment/:id", EquipmentController.update);
+equipmentRouter.patch("/equipment/:id", EquipmentController.edit);
 
 /**
  * @swagger

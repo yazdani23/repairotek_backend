@@ -115,6 +115,7 @@ permissionRouter.post("/permissions", PermissionController.create);
  */
 
 permissionRouter.put("/permissions/:id", PermissionController.update);
+permissionRouter.patch("/permissions/:id", PermissionController.edit);
 
 /**
  * @swagger
