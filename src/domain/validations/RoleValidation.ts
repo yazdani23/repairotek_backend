@@ -7,8 +7,8 @@ const RoleValidationSchema = Joi.object({
   // permissions: Joi.array().required(),
 });
 const RolePatchValidationSchema = Joi.object({
-  name: Joi.string().required(),
-  description: Joi.string().required(),
+  name: Joi.string().optional(),
+  description: Joi.string().optional(),
   isActive: Joi.boolean(),
   // permissions: Joi.array().required(),
 });

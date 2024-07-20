@@ -6,7 +6,7 @@ const TokenBlackListValidationSchema = Joi.object({
 });
 
 const TokenBlackListPatchValidationSchema = Joi.object({
-  token: Joi.string().required(),
+  token: Joi.string().optional(),
 });
 
 export {TokenBlackListPatchValidationSchema, TokenBlackListValidationSchema};
