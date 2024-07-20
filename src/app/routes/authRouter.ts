@@ -140,9 +140,9 @@ authRouter.post("/auth/login", (req, res, next) =>
 
 authRouter.post(
   "/auth/refreshToken",
+  AuthMiddleware.getToken,
   (req, res, next) => AuthController.refreshToken(req, res, next)
 );
-
 
 /**
  * @swagger
@@ -190,12 +190,9 @@ authRouter.post(
  *                   example: An error occurred while logging out
  */
 
-authRouter.post(
-  "/auth/logout",
-  AuthMiddleware.isLogged,
-  (req, res, next) => AuthController.refreshToken(req, res, next)
+authRouter.post("/auth/logout", AuthMiddleware.isLogged, (req, res, next) =>
+  AuthController.refreshToken(req, res, next)
 );
-
 
 /**
  * @swagger
