@@ -58,7 +58,7 @@ app.use(
 
 app.use(express.static(path.join(__dirname, "../../public")));
 
-app.use("/api/v1", indexRouter);
+app.use("/api/v2", indexRouter);
 app.use(sessionMiddleware);
 app.use(errorHandlerMiddleware);
 

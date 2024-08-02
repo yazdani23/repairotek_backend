@@ -48,8 +48,8 @@ const seedDatabase = async () => {
     await DamageEquipmentReportSeeder.seed();
     await InjuryEmployeeReportSeeder.seed();
 
-    await TaskSeeder.seed();
-    await TimeCardEmployeeSeeder.seed();
+    // await TaskSeeder.seed();
+    // await TimeCardEmployeeSeeder.seed();
 
     logger.info("Database seeding completed successfully");
   } catch (error) {

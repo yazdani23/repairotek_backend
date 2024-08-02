@@ -13,7 +13,7 @@ const options: Options = {
     },
     servers: [
       {
-        url: "/api/v1",
+        url: "/api/v2",
         description: "Base URL",
       },
     ],

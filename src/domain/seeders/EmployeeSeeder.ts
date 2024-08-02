@@ -50,15 +50,15 @@ export class EmployeeSeeder {
           nationalId: faker.number.int({ min: 1000000000, max: 9999999999 }), // Assuming national ID is a 10-digit number
           permissions: [],
           employeeCode: faker.number.int({ min: 10000 }),
-          hireDate: faker.date.past(),
-          jobId: job.id,
-          skillDescription: faker.lorem.sentence(),
-          description: faker.lorem.paragraph(),
-          dateOfBirth: faker.date.past({
-            years: 30,
-            refDate: "2024-01-01T00:00:00.000Z",
-          }), // Random date of birth in the past 30 years
-          maritalStatus: faker.helpers.arrayElement(MaritalStatus),
+          // hireDate: faker.date.past(),
+          // jobId: job.id,
+          // skillDescription: faker.lorem.sentence(),
+          // description: faker.lorem.paragraph(),
+          // dateOfBirth: faker.date.past({
+          //   years: 30,
+          //   refDate: "2024-01-01T00:00:00.000Z",
+          // }), // Random date of birth in the past 30 years
+          // maritalStatus: faker.helpers.arrayElement(MaritalStatus),
           yearsOfExperience: faker.number.int({ min: 1, max: 40 }),
           contractType: faker.helpers.arrayElement(ContractType),
           bankAccountInfo: `

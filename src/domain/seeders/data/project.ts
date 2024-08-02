@@ -11,7 +11,7 @@ export const projectData = [
     description: "This is a sample project description 1.",
     longitude: 51.389,
     latitude: 35.6892,
-    status: "completed",
+    status: "Completed",
   },
   {
     projectCode: "PRJ002",
@@ -25,7 +25,7 @@ export const projectData = [
     description: "This is a sample project description 2.",
     longitude: 52.52,
     latitude: 13.405,
-    status: "completed",
+    status: "Completed",
   },
   {
     projectCode: "PRJ003",

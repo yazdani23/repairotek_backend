@@ -23,6 +23,7 @@ export class AdminSeeder {
         );
         return;
       }
+   
       const admins = [];
       const password="Admin@1234"
       const hashedPassword = await bcrypt.hash(password as string, 10);

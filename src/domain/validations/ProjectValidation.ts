@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { StatusProject } from "../../utils/constant/StatusProject";
   
 
 const ProjectValidationSchema = Joi.object({
@@ -17,8 +18,10 @@ const ProjectValidationSchema = Joi.object({
   employees: Joi.array().items(Joi.string().optional()).default([]),
 });
 
+
+
+
 const ProjectPatchValidationSchema = Joi.object({
-  adminId: Joi.string().optional(),
   title: Joi.string().optional(),
   zoneId: Joi.string().required(),
   areaLength: Joi.number().optional(),
@@ -28,6 +31,7 @@ const ProjectPatchValidationSchema = Joi.object({
   description: Joi.string(),
   longitude: Joi.number().optional(),
   latitude: Joi.number().optional(),
+  status: Joi.string().valid(...StatusProject).optional(),
   materials: Joi.array().items(Joi.string().optional()).default([]),
   equipment: Joi.array().items(Joi.string().optional()).default([]),
   employees: Joi.array().items(Joi.string().optional()).default([]),
