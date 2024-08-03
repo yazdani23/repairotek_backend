@@ -2,13 +2,25 @@ import express from "express";
 // //todo: remove
 // const { index, route404 } = require("../controllers/indexController");
 //
+
 import authRouter from "./authRouter";
+import countryRouter from "./countryRouter";
+import assetRouter from "./assetRouter";
+import dailyReportRouter from "./dailyReportRouter";
+import damageEquipmentReportRouter from "./damageEquipmentReportRouter";
+import projectCostRouter from "./projectCostRouter";
+import projectAssignmentRouter from "./projectAssignmentRouter";
+import timeCardEmployeeRouter from "./timeCardEmployeeRouter";
+import taskRouter from "./taskRouter";
+import TokenBlacklistRouter from "./tokenBlacklistRouter";
+
 import userRouter from "./userRouter";
 import projectRouter from "./projectRouter";
 import employeeRouter from "./employeeRouter";
 import equipmentRouter from "./equipmentRouter";
 import roleRouter from "./roleRouter";
 import provinceRouter from "./provinceRouter";
+import injuryEmployeeReportRouter from "./injuryEmployeeReportRouter";
 import zoneRouter from "./zoneRouter";
 // import userZoneRouter from "./userZoneRouter";
 import permissionRouter from "./permissionRouter";
@@ -18,6 +30,7 @@ import projectGallerySubjectRouter from "./projectGallerySubjectRouter";
 import resourceRouter from "./resourceRouter";
 import IndexController from "../controllers/IndexController";
 import materialRouter from "./materialRouter";
+import jobRouter from "./jobRouter";
 import roadRouter from "./roadRouter";
 const indexRouter = express.Router();
 
@@ -30,14 +43,24 @@ const indexRouter = express.Router();
 
 indexRouter.use(authRouter);
 indexRouter.use(adminRouter);
+indexRouter.use(injuryEmployeeReportRouter);
 indexRouter.use(materialRouter);
 indexRouter.use(userRouter);
 indexRouter.use(projectRouter);
+indexRouter.use(countryRouter);
+indexRouter.use(assetRouter);
+indexRouter.use(dailyReportRouter);
+indexRouter.use(damageEquipmentReportRouter);
+indexRouter.use(projectCostRouter);
+indexRouter.use(projectAssignmentRouter);
+indexRouter.use(timeCardEmployeeRouter);
+indexRouter.use(taskRouter);
 indexRouter.use(employeeRouter);
 indexRouter.use(equipmentRouter);
 indexRouter.use(provinceRouter);
 indexRouter.use(roleRouter);
-// indexRouter.use(roadRouter)
+indexRouter.use(roadRouter);
+indexRouter.use(jobRouter);
 indexRouter.use(zoneRouter);
 indexRouter.use(galleryRouter);
 indexRouter.use(projectGallerySubjectRouter);

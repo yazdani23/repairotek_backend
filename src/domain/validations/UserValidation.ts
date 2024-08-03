@@ -10,12 +10,14 @@ const UserValidationSchema = Joi.object({
   mobile: Joi.number().required(),
   profilePhoto: Joi.string(),
   roleId: Joi.string().required(),
+  gender: Joi.string()
+    .valid(...["male", "female"])
+    .required(),
   password: Joi.string().required(),
   // password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{8,30}$")).required(),
 });
 
 const UserPatchValidationSchema = Joi.object({
-  userCode: Joi.number().optional(),
   firstName: Joi.string().optional(),
   lastName: Joi.string().optional(),
   email: Joi.string().email().optional(),
@@ -24,6 +26,9 @@ const UserPatchValidationSchema = Joi.object({
   mobile: Joi.number().optional(),
   profilePhoto: Joi.string(),
   roleId: Joi.string().optional(),
+  gender: Joi.string()
+    .valid(...["male", "female"])
+    .required(),
   // password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{8,30}$")).required(),
 });
-export {UserPatchValidationSchema, UserValidationSchema}
+export { UserPatchValidationSchema, UserValidationSchema };
