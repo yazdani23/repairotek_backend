@@ -16,17 +16,11 @@ import updateLastActivityMiddleware from "./middlewares/updateLastActivityMiddle
 
 dotenv.config();
 const app: Application = express();
-
-// app.get('/login', (req, res) => {
-//   req.session.user = { id: 1, username: 'example' };
-//   res.send('شما وارد شده‌اید.');
-// });
-// پیکربندی middleware session
 const sessionMiddleware = session({
   //To do
   // const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
 
-  secret: "mysecretkey", // کلید مخفی برای رمزنگاری اطلاعات جلسات
+  secret: "mysecretkey",
   resave: false,
   saveUninitialized: false,
 });
@@ -41,20 +35,15 @@ app.use(loggerMiddleware);
 app.use(helmet());
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerSpec)
-);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get("/swagger-json", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
 app.use(
   "/api-docs/swagger-ui",
-  express.static(path.join(__dirname, "../../node_modules/swagger-ui-dist"))
+  express.static(path.join(__dirname, "../../node_modules/swagger-ui-dist")),
 );
-
 
 app.use(express.static(path.join(__dirname, "../../public")));
 
@@ -63,4 +52,3 @@ app.use(sessionMiddleware);
 app.use(errorHandlerMiddleware);
 
 export default app;
-

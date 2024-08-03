@@ -1,4 +1,4 @@
-import { RoadDoc } from './Road';
+import { RoadDoc } from "./Road";
 import { Document, Schema } from "mongoose";
 
 export interface ZoneDoc extends Document {
@@ -7,7 +7,7 @@ export interface ZoneDoc extends Document {
   municipalCode?: string; // کد منطقه شهرداری
   location: {
     type: string; // "Point" یا "Polygon"
-    coordinates: number[][][]; // مختصات
+    coordinates: number[][][] | undefined; // مختصات
   };
   description?: string;
   areaSize?: number; // مساحت منطقه

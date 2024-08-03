@@ -7,7 +7,7 @@ export interface CountryDoc extends Document {
   capital: string;
   population: number;
   area: number; //
-  languages: string[];
+  languages: string[] | undefined;
   currency: string;
   // timezone: string;
   flagUrl: string;

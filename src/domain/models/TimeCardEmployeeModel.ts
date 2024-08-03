@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { IndexOptions, Schema, model } from "mongoose";
 import { TimeCardEmployeeDoc } from "../docs/TimeCardEmployee";
 
 /**
@@ -138,7 +138,7 @@ const TimeCardEmployeeSchema = new Schema<TimeCardEmployeeDoc>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 /**
@@ -149,7 +149,7 @@ const TimeCardEmployeeSchema = new Schema<TimeCardEmployeeDoc>(
  * @instance
  */
 TimeCardEmployeeSchema.virtual("totalScheduledWorkTime").get(function (
-  this: TimeCardEmployeeDoc
+  this: TimeCardEmployeeDoc,
 ) {
   const start = new Date(this.scheduledStartTime).getTime();
   const end = new Date(this.scheduledEndTime).getTime();
@@ -165,7 +165,7 @@ TimeCardEmployeeSchema.virtual("totalScheduledWorkTime").get(function (
  * @instance
  */
 TimeCardEmployeeSchema.virtual("totalActualWorkTime").get(function (
-  this: TimeCardEmployeeDoc
+  this: TimeCardEmployeeDoc,
 ) {
   const start = new Date(this.actualStartTime).getTime();
   const end = new Date(this.actualEndTime).getTime();
@@ -199,10 +199,9 @@ TimeCardEmployeeSchema.pre<TimeCardEmployeeDoc>("save", function (next) {
  * @memberof TimeCardEmployeeSchema
  * @instance
  */
-TimeCardEmployeeSchema.index(
-  { employeeId: 1, timeCardDate: 1 },
-  { unique: true }
-);
+TimeCardEmployeeSchema.index({ employeeId: 1, timeCardDate: 1 }, {
+  unique: true,
+} as IndexOptions);
 
 /**
  * TimeCardEmployee model
@@ -210,7 +209,7 @@ TimeCardEmployeeSchema.index(
  */
 const TimeCardEmployeeModel = model<TimeCardEmployeeDoc>(
   "TimeCardEmployee",
-  TimeCardEmployeeSchema
+  TimeCardEmployeeSchema,
 );
 
 export default TimeCardEmployeeModel;
