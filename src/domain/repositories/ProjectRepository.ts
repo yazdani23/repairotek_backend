@@ -13,7 +13,6 @@ class ProjectRepository extends BaseRepository<ProjectDoc> {
   async getById(id: string): Promise<ProjectDoc | null> {
     try {
       return await this.model
-
         .findById(id)
         .populate("adminId")
         .populate("zoneId")
@@ -73,3 +72,5 @@ class ProjectRepository extends BaseRepository<ProjectDoc> {
 }
 
 export default new ProjectRepository();
+
+

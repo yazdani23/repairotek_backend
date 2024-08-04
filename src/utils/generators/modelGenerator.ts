@@ -7,14 +7,14 @@ import {
 } from "mongoose";
 
 const toJsonSchema = <T>(schema: Schema<T>, deletedProperties?: string[]) => {
-  const deleltedProp = ["__v", "_id", ...(deletedProperties ?? [])];
+  const deletedProp = ["__v", "_id", ...(deletedProperties ?? [])];
   schema.set("toJSON", {
     transform: (doc, ret) => {
       if (!ret._id) {
         return ret;
       }
       ret.id = ret._id.toString();
-      deleltedProp.forEach((item) => delete ret[item]);
+      deletedProp.forEach((item) => delete ret[item]);
       return ret;
     },
   });
@@ -22,20 +22,27 @@ const toJsonSchema = <T>(schema: Schema<T>, deletedProperties?: string[]) => {
   return schema;
 };
 
-const generateSchema = <T>(
+const generateModel = <T>(
   modelName: string,
   schemaDefinition: SchemaDefinition<SchemaDefinitionType<T>, T>,
-  deletedProperties?: string[]
+  deletedProperties?: string[],
+  baseModel?: Model<any> // پارامتر اختیاری برای مدل پایه
 ): Model<T> => {
   const schema = new Schema<T>(schemaDefinition, { timestamps: true });
-  toJsonSchema(schema, deletedProperties);
+  const jsonSchema= toJsonSchema(schema, deletedProperties);
 
   try {
-    return model<T>(modelName, schema);
+    if (baseModel) {
+      // در صورت وجود مدل پایه، یک discriminator ایجاد می‌کند
+      return baseModel.discriminator<T>(modelName, jsonSchema);
+    } else {
+      // در غیر این صورت، یک مدل جدید ایجاد می‌کند
+      return model<T>(modelName, jsonSchema);
+    }
   } catch (error) {
     console.error(`Error creating model ${modelName}:`, error);
     throw error; // Re-throw to propagate the error
   }
 };
 
-export { generateSchema, toJsonSchema };
+export { generateModel, toJsonSchema };

@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 import { EmployeeTimeCardLogDoc } from "../../docs/unuse/TimeCardLogEmployee";
-import { generateSchema } from "../../../utils/generators/modelGenerator";
+import { generateModel } from "../../../utils/generators/modelGenerator";
 
-const EmployeeTimeCardLogModel = generateSchema<EmployeeTimeCardLogDoc>(
+const EmployeeTimeCardLogModel = generateModel<EmployeeTimeCardLogDoc>(
   "EmployeeTimeCard",
   {
     employeeId: {

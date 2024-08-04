@@ -22,7 +22,12 @@ const ${resourceNameUC}ValidationSchema = Joi.object({
 
 });
 
-export default ${resourceNameUC}ValidationSchema;
+const ${resourceNameUC}ValidationPatchSchema = Joi.object({
+
+});
+
+export { ${resourceNameUC}ValidationSchema, ${resourceNameUC}ValidationPatchSchema };
+
 `;
 
   try {

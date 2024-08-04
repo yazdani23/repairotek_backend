@@ -1,10 +1,12 @@
-import { Schema, SchemaDefinition, SchemaDefinitionType } from "mongoose";
-import {toJsonSchema } from "../../utils/generators/modelGenerator";
+import { Schema} from "mongoose";
+import {
+  generateModel,
+} from "../../utils/generators/modelGenerator";
 import UserModel from "./UserModel";
 import { EmployeeDoc } from "../docs/Employee";
 import { MaritalStatus } from "../../utils/constant/MaritalStatus";
 import { ContractType } from "../../utils/constant/ContractType";
-
+import { generateCode } from "../../utils/functions/generateCode";
 
 /**
  * @swagger
@@ -15,6 +17,17 @@ import { ContractType } from "../../utils/constant/ContractType";
  *         - $ref: '#/components/schemas/User'
  *         - type: object
  *           properties:
+ *             id:
+ *               type: string
+ *               description: Unique identifier for the admin
+ *             createdAt:
+ *               type: string
+ *               format: date-time
+ *               description: Timestamp when the admin was created
+ *             updatedAt:
+ *               type: string
+ *               format: date-time
+ *               description: Timestamp when the admin was last updated
  *             employeeCode:
  *               type: number
  *               description: Unique code assigned to the employee
@@ -82,29 +95,30 @@ import { ContractType } from "../../utils/constant/ContractType";
  *         bankAccountInfo: '1234567890'
  *         insuranceNumber: 987654321
  */
-const EmployeeSchemaDefinition: SchemaDefinition<
-  SchemaDefinitionType<EmployeeDoc>,
-  EmployeeDoc
-> = {
-  employeeCode: { type: Number, required: false },
-  hireDate: { type: Date, required: false },
-  jobId: { type: Schema.Types.ObjectId, ref: "Job", required: false },
-  skillDescription: { type: String, required: false },
-  description: { type: String, required: false },
-  dateOfBirth: { type: Date, required: false },
-  maritalStatus: { type: String, enum: MaritalStatus, required: false }, // وضعیت تأهل
-  yearsOfExperience: { type: Number, required: false }, // تعداد سال‌های تجربه کاری
-  contractType: { type: String, enum: ContractType, required: false }, // نوع قرارداد
-  bankAccountInfo: { type: String, required: false }, // اطلاعات حساب بانکی برای پرداخت حقوق
-  insuranceNumber: { type: Number, required: false }, // شماره بیمه
-};
 
-const EmployeeSchema = new Schema<EmployeeDoc>(EmployeeSchemaDefinition, {
-  timestamps: true,
-});
-toJsonSchema(EmployeeSchema, ["password"]);
-
-const EmployeeModel = UserModel.discriminator<EmployeeDoc>("Employee", EmployeeSchema);
-
+///////////// Discriminat //////////////////
+const EmployeeModel = generateModel<EmployeeDoc>(
+  "Employee",
+  {
+    employeeCode: {
+      type: String,
+      required: true,
+      default: () => generateCode("EMP"),
+      unique: true,
+    },
+    hireDate: { type: Date, required: false },
+    jobId: { type: Schema.Types.ObjectId, ref: "Job", required: false },
+    skillDescription: { type: String, required: false },
+    description: { type: String, required: false },
+    dateOfBirth: { type: Date, required: false },
+    maritalStatus: { type: String, enum: MaritalStatus, required: false }, // وضعیت تأهل
+    yearsOfExperience: { type: Number, required: false }, // تعداد سال‌های تجربه کاری
+    contractType: { type: String, enum: ContractType, required: false }, // نوع قرارداد
+    bankAccountInfo: { type: String, required: false }, // اطلاعات حساب بانکی برای پرداخت حقوق
+    insuranceNumber: { type: Number, required: false }, // شماره بیمه
+  },
+  ["__t", "password"],
+  UserModel
+);
 
 export default EmployeeModel;

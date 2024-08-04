@@ -1,115 +1,119 @@
-import { userInfo } from 'os';
-// auth.controller.ts
-import { Request, Response } from "express";
-import AuthService, { AuthServiceType } from "../../domain/services/AuthService";
+// src/app/controllers/AuthController.ts
+import { Request, Response, NextFunction } from "express";
+import AuthService, {
+  AuthServiceType,
+} from "../../domain/services/AuthService";
 import TokenBlackListService from "../../domain/services/TokenBlackListService";
 import createError from "http-errors";
-import BaseService from "../../domain/services/BaseService";
 import { UserDoc } from "../../domain/docs/User";
-import { extractToken, verifyToken } from "../middlewares/authMiddleware";
 import { setToken } from "../../utils/functions/setToken";
+import { TokenBlackListDoc } from "../../domain/docs/TokenBlackList";
+import AuthMiddleware from "../middlewares/authMiddleware";
 
 class AuthController {
   constructor(private authService: AuthServiceType) {}
 
-  async login(req: Request, res: Response): Promise<Response> {
-    const { accessToken, refreshToken , userInfo} = await this.authService.login(
-      req.body.email,
-      req.body.password
-    );
-    if (!accessToken || !refreshToken) {
-      return res.status(400).json({ error: "Invalid email or password" });
+  /**
+   * @summary Logs in a user
+   * @description Authenticates a user and returns access and refresh tokens along with user information.
+   * @param {Request} req - Express request object
+   * @param {Response} res - Express response object
+   * @param {NextFunction} next - Express next middleware function
+   * @returns {Promise<Response | void>} - Response containing accessToken, refreshToken, userInfo, expiresIn, and refreshTokenExpiresIn
+   */
+  async login(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
+    try {
+      const { email, password } = req.body;
+      const {
+        accessToken,
+        refreshToken,
+        userInfo,
+        expiresIn,
+        refreshTokenExpiresIn,
+      } = await this.authService.login(email, password);
+      return res.status(200).json({
+        accessToken,
+        refreshToken,
+        expiresIn,
+        refreshTokenExpiresIn,
+        userInfo,
+      });
+    } catch (err) {
+      next(err);
     }
-    // const user = await this.authService.getByEmail(req.body.email); // Assuming this method fetches user details
-   
-    return res.status(200).json({ accessToken, refreshToken, userInfo });
   }
 
-  async refreshToken(req: Request, res: Response): Promise<Response> {
-    const { refreshToken } = req.body;
-    if (!refreshToken) {
-      throw createError(400, "Refresh token is required");
+  async signup(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
+    try {
+      const { firstName, email, password } = req.body;
+      const user = await this.authService.signup({
+        firstName,
+        email,
+        password,
+      });
+      return res.status(201).json({ message: "Signup successful", user });
+    } catch (err) {
+      next(err);
     }
-
-    const decoded = await verifyToken(refreshToken);
-    const user = await this.authService.getById(decoded.id);
-    if (!user) {
-      throw createError(404, "User not found");
-    }
-
-    const newAccessToken = setToken(user, "15m");
-    return res.status(200).json({ accessToken: newAccessToken });
   }
 
-  ///////////////// changepass
-  // const changePassword = async (req, res) => {
-  //   try {
-  //     const { email, oldPassword, newPassword } = req.body;
+  async forgotPassword(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
+    try {
+      const { email } = req.body;
+      await this.authService.sendPasswordResetEmail(email);
+      return res.status(200).json({ message: "Password reset email sent" });
+    } catch (err) {
+      next(err);
+    }
+  }
 
-  //     const user = await User
-  //       .findOne({ email });
+  async refreshToken(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
+    try {
+      if (!req.user) {
+        throw createError(401, "User not authenticated");
+      }
+      const { id } = req.user;
+      const user = await this.authService.getById(id);
+      if (!user) {
+        throw createError(404, "User not found");
+      }
+      const newAccessToken = setToken(user, "15m");
+      return res.status(200).json({ accessToken: newAccessToken });
+    } catch (err) {
+      next(err);
+    }
+  }
 
-  //     if (user) {
-  //       const verifyPass = await bcrypt.compare(oldPassword, user.password);
-  //       if (verifyPass) {
-  //         const hashPassword = await bcrypt.hash(newPassword, saltRoundd);
-  //         user.password = hashPassword;
-  //         await user.save();
-  //         return res.status(200).send({ message: "Password changed" });
-  //       }
-  //       return res.status(400).send({ message: "old password is not correct!!!" });
-  //     } else {
-  //       return res.status(400).send({ message: "email is not correct!!!" });
-  //     }
-  //   }
-  //   catch (error) {
-  //     return res.status(500).send({ message: "Internal Sever Error" });
-  //   }
-  // }
-
-  //forgot password
-  // const forgotPassword = async (req, res) => {
-  //   try {
-
-  //     const { email } = req.body;
-  //     const user  = await User
-  //       .findOne({ email });
-  //     if (user) {
-  //       const token = jwt.sign(
-  //         { userId: user._id, role: user.role },
-  //         process.env.SECRET_KEY,
-  //         { expiresIn: "15m" }
-  //       );
-  //       return res.status(200).send({ message: "token sent to your email", token });
-  //     }
-  //     return res.status(400).send({ message: "email is not correct!!!" });
-  //   }
-  //   catch (error) {
-  //     return res.status(500).send({ message: "Internal Sever Error" });
-  //   }
-  // }
-
-  // async logout(req: Request, res: Response): Promise<void> {
-  //    try {
-  //      const token = req.headers.authorization?.split(" ")[1];
-  //      if (!token) {
-  //        throw new Error("No token provided");
-  //      }
-
-  //      await this.authService.logout(token);
-  //      res.status(200).json({ message: "Logout successful" });
-  //    } catch (error) {
-  //      next(error);
-  //    }
-  // }
-  // async register(req: Request, res: Response): Promise<void> {
-
-  // }
+  async logout(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
+    try {
+      const token = AuthMiddleware.extractToken(req);
+      const data = { token } as TokenBlackListDoc;
+      await TokenBlackListService.create(data);
+      return res.status(200).json({ message: "Logged out successfully" });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new AuthController(AuthService);
-
-
-
-
-

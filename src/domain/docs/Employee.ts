@@ -1,8 +1,8 @@
-import { Schema } from "mongoose";
+import { Schema, Types } from "mongoose";
 import { UserDoc } from "./User";
 
 export interface EmployeeDoc extends UserDoc {
-  employeeCode: number;
+  employeeCode: string;
   hireDate?: Date;
   jobId?: Schema.Types.ObjectId;
   skillDescription?: string;

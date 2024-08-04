@@ -4,5 +4,6 @@ import Joi from "joi";
 const ReportValidationSchema = Joi.object({
 
 });
+const ReportPatchValidationSchema = Joi.object({});
 
-export default ReportValidationSchema;
+export {ReportPatchValidationSchema, ReportValidationSchema};

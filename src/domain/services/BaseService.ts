@@ -7,7 +7,8 @@ type ResourceData<T> = T;
 class BaseService<T> implements Service<T> {
   constructor(
     protected repository: BaseRepository<T>,
-    protected validateSchema: Joi.ObjectSchema<any>
+    protected validateSchema: Joi.ObjectSchema<any>,
+    protected validatePatchSchema: Joi.ObjectSchema<any>
   ) {}
 
   async create(data: ResourceData<T>): Promise<ResourceData<T>> {
@@ -28,7 +29,9 @@ class BaseService<T> implements Service<T> {
     data: Partial<ResourceData<T>>
   ): Promise<ResourceData<T> | null> {
     try {
-      const validationResult = this.validateSchema.validate(data);
+       const validationResult = this.validateSchema.validate(data, {
+         allowUnknown: true,
+       });
       if (validationResult.error) {
         throw new Error(validationResult.error.message);
       }
@@ -38,6 +41,26 @@ class BaseService<T> implements Service<T> {
         return null; // Record not found
       }
       return await this.repository.update(id, data);
+    } catch (error) {
+      throw new Error(`Failed to update: ${error}`);
+    }
+  }
+  
+  async edit(
+    id: string,
+    data: Partial<ResourceData<T>>
+  ): Promise<ResourceData<T> | null> {
+    try {
+      const validationResult = this.validatePatchSchema.validate(data);
+      if (validationResult.error) {
+        throw new Error(validationResult.error.message);
+      }
+      const existingData = await this.repository.getById(id);
+
+      if (!existingData) {
+        return null; // Record not found
+      }
+      return await this.repository.edit(id, data);
     } catch (error) {
       throw new Error(`Failed to update: ${error}`);
     }

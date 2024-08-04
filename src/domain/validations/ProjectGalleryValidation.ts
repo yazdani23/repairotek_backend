@@ -10,4 +10,14 @@ const ProjectGallerySchema = Joi.object({
   description: Joi.string(),
 });
 
-export default ProjectGallerySchema;
+const ProjectGalleryPatchSchema = Joi.object({
+  projectId: Joi.string().optional(),
+  employeeId: Joi.string().optional(),
+  media: Joi.string().optional(),
+  mediaDateTime: Joi.string().optional(), ///// Todo
+  mediaSubjectId: Joi.string().optional(),
+  location: Joi.string().optional(), /// Todo
+  description: Joi.string(),
+});
+
+export {ProjectGalleryPatchSchema, ProjectGallerySchema};

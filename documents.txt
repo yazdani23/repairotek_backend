@@ -38,3 +38,206 @@ Materials
 Project Gallery 
 Tasks
 Time Card
+
+
+
+project-root/
+├── src/
+│   ├── app/
+│   │   ├── controllsers/
+│   │   │      ├── productController.ts
+│   │   │      └── userController.ts
+│   │   │      └── indexController.ts
+│   │   ├── middlewares/
+│   │   │      ├── productMiddleware.ts
+│   │   │      └── userMiddleware.ts
+│   │   │      └── indexMiddleware.ts
+│   │   ├── routes/
+│   │   │      ├── productRouter.ts
+│   │   │      └── userRouter.ts
+│   │   │      └── indexRouter.ts
+│   │   ├── app.ts
+│   ├── domain/
+│   │   ├── docs/
+│   │   │      ├── userDoc.ts
+│   │   │      └── productDoc.ts
+│   │   ├── models/
+│   │   │      ├── userModel.ts
+│   │   │      └── productModel.ts
+│   │   ├── repositories/
+│   │   │      ├── userRepository.ts
+│   │   │      └── productRepository.ts
+│   │   ├── services/
+│   │   │      ├── userService.ts
+│   │   │      └── productService.ts
+│   │   ├── validations/
+│   │   │      ├── userValidation.ts
+│   │   │      └── productValidation.ts
+│   ├── config/
+│   │   ├── db.ts
+│   │   └── swagger.ts
+│   ├── index.ts
+
+
+
+project-root/
+├── dist/
+├── public/
+├── ├── client(react)/
+├── src/
+│   ├── app/
+│   │   ├── controllsers/
+│   │   │      ├── productController.ts
+│   │   │      └── userController.ts
+│   │   │      └── indexController.ts
+│   │   ├── routes/
+│   │   │      ├── productRouter.ts
+│   │   │      └── userRouter.ts
+│   │   │      └── indexRouter.ts
+│   │   ├── app.ts
+│   ├── domain/
+│   │   ├── models/
+│   │   │      ├── userModel.ts
+│   │   │      └── productModel.ts
+│   │   ├── repositories/
+│   │   │      ├── userRepository.ts
+│   │   │      └── productRepository.ts
+│   │   ├── services/
+│   │   │      ├── userService.ts
+│   │   │      └── productService.ts
+│   ├── config/
+│   │   ├── db.ts
+│   │   └── swagger.ts
+│   ├── index.ts
+│   ├── package.json
+│   ├── vercel.json
+
+
+###################  Postman #############################3
+Postman-Collections/
+├── Local-Collection/
+│   ├── user/
+│   │   ├── Success-Responses/
+│   │   │   ├── GET-users
+│   │   │   ├── POST-users
+│   │   │   ├── PUT-users
+│   │   │   └── DELETE-users
+│   │   ├── Error-Responses/
+│   │   │   ├── GET-users-invalid-id
+│   │   │   ├── POST-users-invalid-data
+│   │   │   ├── PUT-users-invalid-id
+│   │   │   └── DELETE-users-invalid-id
+│   ├── product/
+│   │   ├── Success-Responses/
+│   │   │   ├── GET-products
+│   │   │   ├── POST-products
+│   │   │   ├── PUT-products
+│   │   │   └── DELETE-products
+│   │   ├── Error-Responses/
+│   │   │   ├── GET-products-invalid-id
+│   │   │   ├── POST-products-invalid-data
+│   │   │   ├── PUT-products-invalid-id
+│   │   │   └── DELETE-products-invalid-id
+└── Deployed-Collection/
+    ├── user/
+    │   ├── Success-Responses/
+    │   │   ├── GET-users
+    │   │   ├── POST-users
+    │   │   ├── PUT-users
+    │   │   └── DELETE-users
+    │   ├── Error-Responses/
+    │   │   ├── GET-users-invalid-id
+    │   │   ├── POST-users-invalid-data
+    │   │   ├── PUT-users-invalid-id
+    │   │   └── DELETE-users-invalid-id
+    ├── product/
+    │   ├── Success-Responses/
+    │   │   ├── GET-products
+    │   │   ├── POST-products
+    │   │   ├── PUT-products
+    │   │   └── DELETE-products
+    │   ├── Error-Responses/
+    │   │   ├── GET-products-invalid-id
+    │   │   ├── POST-products-invalid-data
+    │   │   ├── PUT-products-invalid-id
+    │   │   └── DELETE-products-invalid-id
+
+
+
+
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
+    }
+  ],
+
+  "routes": [
+    {
+      "src": "/api-docs/(.*)",
+      "headers": { "Cache-Control": "no-store" },
+      "continue": true
+    },
+       {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "text/css" }
+    },
+    {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "application/javascript" }
+    },
+    {
+      "src": "/api-docs/(.*)",
+      "dest": "/api-docs/$1"
+    },
+    {
+      "handle": "filesystem",
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "handle": "filesystem",
+      "src": "/app/(.*)",
+      "dest": "/app/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "app"
+    }
+  ]
+
+
+}
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
+    }
+  ],
+
+  "routes": [
+    {
+      "src": "/api-docs/(.*)",
+      "headers": { "Cache-Control": "no-store" },
+      "continue": true
+    },
+    {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "text/css" }
+    },
+    {
+      "src": "/api-docs/swagger-ui/(.*)",
+      "headers": { "Content-Type": "application/javascript" }
+    }
+  ]
+}
+
+
+ "dev": "cross-env ENV_MODE=develop ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
+ "dev": "cross-env ENV_MODE=develop tsx watch -r tsconfig-paths/register src/index.ts",

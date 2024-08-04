@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 import { UserZoneDoc } from "../../docs/unuse/UserZone";
-import { generateSchema } from "../../../utils/generators/modelGenerator";
+import { generateModel } from "../../../utils/generators/modelGenerator";
 
-const UserZoneModel = generateSchema<UserZoneDoc>("UserZone", {
+const UserZoneModel = generateModel<UserZoneDoc>("UserZone", {
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   zoneId: { type: Schema.Types.ObjectId, ref: "Zone", required: true },
 });

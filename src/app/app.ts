@@ -12,25 +12,21 @@ import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import swaggerOptions from "../config/swagger";
 import helmet from "helmet";
+import updateLastActivityMiddleware from "./middlewares/updateLastActivityMiddleware";
 
 dotenv.config();
 const app: Application = express();
-
-// app.get('/login', (req, res) => {
-//   req.session.user = { id: 1, username: 'example' };
-//   res.send('شما وارد شده‌اید.');
-// });
-// پیکربندی middleware session
 const sessionMiddleware = session({
   //To do
   // const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
 
-  secret: "mysecretkey", // کلید مخفی برای رمزنگاری اطلاعات جلسات
+  secret: "mysecretkey",
   resave: false,
   saveUninitialized: false,
 });
 
 connentDB();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,18 +34,21 @@ app.use(loggerMiddleware);
 
 app.use(helmet());
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs/swagger-ui", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.get("/api-docs/swagger-json", (req, res) => {
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get("/swagger-json", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
+app.use(
+  "/api-docs/swagger-ui",
+  express.static(path.join(__dirname, "../../node_modules/swagger-ui-dist")),
+);
 
-app.use(express.static(path.join(__dirname, "/public")));
-app.use("/api", indexRouter);
+app.use(express.static(path.join(__dirname, "../../public")));
 
-// اضافه کردن middleware session به برنامه
+app.use("/api/v2", indexRouter);
 app.use(sessionMiddleware);
-
 app.use(errorHandlerMiddleware);
 
 export default app;

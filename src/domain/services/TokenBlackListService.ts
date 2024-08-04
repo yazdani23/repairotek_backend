@@ -1,18 +1,25 @@
 import { TokenBlackListDoc } from "../docs/TokenBlackList";
 import BaseService from "./BaseService";
 import TokenBlackListRepository from "../repositories/TokenBlackListRepository";
-import TokenBlackListValidationSchema from "../validations/TokenBlackListValidation";
+import {
+  TokenBlackListPatchValidationSchema,
+  TokenBlackListValidationSchema,
+} from "../validations/TokenBlackListValidation";
 
-type ResourceData<T> = T;
 class TokenBlackListService extends BaseService<TokenBlackListDoc> {
-  private blackListRepository = this.repository as typeof TokenBlackListRepository;
+  private tokenBlackListRepository = this
+    .repository as typeof TokenBlackListRepository;
   constructor() {
-    super(TokenBlackListRepository, TokenBlackListValidationSchema);
+    super(
+      TokenBlackListRepository,
+      TokenBlackListValidationSchema,
+      TokenBlackListPatchValidationSchema
+    );
   }
 
-  create(data: TokenBlackListDoc): Promise<TokenBlackListDoc> {
-    throw new Error("Method not implemented.");
-  }
+  // create(data: TokenBlackListDoc): Promise<TokenBlackListDoc> {
+  //   throw new Error("Method not implemented.");
+  // }
   // async update(
   //   id: string,
   //   data: Partial<ResourceData<TokenBlackListDoc>>
@@ -24,9 +31,9 @@ class TokenBlackListService extends BaseService<TokenBlackListDoc> {
   //   throw new Error("Method not implemented.");
   //  }
 
-  async getAll(): Promise<ResourceData<TokenBlackListDoc>[]> {
-    throw new Error("Method not implemented.");
-  }
+  // async getAll(): Promise<ResourceData<TokenBlackListDoc>[]> {
+  //   throw new Error("Method not implemented.");
+  // }
   // async getById(id: string): Promise<ResourceData<TokenBlackListDoc> | null> {
   //   throw new Error("Method not implemented.");
   // }
@@ -46,7 +53,7 @@ class TokenBlackListService extends BaseService<TokenBlackListDoc> {
   // }
 
   async isBlackToken(token: string): Promise<boolean> {
-    const result = await this.blackListRepository.findByToken(token);
+    const result = await this.tokenBlackListRepository.findByToken(token);
     return result ? true : false;
   }
 }

@@ -8,14 +8,16 @@
     "forceConsistentCasingInFileNames": true /* Ensure consistent casing in file names */,
     "strict": true /* Enable all strict type-checking options */,
     "skipLibCheck": true /* Skip type checking of all declaration files (.d.ts) */,
-    "sourceMap": true /* Generate source map files for debugging */
+    "sourceMap": true /* Generate source map files for debugging */,
+    "typeRoots": ["./node_modules/@types", "src/types"]
   },
-  "include": ["src"] /* Include all files in the src directory */,
+  "include": ["src", "typings"] /* Include all files in the src directory */,
   "exclude": [
     "node_modules",
     "dist"
   ] /* Exclude node_modules and dist directories */
 }
+
 
 // {
 //   "compilerOptions": {

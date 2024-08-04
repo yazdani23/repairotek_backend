@@ -6,6 +6,7 @@ import JobModel from "../models/JobModel";
 import DepartmentModel from "../models/unUse/DepartmentModel";
 import { ContractType } from "../../utils/constant/ContractType";
 import { MaritalStatus } from "../../utils/constant/MaritalStatus";
+import { generateCode } from "../../utils/functions/generateCode";
 
 export class EmployeeSeeder {
   static removeAllEmployees = async () => {
@@ -49,16 +50,16 @@ export class EmployeeSeeder {
           lastActivity: faker.date.recent().getTime(),
           nationalId: faker.number.int({ min: 1000000000, max: 9999999999 }), // Assuming national ID is a 10-digit number
           permissions: [],
-          employeeCode: faker.number.int({ min: 10000 }),
-          hireDate: faker.date.past(),
-          jobId: job.id,
-          skillDescription: faker.lorem.sentence(),
-          description: faker.lorem.paragraph(),
-          dateOfBirth: faker.date.past({
-            years: 30,
-            refDate: "2024-01-01T00:00:00.000Z",
-          }), // Random date of birth in the past 30 years
-          maritalStatus: faker.helpers.arrayElement(MaritalStatus),
+          employeeCode: generateCode("EMP"),
+          // hireDate: faker.date.past(),
+          // jobId: job.id,
+          // skillDescription: faker.lorem.sentence(),
+          // description: faker.lorem.paragraph(),
+          // dateOfBirth: faker.date.past({
+          //   years: 30,
+          //   refDate: "2024-01-01T00:00:00.000Z",
+          // }), // Random date of birth in the past 30 years
+          // maritalStatus: faker.helpers.arrayElement(MaritalStatus),
           yearsOfExperience: faker.number.int({ min: 1, max: 40 }),
           contractType: faker.helpers.arrayElement(ContractType),
           bankAccountInfo: `
@@ -70,7 +71,6 @@ export class EmployeeSeeder {
           insuranceNumber: faker.number
             .int({ min: 1000000000, max: 9999999999 })
             .toString(), // Assuming insurance number is a 10-digit number
-          
         });
       }
 

@@ -2,6 +2,7 @@ import { Document, Schema } from "mongoose";
 import { RoleDoc } from "./Role";
 
 export interface UserDoc extends Document {
+  id: string;
   firstName: string;
   lastName: string;
   gender: string;
@@ -18,9 +19,10 @@ export interface UserDoc extends Document {
 }
 
 export interface UserInfoDoc {
-  firstName: string,
-  lastName: string,
-  email: string,
+  id:string;
+  firstName: string;
+  lastName: string;
+  email: string;
   profilePhoto: string; 
   role: string;
 };

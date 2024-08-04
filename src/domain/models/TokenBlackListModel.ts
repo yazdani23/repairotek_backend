@@ -1,7 +1,36 @@
 import { TokenBlackListDoc } from "../docs/TokenBlackList";
-import { generateSchema } from "../../utils/generators/modelGenerator";
+import { generateModel } from "../../utils/generators/modelGenerator";
 
-const TokenBlackListModel = generateSchema<TokenBlackListDoc>("TokenBlackList", {
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     TokenBlackList:
+ *       type: object
+ *       required:
+ *         - token
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: Unique identifier for the admin
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the admin was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Timestamp when the admin was last updated
+ *         token:
+ *           type: string
+ *           description: The token that has been blacklisted
+ *           example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ */
+
+/**
+ * TokenBlackList schema definition
+ */
+const TokenBlackListModel = generateModel<TokenBlackListDoc>("TokenBlackList", {
   token: { type: String, required: true, unique: true },
 });
 

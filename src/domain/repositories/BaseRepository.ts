@@ -49,6 +49,19 @@ class BaseRepository<T> implements Repository<T> {
       throw new Error(`Failed to update data: ${error}`);
     }
   }
+  async edit(id: string, newData: Partial<T>): Promise<T | null> {
+    try {
+      const updatedResource = await this.model.findByIdAndUpdate(id, newData, {
+        new: true,
+      });
+      if (!updatedResource) {
+        return null;
+      }
+      return updatedResource;
+    } catch (error) {
+      throw new Error(`Failed to update data: ${error}`);
+    }
+  }
 
   async delete(id: string): Promise<void> {
     try {
