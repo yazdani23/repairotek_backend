@@ -57,7 +57,7 @@ export class ProjectSeeder {
         }
 
         projects.push({
-          projectCode: ()=>generateCode("PRJ"),
+          projectCode: generateCode("PRJ"),
           adminId: admin.id,
           title: faker.lorem.words(3),
           zoneId: randomZone.id,

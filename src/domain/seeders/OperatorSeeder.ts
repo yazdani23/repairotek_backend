@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import logger from "../../utils/helpers/logger";
-import OpreatorModel from "../models/OperatorModel";
+import OperatorModel from "../models/OperatorModel";
 import RoleModel from "../models/RoleModel";
 import JobModel from "../models/JobModel";
 import DepartmentModel from "../models/unUse/DepartmentModel";
@@ -8,35 +8,35 @@ import { ContractType } from "../../utils/constant/ContractType";
 import { MaritalStatus } from "../../utils/constant/MaritalStatus";
 import { generateCode } from "../../utils/functions/generateCode";
 
-export class OpreatorSeeder {
-  static removeAllOpreators = async () => {
+export class OperatorSeeder {
+  static removeAllOperators = async () => {
     try {
-      await OpreatorModel.deleteMany({});
-      logger.info("All opreators removed successfully.");
+      await OperatorModel.deleteMany({});
+      logger.info("All operators removed successfully.");
     } catch (error: any) {
-      logger.error("Failed to remove opreators: " + error.message);
+      logger.error("Failed to remove operators: " + error.message);
     }
   };
 
-  static insertOpreators = async (batchSize = 10) => {
+  static insertOperators = async (batchSize = 10) => {
     try {
-      const role = await RoleModel.findOne({ name: "Opreator" });
+      const role = await RoleModel.findOne({ name: "Operator" });
       const jobs = await JobModel.find({});
 
       if (!role || !jobs.length) {
         logger.error(
-          "Please ensure that role and jobs are populated before seeding opreators."
+          "Please ensure that role and jobs are populated before seeding operators."
         );
         return;
       }
 
-      const opreators = [];
+      const operators = [];
 
       for (let i = 0; i < batchSize; i++) {
         // const job = faker.helpers.arrayElement(jobs).id;
         const job = jobs[Math.floor(Math.random() * jobs.length)];
 
-        opreators.push({
+        operators.push({
           firstName: faker.person.firstName(),
           lastName: faker.person.lastName(),
           gender: faker.person.sex(),
@@ -50,7 +50,7 @@ export class OpreatorSeeder {
           lastActivity: faker.date.recent().getTime(),
           nationalId: faker.number.int({ min: 1000000000, max: 9999999999 }), // Assuming national ID is a 10-digit number
           permissions: [],
-          opreatorCode: generateCode("OPR"),
+          operatorCode: generateCode("OPR"),
           hireDate: faker.date.past(),
           // jobId: job.id,
           // skillDescription: faker.lorem.sentence(),
@@ -74,15 +74,15 @@ export class OpreatorSeeder {
         });
       }
 
-      await OpreatorModel.insertMany(opreators);
-      logger.info(batchSize + " opreators seeded successfully.");
+      await OperatorModel.insertMany(operators);
+      logger.info(batchSize + " operators seeded successfully.");
     } catch (error: any) {
-      logger.error("Failed to seed opreators: " + error.message);
+      logger.error("Failed to seed operators: " + error.message);
     }
   };
 
   static seed = async () => {
-    await this.removeAllOpreators();
-    await this.insertOpreators();
+    await this.removeAllOperators();
+    await this.insertOperators();
   };
 }
