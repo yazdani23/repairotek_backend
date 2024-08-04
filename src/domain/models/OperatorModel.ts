@@ -9,7 +9,7 @@ import UserModel from "./UserModel";
  * @swagger
  * components:
  *   schemas:
- *     Employee:
+ *     Operator:
  *       allOf:
  *         - $ref: '#/components/schemas/User'
  *         - type: object
@@ -25,13 +25,13 @@ import UserModel from "./UserModel";
  *               type: string
  *               format: date-time
  *               description: Timestamp when the admin was last updated
- *             employeeCode:
+ *             operatorCode:
  *               type: number
- *               description: Unique code assigned to the employee
+ *               description: Unique code assigned to the operator
  *             hireDate:
  *               type: string
  *               format: date
- *               description: Date when the employee was hired
+ *               description: Date when the operator was hired
 
  *       example:
  *         firstName: John
@@ -42,7 +42,7 @@ import UserModel from "./UserModel";
  *         mobile: '098-765-4321'
  *         roleId: '60c72b2f9b1d8c001f8e4c9e'
  *         password: 'securepassword123'
- *         employeeCode: 1234
+ *         operatorCode: 1234
  *         hireDate: '2022-01-15'
 
  */
