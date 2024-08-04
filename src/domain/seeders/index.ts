@@ -21,7 +21,7 @@ import { DamageEquipmentReportSeeder } from "./DamageEquipmentReportModelSeeder"
 import { InjuryEmployeeReportSeeder } from "./InjuryEmployeeReportSeeder";
 import { TaskSeeder } from "./TaskSeeder";
 import { TimeCardEmployeeSeeder } from "./TimeCardEmployeeSeeder";
-import { OpreatorSeeder } from "./OperatorSeeder";
+import { OperatorSeeder } from "./OperatorSeeder";
 
 
 const seedDatabase = async () => {
@@ -34,8 +34,8 @@ const seedDatabase = async () => {
 
     // await UserSeeder.seed();
     // await AdminSeeder.seed();
-    // await EmployeeSeeder.seed();
-    await OpreatorSeeder.seed();
+    await EmployeeSeeder.seed();
+    // await OperatorSeeder.seed();
     // await PermissionSeeder.seed();
 
     // await MaterialSeeder.seed();
